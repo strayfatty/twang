@@ -4,8 +4,23 @@
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-<body>
+<body ng-app="twangApp">
+	<div ng-controller="SearchController as search">
+		<div class="form-inline">
+			<input type="text" ng-model='search.query' />
+		</div>
+		<ul ng-repeat="result in search.results">
+			<li>
+				<img src="{{ result.box.small }}" />
+				{{ result.name }}
+			</li>
+		</ul>
+	</div>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/twang/app.js"></script>
+	<script src="js/twang/search/search.controller.js"></script>
+	<script src="js/twang/search/search.service.js"></script>
 </body>
 </html>
