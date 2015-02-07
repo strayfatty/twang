@@ -2,12 +2,12 @@
 	'use strict';
 
 	angular
-		.module('twangApp')
-		.factory('SearchService', SearchService);
+		.module('twitch.api')
+		.factory('TwitchSearch', TwitchSearch);
 
-	SearchService.$inject = ['$http'];
+	TwitchSearch.$inject = ['$http'];
 
-	function SearchService($http) {
+	function TwitchSearch($http) {
 		return {
 			getGames: getGames
 		};

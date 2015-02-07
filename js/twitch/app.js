@@ -2,5 +2,5 @@
 	'use strict';
 
 	angular
-		.module("twangApp", [ "twitch.api" ]);
+		.module("twitch.api", []);
 })();
