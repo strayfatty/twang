@@ -9,14 +9,45 @@
 
 	function TwitchSearch($http) {
 		return {
-			getGames: getGames
+			streams: streams,
+			games: games
 		};
 
-		function getGames(query) {
-			return $http.jsonp("https://api.twitch.tv/kraken/search/games?type=suggest&callback=JSON_CALLBACK&q=" + query)
-				.then(getGamesCompleted);
+		function streams(query, limit, offset) {
+			var url = "https://api.twitch.tv/kraken/search/streams";
+			url += "?callback=JSON_CALLBACK";
+			url += "&q=" + query;
 
-			function getGamesCompleted(response) {
+			if (limit) {
+				streamsUrl += "&limit=" + limit;
+			}
+
+			if (offset) {
+				url += "&offset=" + offset
+			}
+
+			return $htpp.jsonp(url)
+				.then(streamsCompleted);
+
+			function streamsCompleted(response) {
+				return response.data;
+			}
+		}
+
+		function games(query, live) {
+			var url = "https://api.twitch.tv/kraken/search/games";
+			url += "?callback=JSON_CALLBACK";
+			url += "&type=suggest"
+			url += "&q=" + query;
+
+			if (live) {
+				url += "&live=true";
+			}
+
+			return $http.jsonp(url)
+				.then(gamesCompleted);
+
+			function gamesCompleted(response) {
 				return response.data;
 			}
 		};
