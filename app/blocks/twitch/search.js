@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular
-		.module('twitch.api')
-		.factory('TwitchSearch', TwitchSearch);
+		.module('blocks.twitch')
+		.factory('twitchSearch', TwitchSearch);
 
 	TwitchSearch.$inject = ['$http'];
 

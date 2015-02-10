@@ -3,26 +3,28 @@
 <head>
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bs-navbar.css">
 </head>
-<body ng-app="twangApp">
-	<div ng-controller="SearchController as search">
-		<div class="form-inline">
-			<input type="text" ng-model="search.query" ng-model-options="{ debounce: 200 }" />
-			<input type="checkbox" ng-model="search.live" ng-model-options="{ debounce: 200 }" />
-		</div>
-		<ul ng-repeat="result in search.results">
-			<li>
-				<img src="{{ result.box.small }}" />
-				{{ result.name }}
-			</li>
-		</ul>
-	</div>
+<body data-ng-app="app">
+	<div data-ng-include="'app/layout/shell.html'"></div>
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/twitch/app.js"></script>
-	<script src="js/twitch/api/search.js"></script>
-	<script src="js/twang/app.js"></script>
-	<script src="js/twang/search/search.controller.js"></script>
+
+	<script src="app/app.module.js"></script>
+
+	<script src="app/blocks/twitch/twitch.module.js"></script>
+	<script src="app/blocks/twitch/search.js"></script>
+
+	<script src="app/layout/layout.module.js"></script>
+
+	<script src="app/games/games.module.js"></script>
+	<script src="app/games/config.route.js"></script>
+	<script src="app/games/games.js"></script>
+
+	<script src="app/streams/streams.module.js"></script>
+	<script src="app/streams/config.route.js"></script>
 </body>
 </html>
