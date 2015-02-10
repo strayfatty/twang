@@ -10,7 +10,9 @@
 	function routeConfig($routeProvider) {
 		$routeProvider
 			.when('/streams', {
-				templateUrl: 'app/streams/streams.html'
+				templateUrl: 'app/streams/streams.html',
+				controller: "streamsController",
+				controllerAs: "viewModel"
 			});
 	}
 })();

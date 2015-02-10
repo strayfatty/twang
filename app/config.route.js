@@ -2,17 +2,15 @@
 	'use strict';
 
 	angular
-		.module('app.games')
+		.module('app')
 		.config(routeConfig);
 
 	routeConfig.$inject = [ '$routeProvider' ];
 
 	function routeConfig($routeProvider) {
 		$routeProvider
-			.when('/games', {
-				templateUrl: 'app/games/games.html',
-				controller: "gamesController",
-				controllerAs: "viewModel"
+			.otherwise({
+				redirectTo: '/games'
 			});
 	}
 })();

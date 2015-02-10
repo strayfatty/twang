@@ -3,14 +3,14 @@
 
 	angular
 		.module('app.games')
-		.controller('gamesController', GamesController);
+		.controller('streamsController', StreamsController);
 
-	GamesController.$inject = ['$scope', 'twitchSearch'];
+	StreamsController.$inject = ['$scope', 'twitchSearch'];
 
-	function GamesController($scope, twitchSearch) {
+	function StreamsController($scope, twitchSearch) {
 		var vm = this;
 		vm.query = undefined;
-		vm.games = [];
+		vm.streams = [];
 
 		$scope.$watch(angular.bind(vm, function() { return vm.query; }), search)
 
@@ -20,11 +20,11 @@
 		}
 
 		function search() {
-			return twitchSearch.games(vm.query)
+			return twitchSearch.streams(vm.query)
 				.then(searchComplete);
 
 			function searchComplete(data) {
-				vm.games = data.games;
+				vm.streams = data.streams;
 			}
 		}
 	}

@@ -26,7 +26,7 @@
 				url += "&offset=" + offset
 			}
 
-			return $htpp.jsonp(url)
+			return $http.jsonp(url)
 				.then(streamsCompleted);
 
 			function streamsCompleted(response) {

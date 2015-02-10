@@ -2,5 +2,5 @@
 	'use strict';
 
 	angular
-		.module('app.streams', [ 'ngRoute' ]);
+		.module('app.streams', []);
 })();

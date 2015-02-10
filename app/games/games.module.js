@@ -2,5 +2,5 @@
 	'use strict';
 
 	angular
-		.module('app.games', [ 'ngRoute' ]);
+		.module('app.games', []);
 })();

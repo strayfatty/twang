@@ -1,7 +1,16 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			streams
+			<div class="form-inline">
+				<input type="text" ng-model="viewModel.query" ng-model-options="{ debounce: 200}" />
+			</div>
+			<ul ng-repeat="stream in viewModel.streams">
+				<li>
+					<img ng-src="{{ stream.preview.large }}" />
+					<br />
+					{{ stream.channel.display_name }} playing {{ stream.game }}
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>

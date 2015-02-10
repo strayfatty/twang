@@ -6,7 +6,7 @@
 			</div>
 			<ul ng-repeat="game in viewModel.games">
 				<li>
-					<img src="{{ game.box.small }}" />
+					<img ng-src="{{ game.box.small }}" />
 					{{ game.name }}
 				</li>
 			</ul>
