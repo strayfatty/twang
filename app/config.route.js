@@ -10,7 +10,7 @@
 	function routeConfig($routeProvider) {
 		$routeProvider
 			.otherwise({
-				redirectTo: '/games'
+				redirectTo: '/settings'
 			});
 	}
 })();

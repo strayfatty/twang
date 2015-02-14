@@ -2,5 +2,5 @@
 	'use strict';
 
 	angular
-		.module('app.streams', []);
+		.module('app.settings', []);
 })();

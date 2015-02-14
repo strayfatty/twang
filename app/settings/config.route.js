@@ -1,17 +1,17 @@
-(function(){
+(function() {
 	'use strict';
 
 	angular
-		.module('app.streams')
+		.module('app.settings')
 		.config(routeConfig);
 
 	routeConfig.$inject = [ '$routeProvider' ];
 
 	function routeConfig($routeProvider) {
 		$routeProvider
-			.when('/streams', {
-				templateUrl: 'app/streams/streams.html',
-				controller: "streamsController",
+			.when('/settings', {
+				templateUrl: 'app/settings/settings.html',
+				controller: "settingsController",
 				controllerAs: "viewModel"
 			});
 	}

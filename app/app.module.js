@@ -4,12 +4,13 @@
 	angular
 		.module('app', [
 			'ngRoute',
+			'ui.bootstrap',
 
 			'blocks.twitch',
 
-			'app.games',
+			'app.core',
 			'app.layout',
-			'app.streams'
+			'app.settings'
 		])
 		.run(appRun);
 
