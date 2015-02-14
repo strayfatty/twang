@@ -15,9 +15,13 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 game" ng-click="viewModel.removeGame(game)" ng-repeat="game in viewModel.games">
+				<div class="col-sm-6 game clearfix" ng-click="viewModel.removeGame(game)" ng-repeat="game in viewModel.games">
 					<img ng-src="{{ game.image }}"/>
 					<strong>{{ game.name }}</strong>
+
+					<div class="overlay">
+						<span>remove</span>
+					</div>
 				</div>
 			</div>
 		</div>
