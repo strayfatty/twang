@@ -1,0 +1,14 @@
+.settings .dropdown-menu {
+	right: 15px;
+}
+
+.settings .game {
+	cursor: pointer;
+	height: 5em;
+	margin-top: 10px;
+}
+
+.settings .game img {
+	float: left;
+	margin-right: .5em
+}
