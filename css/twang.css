@@ -29,9 +29,9 @@
 	background: rgba(0,0,0,.75);
 	opacity: 0;
 
-	-webkit-transition: opacity .5s ease;
-	-moz-transition: opacity .5s ease;
-	-transition: opacity .5s ease;
+	-webkit-transition: opacity .25s ease;
+	-moz-transition: opacity .25s ease;
+	-transition: opacity .25s ease;
 }
 
 .settings .overlay:hover {
