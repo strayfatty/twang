@@ -9,6 +9,7 @@
 			'blocks.twitch',
 
 			'app.core',
+			'app.dashboard',
 			'app.layout',
 			'app.settings'
 		])

@@ -19,7 +19,7 @@
 			url += "&q=" + query;
 
 			if (limit) {
-				streamsUrl += "&limit=" + limit;
+				url += "&limit=" + limit;
 			}
 
 			if (offset) {

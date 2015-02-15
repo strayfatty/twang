@@ -2,15 +2,17 @@
 	'use strict';
 
 	angular
-		.module('app')
+		.module('app.dashboard')
 		.config(routeConfig);
 
 	routeConfig.$inject = [ '$routeProvider' ];
 
 	function routeConfig($routeProvider) {
 		$routeProvider
-			.otherwise({
-				redirectTo: '/'
+			.when('/', {
+				templateUrl: 'app/dashboard/dashboard.html',
+				controller: "dashboardController",
+				controllerAs: "viewModel"
 			});
 	}
 })();
