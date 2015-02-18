@@ -1,8 +1,23 @@
 <div class="container settings">
 	<div class="row">
 		<div class="col-sm-6">
-			<div class="page-header">
-				<h3>Channels</h3>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header">
+						<h3>Channels</h3>
+					</div>
+					<input class="form-control" type="text" placeholder="Enter channel" ng-model="selectedChannel" typeahead="streams for streams in viewModel.searchStreams($viewValue)" typeahead-wait-ms="200" typeahead-template-url="app/settings/channel-match.html" typeahead-on-select="viewModel.addChannel($item.channel); selectedChannel = undefined;"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 channel clearfix" ng-click="viewModel.removeChannel(channel)" ng-repeat="channel in viewModel.channels">
+					<img ng-src="{{ channel.image }}"/>
+					<strong>{{ channel.display_name }}</strong>
+
+					<div class="overlay">
+						<span>remove</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-6">
@@ -11,7 +26,7 @@
 					<div class="page-header">
 						<h3>Games</h3>
 					</div>
-					<input class="form-control" type="text" placeholder="Search for games" ng-model="results" typeahead="game for games in viewModel.searchGames($viewValue)" typeahead-wait-ms="200" typeahead-template-url="app/settings/game-match.html" typeahead-on-select="viewModel.addGame($item)"/>
+					<input class="form-control" type="text" placeholder="Search for games" ng-model="selectedGame" typeahead="game for games in viewModel.searchGames($viewValue)" typeahead-wait-ms="200" typeahead-template-url="app/settings/game-match.html" typeahead-on-select="viewModel.addGame($item); selectedGame = undefined;"/>
 				</div>
 			</div>
 			<div class="row">

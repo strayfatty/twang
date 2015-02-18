@@ -11,6 +11,8 @@
 		var service = {};
 		service.addGame = addGame;
 		service.removeGame = removeGame;
+		service.addChannel = addChannel;
+		service.removeChannel = removeChannel;
 		service.getGames = getGames;
 		service.getChannels = getChannels;
 
@@ -18,8 +20,7 @@
 
 		function addGame(name, image) {
 			var games = service.getGames();
-			if (games.map(function(value) { return value.name; }).indexOf(name) >= 0)
-			{
+			if (games.map(function(value) { return value.name; }).indexOf(name) >= 0) {
 				return;
 			}
 
@@ -36,6 +37,27 @@
 
 			games.splice(index, 1);
 			window.localStorage['twang.games'] = JSON.stringify(games);
+		}
+
+		function addChannel(name, display_name, image) {
+			var channels = service.getChannels();
+			if (channels.map(function(value) { return value.name; }).indexOf(name) >= 0) {
+				return;
+			}
+
+			channels.push({ name: name, display_name: display_name, image: image});
+			window.localStorage['twang.channels']= JSON.stringify(channels);
+		}
+
+		function removeChannel(name) {
+			var channels = service.getChannels();
+			var index = channels.map(function(value) { return value.name }).indexOf(name);
+			if (index < 0) {
+				return;
+			}
+
+			channels.splice(index, 1);
+			window.localStorage['twang.channels']= JSON.stringify(channels);
 		}
 
 		function getGames() {

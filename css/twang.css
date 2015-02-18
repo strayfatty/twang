@@ -12,6 +12,17 @@
 	margin-right: .5em
 }
 
+.settings .channel {
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+.settings .channel img {
+	float: left;
+	width: 50px;
+	margin-right: .5em
+}
+
 .settings .overlay {
 	display: block;
 	position: absolute;
@@ -60,4 +71,8 @@
 	display:box;
 	box-pack:center;
 	box-align:center;
+}
+
+.settings .channel-logo {
+	width: 50px;
 }
