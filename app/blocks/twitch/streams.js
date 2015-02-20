@@ -10,6 +10,7 @@
 	function TwitchStreams($http) {
 		return {
 			getByGame: getByGame,
+			getByChannel: getByChannel
 		};
 
 		function getByGame(game, limit, offset) {
@@ -26,9 +27,30 @@
 			}
 
 			return $http.jsonp(url)
-				.then(getByGamesCompleted);
+				.then(getByGameCompleted);
 
-			function getByGamesCompleted(response) {
+			function getByGameCompleted(response) {
+				return response.data;
+			}
+		}
+
+		function getByChannel(channel, limit, offset) {
+			var url = "https://api.twitch.tv/kraken/streams";
+			url += "?callback=JSON_CALLBACK";
+			url += "&channel=" + channel;
+
+			if (limit) {
+				url += "&limit=" + limit;
+			}
+
+			if (offset) {
+				url += "&offset=" + offset
+			}
+
+			return $http.jsonp(url)
+				.then(getByChannelCompleted);
+
+			function getByChannelCompleted(response) {
 				return response.data;
 			}
 		}

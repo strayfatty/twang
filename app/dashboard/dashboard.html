@@ -1,11 +1,21 @@
 <div class="container dashboard">
 	<div class="row">
-		<div class="col-sm-2">
-			<div class="page-header">
-				<h3>Channels</h3>
+		<div class="col-sm-3">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header">
+						<h3>Channels</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12" ng-repeat="stream in viewModel.channels">
+						<a href="{{ stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
+						<p><strong>{{ stream.channel.display_name }}</strong>	playing {{ stream.game }}</p>
+				</div>
 			</div>
 		</div>
-		<div class="col-sm-10">
+		<div class="col-sm-9">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="page-header">
@@ -22,7 +32,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-3" ng-repeat="stream in game.streams">
-							<a href="{{ stream.channel.url }}"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
+							<a href="{{ stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
 							<p>{{ stream.viewers }} viewers on {{ stream.channel.display_name}}</p>
 						</div>
 					</div>
