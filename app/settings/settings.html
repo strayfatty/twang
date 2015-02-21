@@ -10,13 +10,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 channel clearfix" ng-click="viewModel.removeChannel(channel)" ng-repeat="channel in viewModel.channels">
+				<div class="col-sm-6 channel clearfix" ng-repeat="channel in viewModel.channels">
+					<button type="button" class="close" ng-click="viewModel.removeChannel(channel)">&times;</button>
 					<img ng-src="{{ channel.image }}"/>
-					<strong>{{ channel.display_name }}</strong>
-
-					<div class="overlay">
-						<span>remove</span>
-					</div>
+					<a class="act act-default" href="http://www.twitch.tv/{{ channel.name }}" target="_blank">{{ channel.display_name }}</a>
 				</div>
 			</div>
 		</div>
@@ -30,13 +27,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 game clearfix" ng-click="viewModel.removeGame(game)" ng-repeat="game in viewModel.games">
+				<div class="col-sm-6 game clearfix" ng-repeat="game in viewModel.games">
+					<button type="button" class="close" ng-click="viewModel.removeGame(game)">&times;</button>
 					<img ng-src="{{ game.image }}"/>
-					<strong>{{ game.name }}</strong>
-
-					<div class="overlay">
-						<span>remove</span>
-					</div>
+					<a class="act act-default" href="http://www.twitch.tv/directory/game/{{ game.name }}" target="_blank">{{ game.name }}</a>
 				</div>
 			</div>
 		</div>

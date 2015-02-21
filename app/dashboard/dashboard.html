@@ -11,7 +11,9 @@
 			<div class="row">
 				<div class="col-sm-12" ng-repeat="stream in viewModel.channels">
 						<a href="{{ stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
-						<p><strong>{{ stream.channel.display_name }}</strong>	playing {{ stream.game }}</p>
+						<p>
+							<a class="act act-default" href="http://www.twitch.tv/{{ stream.channel.name }}" target="_blank">{{ stream.channel.display_name}}</a> playing <a class="act act-default" href="http://www.twitch.tv/directory/game/{{ stream.game }}" target="_blank">{{ stream.game }}</a>
+						</p>
 				</div>
 			</div>
 		</div>
@@ -27,13 +29,15 @@
 				<div class="col-sm-12">
 					<div class="row">
 						<div class="col-sm-12">
-							<a href="http://www.twitch.tv/directory/game/{{ game.name }}">{{ game.name }}</a>
+							<a class="act act-primary" href="http://www.twitch.tv/directory/game/{{ game.name }}">{{ game.name }}</a>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3" ng-repeat="stream in game.streams">
 							<a href="{{ stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
-							<p>{{ stream.viewers }} viewers on {{ stream.channel.display_name}}</p>
+							<p>
+								{{ stream.viewers }} viewers on <a class="act act-default" href="http://www.twitch.tv/{{ stream.channel.name }}" target="_blank">{{ stream.channel.display_name}}</a>
+							</p>
 						</div>
 					</div>
 				</div>

@@ -3,7 +3,6 @@
 }
 
 .settings .game {
-	cursor: pointer;
 	margin-top: 10px;
 }
 
@@ -13,7 +12,6 @@
 }
 
 .settings .channel {
-	cursor: pointer;
 	margin-top: 10px;
 }
 
@@ -21,56 +19,6 @@
 	float: left;
 	width: 50px;
 	margin-right: .5em
-}
-
-.settings .overlay {
-	display: block;
-	position: absolute;
-	z-index: 20;
-	overflow: hidden;
-	top: 0;
-	left: 15px;
-	right: 15px;
-	bottom: 0;
-
-	color: white;
-	font-weight: bold;
-	font-size: 1.5em;
-
-	background: rgba(0,0,0,.75);
-	opacity: 0;
-
-	-webkit-transition: opacity .25s ease;
-	-moz-transition: opacity .25s ease;
-	-transition: opacity .25s ease;
-}
-
-.settings .overlay:hover {
-	opacity: 1;
-}
-
-.settings .overlay span {
-	height: 100%;
-
-	/* Internet Explorer 10 */
-	display:-ms-flexbox;
-	-ms-flex-pack:center;
-	-ms-flex-align:center;
-
-	/* Firefox */
-	display:-moz-box;
-	-moz-box-pack:center;
-	-moz-box-align:center;
-
-	/* Safari, Opera, and Chrome */
-	display:-webkit-box;
-	-webkit-box-pack:center;
-	-webkit-box-align:center;
-
-	/* W3C */
-	display:box;
-	box-pack:center;
-	box-align:center;
 }
 
 .settings .channel-logo {
