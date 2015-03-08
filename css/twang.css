@@ -2,20 +2,20 @@
 	right: 15px;
 }
 
-.settings .game {
+.settings .game-follow {
 	margin-top: 10px;
 }
 
-.settings .game img {
+.settings .game-follow img {
 	float: left;
 	margin-right: .5em
 }
 
-.settings .channel {
+.settings .channel-follow {
 	margin-top: 10px;
 }
 
-.settings .channel img {
+.settings .channel-follow img {
 	float: left;
 	width: 50px;
 	margin-right: .5em
