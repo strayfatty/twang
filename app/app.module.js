@@ -15,9 +15,9 @@
 		])
 		.run(appRun);
 
-		appRun.$inject = [ '$route' ];
+	appRun.$inject = [ '$route' ];
 
-		function appRun($route) {
-			$route.reload();
-		}
+	function appRun($route) {
+		$route.reload();
+	}
 })();
