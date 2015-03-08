@@ -11,8 +11,6 @@
 		$routeProvider
 			.when('/', {
 				templateUrl: 'app/dashboard/dashboard.html',
-				controller: "dashboardController",
-				controllerAs: "viewModel"
 			});
 	}
 })();
