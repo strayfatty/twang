@@ -1,18 +1,6 @@
 <div class="container dashboard">
 	<div class="row">
-		<div class="col-sm-3">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="page-header">
-						<h3>Channels</h3>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12" ng-repeat="stream in viewModel.channels" data-channel-stream data-stream="stream">
-				</div>
-			</div>
-		</div>
+		<div class="col-sm-3" data-active-channel-list></div>
 		<div class="col-sm-9">
 			<div class="row">
 				<div class="col-sm-12">
