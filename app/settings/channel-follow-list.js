@@ -1,37 +1,51 @@
-(function(){
+(function (){
 	'use strict';
 
 	angular
 		.module('app.settings')
-		.controller('settingsController', SettingsController);
+		.directive('channelFollowList', channelFollowList);
 
-	SettingsController.$inject = [ 'userService', 'twitchSearch', 'twitchChannels' ];
+	function channelFollowList() {
+		var directive = {
+			restrict: 'EA',
+			replace: true,
+			templateUrl: 'app/settings/channel-follow-list.html',
+			scope: {
+			},
+			controller: ChannelFollowListController,
+			controllerAs: 'viewModel',
+			bindToController: true
+		};
 
-	function SettingsController(userService, twitchSearch, twitchChannels) {
+		return directive;
+	};
+
+	ChannelFollowListController.$inject = [ 'userService', 'twitchSearch', 'twitchChannels' ];
+
+	function ChannelFollowListController(userService, twitchSearch, twitchChannels) {
 		var viewModel = this;
 		viewModel.channels = [];
-		viewModel.searchStreams = searchStreams;
-		viewModel.addChannel = addChannel;
-		viewModel.removeChannel = removeChannel;
+		viewModel.add = add;
+		viewModel.remove = remove;
+		viewModel.search = search;
 
 		activate();
 
 		function activate() {
-			viewModel.games = userService.getGames();
 			viewModel.channels = userService.getChannels();
 		}
 
-		function addChannel(channel) {
+		function add(channel) {
 			userService.addChannel(channel.name, channel.display_name, channel.logo);
 			activate();
 		}
 
-		function removeChannel(channel) {
+		function remove(channel) {
 			userService.removeChannel(channel.name);
 			activate();
 		}
 
-		function searchStreams(query) {
+		function search(query) {
 			return twitchSearch.streams(query)
 				.then(searchStreamsCompleted);
 

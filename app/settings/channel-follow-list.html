@@ -1,0 +1,13 @@
+<div class="channel-follow-list">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="page-header">
+				<h3>Channels</h3>
+			</div>
+			<input class="form-control" type="text" placeholder="Enter channel" ng-model="selectedChannel" typeahead="streams for streams in viewModel.search($viewValue)" typeahead-wait-ms="200" typeahead-template-url="app/settings/channel-match.html" typeahead-on-select="viewModel.add($item.channel); selectedChannel = undefined;"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 channel clearfix" ng-repeat="channel in viewModel.channels" data-channel-follow data-channel="channel" data-remove="viewModel.remove"></div>
+	</div>
+</div>

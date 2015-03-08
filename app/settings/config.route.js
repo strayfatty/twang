@@ -11,8 +11,6 @@
 		$routeProvider
 			.when('/settings', {
 				templateUrl: 'app/settings/settings.html',
-				controller: "settingsController",
-				controllerAs: "viewModel"
 			});
 	}
 })();
