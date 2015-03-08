@@ -10,11 +10,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 channel clearfix" ng-repeat="channel in viewModel.channels">
-					<button type="button" class="close" ng-click="viewModel.removeChannel(channel)">&times;</button>
-					<img ng-src="{{ channel.image }}"/>
-					<a class="act act-default" href="http://www.twitch.tv/{{ channel.name }}" target="_blank">{{ channel.display_name }}</a>
-				</div>
+				<div class="col-sm-6 channel clearfix" ng-repeat="channel in viewModel.channels" data-channel-follow data-channel="channel" data-remove="viewModel.removeChannel"></div>
 			</div>
 		</div>
 		<div class="col-sm-6" data-game-follow-list></div>

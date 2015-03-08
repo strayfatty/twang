@@ -36,7 +36,7 @@
 				.then(searchStreamsCompleted);
 
 			function searchStreamsCompleted(data) {
-				if (data.streams.length > 0) {
+				if (!data.error && data.streams.length > 0) {
 					return data.streams;
 				}
 
