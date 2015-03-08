@@ -9,11 +9,7 @@
 
 	function SettingsController(userService, twitchSearch, twitchChannels) {
 		var viewModel = this;
-		viewModel.games = [];
 		viewModel.channels = [];
-		viewModel.searchGames = searchGames;
-		viewModel.addGame = addGame;
-		viewModel.removeGame = removeGame;
 		viewModel.searchStreams = searchStreams;
 		viewModel.addChannel = addChannel;
 		viewModel.removeChannel = removeChannel;
@@ -23,25 +19,6 @@
 		function activate() {
 			viewModel.games = userService.getGames();
 			viewModel.channels = userService.getChannels();
-		}
-
-		function searchGames(query) {
-			return twitchSearch.games(query)
-				.then(searchGamesCompleted);
-
-			function searchGamesCompleted(data) {
-				return data.games;
-			}
-		}
-
-		function addGame(game) {
-			userService.addGame(game.name, game.box.small);
-			activate();
-		}
-
-		function removeGame(game) {
-			userService.removeGame(game.name);
-			activate();
 		}
 
 		function addChannel(channel) {
