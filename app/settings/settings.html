@@ -27,11 +27,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 game clearfix" ng-repeat="game in viewModel.games">
-					<button type="button" class="close" ng-click="viewModel.removeGame(game)">&times;</button>
-					<img ng-src="{{ game.image }}"/>
-					<a class="act act-default" href="http://www.twitch.tv/directory/game/{{ game.name }}" target="_blank">{{ game.name }}</a>
-				</div>
+				<div class="col-sm-6 game clearfix" ng-repeat="game in viewModel.games" data-game-follow data-game="game" data-remove="viewModel.removeGame"></div>
 			</div>
 		</div>
 	</div>
