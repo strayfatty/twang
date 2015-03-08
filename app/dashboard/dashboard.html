@@ -9,11 +9,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12" ng-repeat="stream in viewModel.channels">
-						<a href="{{ stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
-						<p>
-							<a class="act act-default" href="http://www.twitch.tv/{{ stream.channel.name }}" target="_blank">{{ stream.channel.display_name}}</a> playing <a class="act act-default" href="http://www.twitch.tv/directory/game/{{ stream.game }}" target="_blank">{{ stream.game }}</a>
-						</p>
+				<div class="col-sm-12" ng-repeat="stream in viewModel.channels" data-channel-stream data-stream="stream">
 				</div>
 			</div>
 		</div>

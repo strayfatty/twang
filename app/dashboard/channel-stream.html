@@ -1,0 +1,10 @@
+<div class="channel-stream">
+	<a class="act act-primary" href="http://www.twitch.tv/{{ viewModel.stream.channel.name }}" target="_blank">{{ viewModel.stream.channel.display_name}}</a>
+	<br/>
+	<a href="{{ viewModel.stream.channel.url }}" target="_blank">
+		<img class="img-responsive" ng-src="{{ viewModel.stream.preview.medium }}">
+	</a>
+	<p>
+		playing <a class="act act-default" href="http://www.twitch.tv/directory/game/{{ viewModel.stream.game }}" target="_blank">{{ viewModel.stream.game }}</a>
+	</p>
+</div>
