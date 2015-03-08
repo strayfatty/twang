@@ -17,12 +17,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3" ng-repeat="stream in game.streams">
-							<a href="{{ stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ stream.preview.medium }}"></a>
-							<p>
-								{{ stream.viewers }} viewers on <a class="act act-default" href="http://www.twitch.tv/{{ stream.channel.name }}" target="_blank">{{ stream.channel.display_name}}</a>
-							</p>
-						</div>
+						<div class="col-sm-3" ng-repeat="stream in game.streams" data-game-stream data-stream="stream"></div>
 					</div>
 				</div>
 			</div>
