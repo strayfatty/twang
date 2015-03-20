@@ -14,7 +14,7 @@
 				stream: '='
 			},
 			controller: GameStreamController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -22,6 +22,6 @@
 	};
 
 	function GameStreamController() {
-		var viewModel = this;
+		var model = this;
 	}
 })();

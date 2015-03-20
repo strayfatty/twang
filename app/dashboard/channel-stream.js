@@ -14,7 +14,7 @@
 				stream: '='
 			},
 			controller: ChannelStreamController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -22,6 +22,6 @@
 	};
 
 	function ChannelStreamController() {
-		var viewModel = this;
+		var model = this;
 	}
 })();

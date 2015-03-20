@@ -1,6 +1,6 @@
 <div class="game-stream">
-	<a href="{{ viewModel.stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ viewModel.stream.preview.medium }}"></a>
+	<a href="{{ model.stream.channel.url }}" target="_blank"><img class="img-responsive" ng-src="{{ model.stream.preview.medium }}"></a>
 	<p>
-		{{ viewModel.stream.viewers }} viewers on <a class="act act-default" href="http://www.twitch.tv/{{ viewModel.stream.channel.name }}" target="_blank">{{ viewModel.stream.channel.display_name}}</a>
+		{{ model.stream.viewers }} viewers on <a class="act act-default" href="http://www.twitch.tv/{{ model.stream.channel.name }}" target="_blank">{{ model.stream.channel.display_name}}</a>
 	</p>
 </div>

@@ -4,10 +4,10 @@
 			<div class="page-header">
 				<h3>Games</h3>
 			</div>
-			<input class="form-control" type="text" placeholder="Search for games" ng-model="selectedGame" typeahead="game for games in viewModel.search($viewValue)" typeahead-wait-ms="200" typeahead-template-url="app/settings/game-match.html" typeahead-on-select="viewModel.add($item); selectedGame = undefined;"/>
+			<input class="form-control" type="text" placeholder="Search for games" ng-model="selectedGame" typeahead="game for games in model.search($viewValue)" typeahead-wait-ms="200" typeahead-template-url="app/settings/game-match.html" typeahead-on-select="model.add($item); selectedGame = undefined;"/>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 clearfix" ng-repeat="game in viewModel.games" data-game-follow data-game="game" data-remove="viewModel.remove"></div>
+		<game-follow class="col-sm-6 clearfix" ng-repeat="game in model.games" game="game" remove="model.remove"></game-follow>
 	</div>
 </div>

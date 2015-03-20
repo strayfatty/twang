@@ -13,7 +13,7 @@
 			scope: {
 			},
 			controller: GameFollowListController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -23,16 +23,16 @@
 	GameFollowListController.$inject = [ 'userService', 'twitchSearch' ];
 
 	function GameFollowListController(userService, twitchSearch) {
-		var viewModel = this;
-		viewModel.games = [];
-		viewModel.add = add;
-		viewModel.remove = remove;
-		viewModel.search = search;
+		var model = this;
+		model.games = [];
+		model.add = add;
+		model.remove = remove;
+		model.search = search;
 
 		activate();
 
 		function activate() {
-			viewModel.games = userService.getGames();
+			model.games = userService.getGames();
 		}
 
 		function add(game) {

@@ -1,10 +1,10 @@
-<div class="game-stream-list" ng-show="viewModel.streams.length > 0">
+<div class="game-stream-list" ng-show="model.streams.length > 0">
 	<div class="row">
 		<div class="col-sm-12">
-			<a class="act act-primary" href="http://www.twitch.tv/directory/game/{{ viewModel.game }}">{{ viewModel.game }}</a>
+			<a class="act act-primary" href="http://www.twitch.tv/directory/game/{{ model.game }}">{{ model.game }}</a>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3" ng-repeat="stream in viewModel.streams" data-game-stream data-stream="stream"></div>
+		<game-stream class="col-sm-3" ng-repeat="stream in model.streams" stream="stream"></game-stream>
 	</div>
 </div>

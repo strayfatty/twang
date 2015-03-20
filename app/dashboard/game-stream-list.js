@@ -14,7 +14,7 @@
 				game: '='
 			},
 			controller: GameStreamListController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -24,15 +24,15 @@
 	GameStreamListController.$inject = [ 'twitchStreams' ];
 
 	function GameStreamListController(twitchStreams) {
-		var viewModel = this;
-		viewModel.streams = [];
+		var model = this;
+		model.streams = [];
 
 		activate();
 
 		function activate() {
-			twitchStreams.getByGame(viewModel.game, 4, 0)
+			twitchStreams.getByGame(model.game, 4, 0)
 				.then(function (data) {
-					viewModel.streams = data.streams;
+					model.streams = data.streams;
 				});
 		}
 	}

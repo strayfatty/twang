@@ -13,7 +13,7 @@
 			scope: {
 			},
 			controller: ActiveGameListController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -23,13 +23,13 @@
 	ActiveGameListController.$inject = [ 'userService' ];
 
 	function ActiveGameListController(userService) {
-		var viewModel = this;
-		viewModel.games = [];
+		var model = this;
+		model.games = [];
 
 		activate();
 
 		function activate() {
-			viewModel.games = userService.getGames();
+			model.games = userService.getGames();
 		}
 	}
 })();

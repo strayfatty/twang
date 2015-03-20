@@ -13,7 +13,7 @@
 			scope: {
 			},
 			controller: ActiveChannelListController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -23,8 +23,8 @@
 	ActiveChannelListController.$inject = [ 'userService', 'twitchStreams' ];
 
 	function ActiveChannelListController(userService, twitchStreams) {
-		var viewModel = this;
-		viewModel.channels = [];
+		var model = this;
+		model.channels = [];
 
 		activate();
 
@@ -37,7 +37,7 @@
 
 			twitchStreams.getByChannel(channel, channels.length, 0)
 				.then(function (data) {
-					viewModel.channels = data.streams;
+					model.channels = data.streams;
 				});
 		}
 	}

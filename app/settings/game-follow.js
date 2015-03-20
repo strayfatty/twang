@@ -15,7 +15,7 @@
 				remove: '=',
 			},
 			controller: GameFollowController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -23,6 +23,6 @@
 	};
 
 	function GameFollowController() {
-		var viewModel = this;
+		var model = this;
 	}
 })();

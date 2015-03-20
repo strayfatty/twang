@@ -15,7 +15,7 @@
 				remove: '=',
 			},
 			controller: ChannelFollowController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -23,6 +23,6 @@
 	};
 
 	function ChannelFollowController() {
-		var viewModel = this;
+		var model = this;
 	}
 })();

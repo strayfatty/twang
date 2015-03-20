@@ -13,7 +13,7 @@
 			scope: {
 			},
 			controller: ChannelFollowListController,
-			controllerAs: 'viewModel',
+			controllerAs: 'model',
 			bindToController: true
 		};
 
@@ -23,16 +23,16 @@
 	ChannelFollowListController.$inject = [ 'userService', 'twitchSearch', 'twitchChannels' ];
 
 	function ChannelFollowListController(userService, twitchSearch, twitchChannels) {
-		var viewModel = this;
-		viewModel.channels = [];
-		viewModel.add = add;
-		viewModel.remove = remove;
-		viewModel.search = search;
+		var model = this;
+		model.channels = [];
+		model.add = add;
+		model.remove = remove;
+		model.search = search;
 
 		activate();
 
 		function activate() {
-			viewModel.channels = userService.getChannels();
+			model.channels = userService.getChannels();
 		}
 
 		function add(channel) {

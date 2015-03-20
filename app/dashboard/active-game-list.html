@@ -6,7 +6,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row" ng-repeat="game in viewModel.games">
-		<div class="col-sm-12" data-game-stream-list data-game="game.name"></div>
+	<div class="row" ng-repeat="game in model.games">
+		<game-stream-list class="col-sm-12" game="game.name"></game-stream-list>
 	</div>
 </div>
