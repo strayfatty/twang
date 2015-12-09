@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8"/>
-	<link rel="stylesheet" href="dist/site.css">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="dist/site.css">
 </head>
-<body data-ng-app="app">
-	<div data-ng-include="'app/layout/shell.html'"></div>
-
-	<script src="dist/scripts.js"></script>
+<body ng-app="app">
+    <header class="clearfix">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/twang" class="navbar-brand"><span class="brand-title">TWANG</span></a>
+                    <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/settings">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="container">
+        <div ng-view />
+    </section>
+    <script src="dist/scripts.js"></script>
 </body>
 </html>

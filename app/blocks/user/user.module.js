@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('blocks.twitch', []);
+        .module('blocks.user', []);
 }());

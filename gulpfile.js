@@ -49,10 +49,10 @@ gulp.task('default', ['css', 'scripts']);
 
 gulp.task('watch', function () {
     gulp.watch(cssFiles, ['css']);
-    gulp.watch(scriptFiles.concat('app/**/*.html'), ['scripts']);
+    gulp.watch(scriptFiles.concat('./app/**/*.html'), ['scripts']);
 });
 
 function prepareTemplates() {
-    return gulp.src('app/**/*.html')
+    return gulp.src('./app/**/*.html')
         .pipe(angularTemplateCache('templates.js', { root: 'app', module: 'app' }))
 }

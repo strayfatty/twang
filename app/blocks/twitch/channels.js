@@ -1,27 +1,27 @@
 (function(){
-	'use strict';
+    'use strict';
 
-	angular
-		.module('blocks.twitch')
-		.factory('twitchChannels', TwitchChannels);
+    angular
+        .module('blocks.twitch')
+        .factory('blocks.twitch.channels', TwitchChannels);
 
-	TwitchChannels.$inject = ['$http'];
+    TwitchChannels.$inject = ['$http'];
 
-	function TwitchChannels($http) {
-		return {
-			getByName: getByName,
-		};
+    function TwitchChannels($http) {
+        return {
+            getByName: getByName,
+        };
 
-		function getByName(name) {
-			var url = "https://api.twitch.tv/kraken/channels/" + name;
-			url += "?callback=JSON_CALLBACK";
+        function getByName(name) {
+            var url = "https://api.twitch.tv/kraken/channels/" + name;
+            url += "?callback=JSON_CALLBACK";
 
-			return $http.jsonp(url)
-				.then(getCompleted);
+            return $http.jsonp(url)
+                .then(getCompleted);
 
-			function getCompleted(response) {
-				return response.data;
-			}
-		}
-	};
-})();
+            function getCompleted(response) {
+                return response.data;
+            }
+        }
+    };
+}());

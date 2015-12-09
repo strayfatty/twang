@@ -1,55 +1,55 @@
 (function(){
-	'use strict';
+    'use strict';
 
-	angular
-		.module('blocks.twitch')
-		.factory('twitchSearch', TwitchSearch);
+    angular
+        .module('blocks.twitch')
+        .factory('blocks.twitch.search', TwitchSearch);
 
-	TwitchSearch.$inject = ['$http'];
+    TwitchSearch.$inject = ['$http'];
 
-	function TwitchSearch($http) {
-		return {
-			streams: streams,
-			games: games
-		};
+    function TwitchSearch($http) {
+        return {
+            streams: streams,
+            games: games
+        };
 
-		function streams(query, limit, offset) {
-			var url = "https://api.twitch.tv/kraken/search/streams";
-			url += "?callback=JSON_CALLBACK";
-			url += "&q=" + query;
+        function streams(query, limit, offset) {
+            var url = "https://api.twitch.tv/kraken/search/streams";
+            url += "?callback=JSON_CALLBACK";
+            url += "&q=" + query;
 
-			if (limit) {
-				url += "&limit=" + limit;
-			}
+            if (limit) {
+                url += "&limit=" + limit;
+            }
 
-			if (offset) {
-				url += "&offset=" + offset
-			}
+            if (offset) {
+                url += "&offset=" + offset
+            }
 
-			return $http.jsonp(url)
-				.then(streamsCompleted);
+            return $http.jsonp(url)
+                .then(streamsCompleted);
 
-			function streamsCompleted(response) {
-				return response.data;
-			}
-		}
+            function streamsCompleted(response) {
+                return response.data;
+            }
+        }
 
-		function games(query, live) {
-			var url = "https://api.twitch.tv/kraken/search/games";
-			url += "?callback=JSON_CALLBACK";
-			url += "&type=suggest"
-			url += "&q=" + query;
+        function games(query, live) {
+            var url = "https://api.twitch.tv/kraken/search/games";
+            url += "?callback=JSON_CALLBACK";
+            url += "&type=suggest"
+            url += "&q=" + query;
 
-			if (live) {
-				url += "&live=true";
-			}
+            if (live) {
+                url += "&live=true";
+            }
 
-			return $http.jsonp(url)
-				.then(gamesCompleted);
+            return $http.jsonp(url)
+                .then(gamesCompleted);
 
-			function gamesCompleted(response) {
-				return response.data;
-			}
-		};
-	};
-})();
+            function gamesCompleted(response) {
+                return response.data;
+            }
+        };
+    };
+}());

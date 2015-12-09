@@ -1,0 +1,26 @@
+<div class="channels">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>Channels</h3>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <input class="form-control"
+                   type="text"
+                   placeholder="Enter channel"
+                   ng-model="selectedChannel"
+                   uib-typeahead="streams for streams in model.searchChannels($viewValue)"
+                   typeahead-wait-ms="200"
+                   typeahead-template-url="app/settings/settingsChannelsMatch.html"
+                   typeahead-on-select="model.addChannel($item.channel); selectedChannel = undefined;"/>
+        </div>
+        <div class="col-md-6" ng-repeat="channel in model.channels">
+            <div class="channel-follow">
+                <button type="button" class="close" ng-click="model.removeChannel(channel)">&times;</button>
+                <img ng-src="{{ channel.logo || channel.image }}"/>
+                <a class="act act-default" href="http://www.twitch.tv/{{ channel.name }}" target="_blank">{{ channel.display_name }}</a>
+            </div>
+        </div>
+    </div>
+</div>

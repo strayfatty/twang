@@ -1,0 +1,12 @@
+<div class="dashboard-games">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>Games</h3>
+            </div>
+        </div>
+        <div class="col-md-12" ng-repeat="game in model.games">
+            <div dashboard-game-streams="game"></div>
+        </div>
+    </div>
+</div>
