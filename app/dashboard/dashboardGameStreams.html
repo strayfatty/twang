@@ -1,0 +1,15 @@
+<div class="dashboard-game-streams" ng-show="model.streams.length > 0">
+    <div class="row">
+        <div class="col-md-12">
+            <a class="act act-primary" href="http://www.twitch.tv/directory/game/{{ model.game.name }}">{{ model.game.name }}</a>
+        </div>
+        <div class="col-md-3" ng-repeat="stream in model.streams">
+            <a href="{{ stream.channel.url }}" target="_blank">
+                <img class="img-responsive" ng-src="{{ stream.preview.medium }}">
+            </a>
+            <p>
+                {{ stream.viewers }} viewers on <a class="act act-default" href="{{ stream.channel.url }}" target="_blank">{{ stream.channel.display_name }}</a>
+            </p>
+        </div>
+    </div>
+</div>

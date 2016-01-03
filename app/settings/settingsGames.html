@@ -1,0 +1,26 @@
+<div class="settings-games">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>Games</h3>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <input class="form-control"
+                   type="text"
+                   placeholder="Search for games"
+                   ng-model="selectedGame"
+                   uib-typeahead="game for games in model.searchGames($viewValue)"
+                   typeahead-wait-ms="200"
+                   typeahead-template-url="app/settings/settingsGamesMatch.html"
+                   typeahead-on-select="model.addGame($item); selectedGame = undefined;"/>
+        </div>
+        <div class="col-md-6" ng-repeat="game in model.games">
+            <div class="game-follow">
+                <button type="button" class="close" ng-click="model.removeGame(game)">&times;</button>
+                <img ng-src="{{ game.image || game.box.small }}"/>
+                <a class="act act-default" href='http://www.twitch.tv/directory/game/{{ game.name }}' target="_blank">{{ game.name }}</a>
+            </div>
+        </div>
+    </div>
+</div>
