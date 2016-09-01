@@ -5,12 +5,9 @@
         .module('app')
         .config(routeConfig);
 
-    routeConfig.$inject = ['$routeProvider'];
+    routeConfig.$inject = ['$urlRouterProvider'];
 
-    function routeConfig($routeProvider) {
-        $routeProvider
-            .otherwise({
-                redirectTo: '/'
-            });
+    function routeConfig($urlRouterProvider) {
+        $urlRouterProvider.otherwise('/feed');
     }
 }());

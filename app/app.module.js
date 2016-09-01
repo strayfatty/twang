@@ -3,10 +3,10 @@
 
     angular
         .module('app', [
-            'ngRoute',
-            'ui.bootstrap',
+            'ngMaterial',
 
-            'app.dashboard',
-            'app.settings'
+            'blocks.router',
+
+            'twang'
         ]);
 }());
