@@ -68,7 +68,7 @@
 
     function materialConfig($mdThemingProvider) {
         $mdThemingProvider.theme('default')
-            .primaryPalette('teal');
+            .primaryPalette('grey');
     }
 }());
 (function() {
@@ -373,14 +373,21 @@
         .module('twang')
         .controller('twang.navigation.controller', NavigationController);
 
-    NavigationController.$inject = ['$mdSidenav'];
+    NavigationController.$inject = ['$mdMedia', '$mdSidenav'];
 
-    function NavigationController($mdSidenav) {
+    function NavigationController($mdMedia, $mdSidenav) {
         var vm = this;
+        vm.isLockedOpen = isLockedOpen;
         vm.toggleNavigation = toggleNavigation;
 
-        function toggleNavigation() {
-            $mdSidenav('navigation').toggle();
+        function isLockedOpen() {
+            return $mdMedia('gt-sm');
+        }
+
+        function toggleNavigation(b) {
+            if (!vm.isLockedOpen()) {
+                $mdSidenav('navigation').toggle();
+            }
         }
     }
 }());
@@ -413,6 +420,6 @@
     }
 }());
 angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/feed/feed.html','<h1>FEED</h1>');
-$templateCache.put('app/twang/twang.header.html','<md-toolbar layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>TWANG</h3>\r\n</md-toolbar>\r\n');
-$templateCache.put('app/twang/twang.navigation.html','<md-sidenav class="md-whiteframe-z2"\r\n            md-component-id="navigation"\r\n            md-is-locked-open="$mdMedia(\'gt-sm\')"\r\n            ng-click="vm.toggleNavigation()">\r\n    <md-list>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.feed" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Feed\r\n            </md-button>\r\n        </md-list-item>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.calendar" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Calendar\r\n            </md-button>\r\n        </md-list-item>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.shows" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Shows\r\n            </md-button>\r\n        </md-list-item>\r\n    </md-list>\r\n</md-sidenav>\r\n');}]);
+$templateCache.put('app/twang/twang.header.html','<md-toolbar class="md-hue-1" layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>TWANG</h3>\r\n</md-toolbar>\r\n');
+$templateCache.put('app/twang/twang.navigation.html','<md-sidenav class="md-whiteframe-z2"\r\n            md-component-id="navigation"\r\n            md-is-locked-open="vm.isLockedOpen()"\r\n            ng-click="vm.toggleNavigation()">\r\n    <md-list>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.feed" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Feed\r\n            </md-button>\r\n        </md-list-item>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.calendar" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Calendar\r\n            </md-button>\r\n        </md-list-item>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.shows" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Shows\r\n            </md-button>\r\n        </md-list-item>\r\n    </md-list>\r\n</md-sidenav>\r\n');}]);
 //# sourceMappingURL=app.js.map
