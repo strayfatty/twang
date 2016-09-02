@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('twang.feed', []);
+        .module('twang.channels', []);
 }());

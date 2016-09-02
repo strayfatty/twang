@@ -2,19 +2,22 @@
     'use strict';
 
     angular
-        .module('twang.feed')
+        .module('twang.channels')
         .config(routeConfig);
 
     routeConfig.$inject = ['$stateProvider'];
 
     function routeConfig($stateProvider) {
-        $stateProvider.state('twang.feed',
+        $stateProvider.state('twang.channels',
             {
-                url: '/feed',
+                url: '/channels',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/feed/feed.html'
+                        templateUrl: 'app/twang/channels/channels.html'
                     }
+                },
+                data: {
+                    title: 'Channels'
                 }
             });
     }

@@ -34,14 +34,28 @@
     'use strict';
 
     angular
-        .module('twang.feed', []);
+        .module('twang.channels', []);
+}());
+(function () {
+    'use strict';
+
+    angular
+        .module('twang.dashboard', []);
+}());
+(function () {
+    'use strict';
+
+    angular
+        .module('twang.games', []);
 }());
 (function() {
     'use strict';
 
     angular
         .module('twang', [
-            'twang.feed'
+            'twang.dashboard',
+            'twang.channels',
+            'twang.games'
         ]);
 }());
 (function() {
@@ -81,7 +95,7 @@
     routeConfig.$inject = ['$urlRouterProvider'];
 
     function routeConfig($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/feed');
+        $urlRouterProvider.otherwise('/dashboard');
     }
 }());
 (function() {
@@ -331,19 +345,70 @@
     'use strict';
 
     angular
-        .module('twang.feed')
+        .module('twang.channels')
         .config(routeConfig);
 
     routeConfig.$inject = ['$stateProvider'];
 
     function routeConfig($stateProvider) {
-        $stateProvider.state('twang.feed',
+        $stateProvider.state('twang.channels',
             {
-                url: '/feed',
+                url: '/channels',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/feed/feed.html'
+                        templateUrl: 'app/twang/channels/channels.html'
                     }
+                },
+                data: {
+                    title: 'Channels'
+                }
+            });
+    }
+}());
+(function () {
+    'use strict';
+
+    angular
+        .module('twang.dashboard')
+        .config(routeConfig);
+
+    routeConfig.$inject = ['$stateProvider'];
+
+    function routeConfig($stateProvider) {
+        $stateProvider.state('twang.dashboard',
+            {
+                url: '/dashboard',
+                views: {
+                    'content@': {
+                        templateUrl: 'app/twang/dashboard/dashboard.html'
+                    }
+                },
+                data: {
+                    title: 'Dashboard'
+                }
+            });
+    }
+}());
+(function () {
+    'use strict';
+
+    angular
+        .module('twang.games')
+        .config(routeConfig);
+
+    routeConfig.$inject = ['$stateProvider'];
+
+    function routeConfig($stateProvider) {
+        $stateProvider.state('twang.games',
+            {
+                url: '/games',
+                views: {
+                    'content@': {
+                        templateUrl: 'app/twang/games/games.html'
+                    }
+                },
+                data: {
+                    title: 'Games'
                 }
             });
     }
@@ -355,10 +420,12 @@
         .module('twang')
         .controller('twang.header.controller', HeaderController);
 
-    HeaderController.$inject = ['$mdSidenav'];
+    HeaderController.$inject = ['$mdSidenav', '$state'];
 
-    function HeaderController($mdSidenav) {
+    function HeaderController($mdSidenav, $state) {
         var vm = this;
+        vm.state = $state;
+        
         vm.toggleNavigation = toggleNavigation;
 
         function toggleNavigation() {
@@ -373,21 +440,14 @@
         .module('twang')
         .controller('twang.navigation.controller', NavigationController);
 
-    NavigationController.$inject = ['$mdMedia', '$mdSidenav'];
+    NavigationController.$inject = ['$mdSidenav'];
 
-    function NavigationController($mdMedia, $mdSidenav) {
+    function NavigationController($mdSidenav) {
         var vm = this;
-        vm.isLockedOpen = isLockedOpen;
         vm.toggleNavigation = toggleNavigation;
 
-        function isLockedOpen() {
-            return $mdMedia('gt-sm');
-        }
-
-        function toggleNavigation(b) {
-            if (!vm.isLockedOpen()) {
-                $mdSidenav('navigation').toggle();
-            }
+        function toggleNavigation() {
+            $mdSidenav('navigation').toggle();
         }
     }
 }());
@@ -419,7 +479,9 @@
             });
     }
 }());
-angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/feed/feed.html','<h1>FEED</h1>');
-$templateCache.put('app/twang/twang.header.html','<md-toolbar class="md-hue-1" layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>TWANG</h3>\r\n</md-toolbar>\r\n');
-$templateCache.put('app/twang/twang.navigation.html','<md-sidenav class="md-whiteframe-z2"\r\n            md-component-id="navigation"\r\n            md-is-locked-open="vm.isLockedOpen()"\r\n            ng-click="vm.toggleNavigation()">\r\n    <md-list>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.feed" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Feed\r\n            </md-button>\r\n        </md-list-item>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.calendar" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Calendar\r\n            </md-button>\r\n        </md-list-item>\r\n        <md-list-item>\r\n            <md-button ui-sref="twang.shows" ui-sref-active-eq="selected">\r\n                <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n                Shows\r\n            </md-button>\r\n        </md-list-item>\r\n    </md-list>\r\n</md-sidenav>\r\n');}]);
+angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/channels/channels.html','');
+$templateCache.put('app/twang/dashboard/dashboard.html','');
+$templateCache.put('app/twang/games/games.html','');
+$templateCache.put('app/twang/twang.header.html','<md-toolbar class="md-hue-1" layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>{{ vm.state.current.data.title }}</h3>\r\n</md-toolbar>\r\n');
+$templateCache.put('app/twang/twang.navigation.html','<md-toolbar class="md-hue-3">\r\n    <h3>TWANG</h3>\r\n</md-toolbar>\r\n<md-divider></md-divider>\r\n<md-list>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.dashboard" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Dashboard\r\n        </md-button>\r\n    </md-list-item>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.channels" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Channels\r\n        </md-button>\r\n    </md-list-item>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.games" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Games\r\n        </md-button>\r\n    </md-list-item>\r\n</md-list>\r\n');}]);
 //# sourceMappingURL=app.js.map

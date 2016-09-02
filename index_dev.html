@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="dist/vendor.min.css"/>
     <link rel="stylesheet" href="dist/app.min.css"/>
 </head>
-<body ng-app="app" layout="column">
-<div ui-view="header" layout="row"></div>
-<div flex layout="row">
-    <div ui-view="navigation" layout="row"></div>
-    <md-content flex layout-padding=""
-                layout="column"
-                ui-view="content"></md-content>
+<body ng-app="app" layout="row">
+<md-sidenav class="md-whiteframe-z2" 
+            md-component-id="navigation"
+            md-is-locked-open="$mdMedia('gt-sm')"
+            layout="column"
+            ui-view="navigation">
+</md-sidenav>
+<div layout="column" layout-fill>
+    <div ui-view="header"></div>
+    <md-content flex layout-padding ui-view="content"></md-content>
 </div>
 <script src="dist/vendor.js"></script>
 <script src="dist/app.js"></script>

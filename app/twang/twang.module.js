@@ -3,6 +3,8 @@
 
     angular
         .module('twang', [
-            'twang.feed'
+            'twang.dashboard',
+            'twang.channels',
+            'twang.games'
         ]);
 }());

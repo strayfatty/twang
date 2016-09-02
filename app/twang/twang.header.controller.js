@@ -5,10 +5,12 @@
         .module('twang')
         .controller('twang.header.controller', HeaderController);
 
-    HeaderController.$inject = ['$mdSidenav'];
+    HeaderController.$inject = ['$mdSidenav', '$state'];
 
-    function HeaderController($mdSidenav) {
+    function HeaderController($mdSidenav, $state) {
         var vm = this;
+        vm.state = $state;
+        
         vm.toggleNavigation = toggleNavigation;
 
         function toggleNavigation() {

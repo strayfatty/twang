@@ -8,6 +8,6 @@
     routeConfig.$inject = ['$urlRouterProvider'];
 
     function routeConfig($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/feed');
+        $urlRouterProvider.otherwise('/dashboard');
     }
 }());

@@ -5,21 +5,14 @@
         .module('twang')
         .controller('twang.navigation.controller', NavigationController);
 
-    NavigationController.$inject = ['$mdMedia', '$mdSidenav'];
+    NavigationController.$inject = ['$mdSidenav'];
 
-    function NavigationController($mdMedia, $mdSidenav) {
+    function NavigationController($mdSidenav) {
         var vm = this;
-        vm.isLockedOpen = isLockedOpen;
         vm.toggleNavigation = toggleNavigation;
 
-        function isLockedOpen() {
-            return $mdMedia('gt-sm');
-        }
-
-        function toggleNavigation(b) {
-            if (!vm.isLockedOpen()) {
-                $mdSidenav('navigation').toggle();
-            }
+        function toggleNavigation() {
+            $mdSidenav('navigation').toggle();
         }
     }
 }());

@@ -1,25 +1,24 @@
-<md-sidenav class="md-whiteframe-z2"
-            md-component-id="navigation"
-            md-is-locked-open="vm.isLockedOpen()"
-            ng-click="vm.toggleNavigation()">
-    <md-list>
-        <md-list-item>
-            <md-button ui-sref="twang.feed" ui-sref-active-eq="selected">
-                <md-icon md-svg-src="images/menu.svg"></md-icon>
-                Feed
-            </md-button>
-        </md-list-item>
-        <md-list-item>
-            <md-button ui-sref="twang.calendar" ui-sref-active-eq="selected">
-                <md-icon md-svg-src="images/menu.svg"></md-icon>
-                Calendar
-            </md-button>
-        </md-list-item>
-        <md-list-item>
-            <md-button ui-sref="twang.shows" ui-sref-active-eq="selected">
-                <md-icon md-svg-src="images/menu.svg"></md-icon>
-                Shows
-            </md-button>
-        </md-list-item>
-    </md-list>
-</md-sidenav>
+<md-toolbar class="md-hue-3">
+    <h3>TWANG</h3>
+</md-toolbar>
+<md-divider></md-divider>
+<md-list>
+    <md-list-item>
+        <md-button ui-sref="twang.dashboard" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">
+            <md-icon md-svg-src="images/menu.svg"></md-icon>
+            Dashboard
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button ui-sref="twang.channels" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">
+            <md-icon md-svg-src="images/menu.svg"></md-icon>
+            Channels
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button ui-sref="twang.games" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">
+            <md-icon md-svg-src="images/menu.svg"></md-icon>
+            Games
+        </md-button>
+    </md-list-item>
+</md-list>
