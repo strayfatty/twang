@@ -12,3 +12,17 @@ md-list .md-button.selected,
 md-list .md-button.selected md-icon {
     color: #03a9f4;
 }
+
+h3.heading, h4.heading {
+    margin-bottom: 0;
+}
+
+md-card md-card-header {
+    md-card-avatar {
+        margin-right: 12px;
+    }
+
+    md-card-header-text {
+        overflow: hidden;
+    }
+}

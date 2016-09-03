@@ -13,7 +13,9 @@
                 url: '/dashboard',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/dashboard/dashboard.html'
+                        templateUrl: 'app/twang/dashboard/dashboard.html',
+                        controller: 'twang.dashboard.controller',
+                        controllerAs: 'vm'
                     }
                 },
                 data: {
