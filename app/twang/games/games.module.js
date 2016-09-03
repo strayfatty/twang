@@ -3,6 +3,7 @@
 
     angular
         .module('twang.games', [
-            'blocks.user'
+            'blocks.user',
+            'blocks.twitch'
         ]);
 }());
