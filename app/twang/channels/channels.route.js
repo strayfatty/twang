@@ -13,7 +13,9 @@
                 url: '/channels',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/channels/channels.html'
+                        templateUrl: 'app/twang/channels/channels.html',
+                        controller: 'twang.channels.controller',
+                        controllerAs: 'vm'
                     }
                 },
                 data: {

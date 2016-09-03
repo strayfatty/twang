@@ -2,5 +2,8 @@
     'use strict';
 
     angular
-        .module('twang.channels', []);
+        .module('twang.channels', [
+            'blocks.user',
+            'blocks.twitch'
+        ]);
 }());

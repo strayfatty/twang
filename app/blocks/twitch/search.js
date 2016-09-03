@@ -30,7 +30,7 @@
                 .then(streamsCompleted);
 
             function streamsCompleted(response) {
-                return response.data;
+                return response.data.streams;
             }
         }
 

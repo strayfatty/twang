@@ -34,7 +34,10 @@
     'use strict';
 
     angular
-        .module('twang.channels', []);
+        .module('twang.channels', [
+            'blocks.user',
+            'blocks.twitch'
+        ]);
 }());
 (function () {
     'use strict';
@@ -174,7 +177,7 @@
                 .then(streamsCompleted);
 
             function streamsCompleted(response) {
-                return response.data;
+                return response.data.streams;
             }
         }
 
@@ -344,6 +347,76 @@
         }
     };
 }());
+(function() {
+    'use strict';
+
+    angular
+        .module('twang.channels')
+        .controller('twang.channels.controller', ChannelsController);
+
+    ChannelsController.$inject = ['$q', '$mdToast', 'blocks.user.service', 'blocks.twitch.search', 'blocks.twitch.channels'];
+
+    function ChannelsController($q, $mdToast, userService, twitchSearch, twitchChannels) {
+        var vm = this;
+        vm.channels = [];
+        vm.search = search;
+        vm.add = add;
+        vm.remove = remove;
+
+        activate();
+
+        function activate() {
+            return userService.getChannels()
+                .then(setChannels);
+        }
+
+        function setChannels(channels) {
+            vm.channels = channels;
+        }
+
+        function search(searchText) {
+            var promises = [
+                twitchChannels.getByName(searchText),
+                twitchSearch.streams(searchText)
+            ];
+
+            return $q.all(promises)
+                .then(combine);
+
+            function combine(responses) {
+                var channel = responses[0];
+                var channels = responses[1].map(function (stream) { return stream.channel; });
+
+                if (channel && channel._id) {
+                    channels = channels.filter(function (element) { return element.name != channel.name; });
+                    channels.unshift(channel);
+                }
+
+                return channels;
+            }
+        }
+
+        function add(channel) {
+            if (!channel) {
+                return;
+            }
+
+            return userService.addChannel(channel)
+                .then(setChannels)
+                .then(function () { return $mdToast.showSimple(channel.display_name + " added"); });
+        }
+
+        function remove(channel) {
+            if (!channel) {
+                return;
+            }
+
+            return userService.removeChannel(channel)
+                .then(setChannels)
+                .then(function () { return $mdToast.showSimple(channel.display_name + " removed"); })
+        }
+    }
+}());
 (function () {
     'use strict';
 
@@ -359,7 +432,9 @@
                 url: '/channels',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/channels/channels.html'
+                        templateUrl: 'app/twang/channels/channels.html',
+                        controller: 'twang.channels.controller',
+                        controllerAs: 'vm'
                     }
                 },
                 data: {
@@ -424,12 +499,20 @@
         }
 
         function add(game) {
+            if (!game) {
+                return;
+            }
+
             return userService.addGame(game)
                 .then(setGames)
                 .then(function () { return $mdToast.showSimple(game.name + " added"); });
         }
 
         function remove(game) {
+            if (!game) {
+                return;
+            }
+
             return userService.removeGame(game)
                 .then(setGames)
                 .then(function () { return $mdToast.showSimple(game.name + " removed"); })
@@ -528,7 +611,7 @@
             });
     }
 }());
-angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/channels/channels.html','');
+angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/channels/channels.html','<div layout="row" layout-sm="column" layout-xs="column" layout-wrap>\r\n    <md-autocomplete flex="100"\r\n                     md-search-text="searchText"\r\n                     md-selected-item="selectedItem"\r\n                     md-item-text="item.name"\r\n                     md-items="item in vm.search(searchText)"\r\n                     md-delay="200"\r\n                     md-autoselect="true"\r\n                     md-selected-item-change="vm.add(selectedItem); searchText = \'\'; selectedItem = null"\r\n                     placeholder="Add a channel">\r\n        <md-item-template>{{ item.display_name }}</md-item-template>\r\n    </md-autocomplete>\r\n    <div flex flex-gt-sm="50" flex-gt-md="33" ng-repeat="channel in vm.channels | orderBy:\'display_name\'">\r\n        <md-card>\r\n            <md-card-title>\r\n                <md-card-title-text>\r\n                    <span class="md-headline">{{ channel.display_name }}</span>\r\n                </md-card-title-text>\r\n                <md-card-title-media>\r\n                    <img class="md-media-md" ng-src="{{ channel.logo }}">\r\n                </md-card-title-media>\r\n            </md-card-title>\r\n            <md-card-actions layout="row" layout-align="end center">\r\n                <md-button href="{{ channel.url }}" target="_blank">View</md-button>\r\n                <md-button ng-click="vm.remove(channel)">Remove</md-button>\r\n            </md-card-actions>\r\n        </md-card>\r\n    </div>\r\n</div>');
 $templateCache.put('app/twang/dashboard/dashboard.html','');
 $templateCache.put('app/twang/games/games.html','<div layout="row" layout-sm="column" layout-xs="column" layout-wrap>\r\n    <md-autocomplete flex="100"\r\n                     md-search-text="searchText"\r\n                     md-selected-item="selectedItem"\r\n                     md-item-text="item.name"\r\n                     md-items="item in vm.search(searchText)"\r\n                     md-delay="200"\r\n                     md-autoselect="true"\r\n                     md-selected-item-change="vm.add(selectedItem); searchText = \'\'; selectedItem = null"\r\n                     placeholder="Add a game">\r\n        <md-item-template>{{ item.name }}</md-item-template>\r\n    </md-autocomplete>\r\n    <div flex flex-gt-sm="50" flex-gt-md="33" ng-repeat="game in vm.games | orderBy:\'name\'">\r\n        <md-card>\r\n            <md-card-title>\r\n                <md-card-title-text>\r\n                    <span class="md-headline">{{ game.name }}</span>\r\n                </md-card-title-text>\r\n                <md-card-title-media>\r\n                    <img class="md-media-md" ng-src="{{ game.box.medium }}">\r\n                </md-card-title-media>\r\n            </md-card-title>\r\n            <md-card-actions layout="row" layout-align="end center">\r\n                <md-button href="https://www.twitch.tv/directory/game/{{ game.name }}" target="_blank">View</md-button>\r\n                <md-button ng-click="vm.remove(game)">Remove</md-button>\r\n            </md-card-actions>\r\n        </md-card>\r\n    </div>\r\n</div>');
 $templateCache.put('app/twang/twang.header.html','<md-toolbar class="md-hue-1" layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>{{ vm.state.current.data.title }}</h3>\r\n</md-toolbar>\r\n');

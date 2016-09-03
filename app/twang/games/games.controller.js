@@ -30,12 +30,20 @@
         }
 
         function add(game) {
+            if (!game) {
+                return;
+            }
+
             return userService.addGame(game)
                 .then(setGames)
                 .then(function () { return $mdToast.showSimple(game.name + " added"); });
         }
 
         function remove(game) {
+            if (!game) {
+                return;
+            }
+
             return userService.removeGame(game)
                 .then(setGames)
                 .then(function () { return $mdToast.showSimple(game.name + " removed"); })
