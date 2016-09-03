@@ -48,7 +48,7 @@
                 .then(gamesCompleted);
 
             function gamesCompleted(response) {
-                return response.data;
+                return response.data.games;
             }
         };
     };

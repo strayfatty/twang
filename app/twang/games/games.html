@@ -5,6 +5,7 @@
                      md-item-text="item.name"
                      md-items="item in vm.search(searchText)"
                      md-delay="200"
+                     md-autoselect="true"
                      md-selected-item-change="vm.add(selectedItem); searchText = ''; selectedItem = null"
                      placeholder="Add a game">
         <md-item-template>{{ item.name }}</md-item-template>

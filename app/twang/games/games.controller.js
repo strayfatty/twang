@@ -26,10 +26,7 @@
         }
 
         function search(searchText) {
-            return twitchSearch.games(searchText)
-                .then(function (response) {
-                    return response.games;
-                });
+            return twitchSearch.games(searchText);
         }
 
         function add(game) {

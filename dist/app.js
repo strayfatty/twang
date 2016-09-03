@@ -192,7 +192,7 @@
                 .then(gamesCompleted);
 
             function gamesCompleted(response) {
-                return response.data;
+                return response.data.games;
             }
         };
     };
@@ -420,10 +420,7 @@
         }
 
         function search(searchText) {
-            return twitchSearch.games(searchText)
-                .then(function (response) {
-                    return response.games;
-                });
+            return twitchSearch.games(searchText);
         }
 
         function add(game) {
@@ -531,7 +528,7 @@
 }());
 angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/channels/channels.html','');
 $templateCache.put('app/twang/dashboard/dashboard.html','');
-$templateCache.put('app/twang/games/games.html','<div layout="row" layout-sm="column" layout-xs="column" layout-wrap>\r\n    <md-autocomplete flex="100"\r\n                     md-search-text="searchText"\r\n                     md-selected-item="selectedItem"\r\n                     md-item-text="item.name"\r\n                     md-items="item in vm.search(searchText)"\r\n                     md-delay="200"\r\n                     md-selected-item-change="vm.add(selectedItem); searchText = \'\'; selectedItem = null"\r\n                     placeholder="Add a game">\r\n        <md-item-template>{{ item.name }}</md-item-template>\r\n    </md-autocomplete>\r\n    <div flex flex-gt-sm="50" flex-gt-md="33" ng-repeat="game in vm.games | orderBy:\'name\'">\r\n        <md-card>\r\n            <md-card-title>\r\n                <md-card-title-text>\r\n                    <span class="md-headline">{{ game.name }}</span>\r\n                </md-card-title-text>\r\n                <md-card-title-media>\r\n                    <img class="md-media-md" ng-src="{{ game.box.medium }}">\r\n                </md-card-title-media>\r\n            </md-card-title>\r\n            <md-card-actions layout="row" layout-align="end center">\r\n                <md-button href="https://www.twitch.tv/directory/game/{{ game.name }}" target="_blank">View</md-button>\r\n                <md-button ng-click="vm.remove(game)">Remove</md-button>\r\n            </md-card-actions>\r\n        </md-card>\r\n    </div>\r\n</div>');
+$templateCache.put('app/twang/games/games.html','<div layout="row" layout-sm="column" layout-xs="column" layout-wrap>\r\n    <md-autocomplete flex="100"\r\n                     md-search-text="searchText"\r\n                     md-selected-item="selectedItem"\r\n                     md-item-text="item.name"\r\n                     md-items="item in vm.search(searchText)"\r\n                     md-delay="200"\r\n                     md-autoselect="true"\r\n                     md-selected-item-change="vm.add(selectedItem); searchText = \'\'; selectedItem = null"\r\n                     placeholder="Add a game">\r\n        <md-item-template>{{ item.name }}</md-item-template>\r\n    </md-autocomplete>\r\n    <div flex flex-gt-sm="50" flex-gt-md="33" ng-repeat="game in vm.games | orderBy:\'name\'">\r\n        <md-card>\r\n            <md-card-title>\r\n                <md-card-title-text>\r\n                    <span class="md-headline">{{ game.name }}</span>\r\n                </md-card-title-text>\r\n                <md-card-title-media>\r\n                    <img class="md-media-md" ng-src="{{ game.box.medium }}">\r\n                </md-card-title-media>\r\n            </md-card-title>\r\n            <md-card-actions layout="row" layout-align="end center">\r\n                <md-button href="https://www.twitch.tv/directory/game/{{ game.name }}" target="_blank">View</md-button>\r\n                <md-button ng-click="vm.remove(game)">Remove</md-button>\r\n            </md-card-actions>\r\n        </md-card>\r\n    </div>\r\n</div>');
 $templateCache.put('app/twang/twang.header.html','<md-toolbar class="md-hue-1" layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>{{ vm.state.current.data.title }}</h3>\r\n</md-toolbar>\r\n');
 $templateCache.put('app/twang/twang.navigation.html','<md-toolbar class="md-hue-3">\r\n    <h3>TWANG</h3>\r\n</md-toolbar>\r\n<md-divider></md-divider>\r\n<md-list>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.dashboard" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Dashboard\r\n        </md-button>\r\n    </md-list-item>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.channels" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Channels\r\n        </md-button>\r\n    </md-list-item>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.games" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Games\r\n        </md-button>\r\n    </md-list-item>\r\n</md-list>\r\n');}]);
 //# sourceMappingURL=app.js.map
