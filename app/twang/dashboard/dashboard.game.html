@@ -1,0 +1,20 @@
+<h4 class="heading" ng-class="{ 'ng-hide': vm.streams.length == 0 }">{{ vm.game.name }}</h4>
+<div ng-class="{ 'ng-hide': vm.streams.length == 0 }" layout="row" layout-sm="column" layout-xs="column">
+    <div flex flex-gt-sm="50" flex-gt-md="25" ng-repeat="stream in vm.streams">
+        <md-card>
+            <img class="md-card-image" ng-src="{{ stream.preview.medium }}">
+            <md-card-header>
+                <md-card-avatar>
+                    <img ng-src="{{ stream.channel.logo }}">
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">{{ stream.channel.display_name }}</span>
+                    <span class="md-subhead">{{ stream.viewers }} viewers</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button href="{{ stream.channel.url }}" target="_blank">View</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>

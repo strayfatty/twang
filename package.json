@@ -17,11 +17,22 @@
   "homepage": "https://github.com/strayfatty/twang",
   "devDependencies": {
     "add-stream": "^1.0.0",
-    "gulp": "^3.9.0",
-    "gulp-angular-templatecache": "^1.8.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
     "gulp-concat": "^2.6.0",
-    "gulp-minify-css": "^1.2.2",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-order": "^1.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.1"
+    "gulp-uglify": "^2.0.0",
+    "require-dir": "^0.3.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-aria": "^1.5.8",
+    "angular-material": "^1.1.0",
+    "angular-ui-router": "^0.3.1"
   }
 }
