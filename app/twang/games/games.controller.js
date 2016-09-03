@@ -5,9 +5,9 @@
         .module('twang.games')
         .controller('twang.games.controller', GamesController);
 
-    GamesController.$inject = ['blocks.user.service', 'blocks.twitch.search'];
+    GamesController.$inject = ['$mdToast', 'blocks.user.service', 'blocks.twitch.search'];
 
-    function GamesController(userService, twitchSearch) {
+    function GamesController($mdToast, userService, twitchSearch) {
         var vm = this;
         vm.games = [];
         vm.search = search;
@@ -18,11 +18,11 @@
 
         function activate() {
             return userService.getGames()
-                .then(getGamesCompleted);
+                .then(setGames);
+        }
 
-            function getGamesCompleted(response) {
-                vm.games = response;
-            }
+        function setGames(games) {
+            vm.games = games;
         }
 
         function search(searchText) {
@@ -31,12 +31,14 @@
 
         function add(game) {
             return userService.addGame(game)
-                .then(activate);
+                .then(setGames)
+                .then(function () { return $mdToast.showSimple(game.name + " added"); });
         }
 
         function remove(game) {
             return userService.removeGame(game)
-                .then(activate);
+                .then(setGames)
+                .then(function () { return $mdToast.showSimple(game.name + " removed"); })
         }
     }
 }());
