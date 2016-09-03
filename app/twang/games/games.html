@@ -1,0 +1,12 @@
+<div layout="row" layout-sm="column" layout-xs="column" layout-wrap>
+    <md-card flex flex-gt-sm="45" flex-gt-md="30" ng-repeat="game in vm.games">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">{{ game.name }}</span>
+            </md-card-title-text>
+            <md-card-title-media>
+                <img class="md-media-md" ng-src="{{ game.box.medium }}">
+            </md-card-title-media>
+        </md-card-title>
+    </md-card>
+</div>

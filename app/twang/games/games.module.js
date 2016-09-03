@@ -2,5 +2,7 @@
     'use strict';
 
     angular
-        .module('twang.games', []);
+        .module('twang.games', [
+            'blocks.user'
+        ]);
 }());

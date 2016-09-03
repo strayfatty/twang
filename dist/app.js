@@ -46,7 +46,9 @@
     'use strict';
 
     angular
-        .module('twang.games', []);
+        .module('twang.games', [
+            'blocks.user'
+        ]);
 }());
 (function() {
     'use strict';
@@ -389,6 +391,31 @@
             });
     }
 }());
+(function() {
+    'use strict';
+
+    angular
+        .module('twang.games')
+        .controller('twang.games.controller', GamesController);
+
+    GamesController.$inject = ['blocks.user.service'];
+
+    function GamesController(userService) {
+        var vm = this;
+        vm.games = [];
+
+        activate();
+
+        function activate() {
+            return userService.getGames()
+                .then(getGamesCompleted);
+
+            function getGamesCompleted(response) {
+                vm.games = response;
+            }
+        }
+    }
+}());
 (function () {
     'use strict';
 
@@ -404,7 +431,9 @@
                 url: '/games',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/games/games.html'
+                        templateUrl: 'app/twang/games/games.html',
+                        controller: 'twang.games.controller',
+                        controllerAs: 'vm'
                     }
                 },
                 data: {
@@ -481,7 +510,7 @@
 }());
 angular.module('app').run(['$templateCache', function($templateCache) {$templateCache.put('app/twang/channels/channels.html','');
 $templateCache.put('app/twang/dashboard/dashboard.html','');
-$templateCache.put('app/twang/games/games.html','');
+$templateCache.put('app/twang/games/games.html','<div layout="row" layout-sm="column" layout-xs="column" layout-wrap>\r\n    <md-card flex flex-gt-sm="45" flex-gt-md="30" ng-repeat="game in vm.games">\r\n        <md-card-title>\r\n            <md-card-title-text>\r\n                <span class="md-headline">{{ game.name }}</span>\r\n            </md-card-title-text>\r\n            <md-card-title-media>\r\n                <img class="md-media-md" ng-src="{{ game.box.medium }}">\r\n            </md-card-title-media>\r\n        </md-card-title>\r\n    </md-card>\r\n</div>');
 $templateCache.put('app/twang/twang.header.html','<md-toolbar class="md-hue-1" layout="row">\r\n    <md-button class="menu" aria-label="menu" hide-gt-sm ng-click="vm.toggleNavigation()">\r\n        <md-icon md-svg-icon="menu"></md-icon>\r\n    </md-button>\r\n    <h3>{{ vm.state.current.data.title }}</h3>\r\n</md-toolbar>\r\n');
 $templateCache.put('app/twang/twang.navigation.html','<md-toolbar class="md-hue-3">\r\n    <h3>TWANG</h3>\r\n</md-toolbar>\r\n<md-divider></md-divider>\r\n<md-list>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.dashboard" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Dashboard\r\n        </md-button>\r\n    </md-list-item>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.channels" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Channels\r\n        </md-button>\r\n    </md-list-item>\r\n    <md-list-item>\r\n        <md-button ui-sref="twang.games" ui-sref-active-eq="selected" ng-click="vm.toggleNavigation()">\r\n            <md-icon md-svg-src="images/menu.svg"></md-icon>\r\n            Games\r\n        </md-button>\r\n    </md-list-item>\r\n</md-list>\r\n');}]);
 //# sourceMappingURL=app.js.map

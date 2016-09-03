@@ -13,7 +13,9 @@
                 url: '/games',
                 views: {
                     'content@': {
-                        templateUrl: 'app/twang/games/games.html'
+                        templateUrl: 'app/twang/games/games.html',
+                        controller: 'twang.games.controller',
+                        controllerAs: 'vm'
                     }
                 },
                 data: {
