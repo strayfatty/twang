@@ -1,5 +1,10 @@
-md-toolbar h3 {
-    margin: auto;
+md-toolbar {
+    min-height: 48px!important;
+}
+
+.md-toolbar-tools {
+    height: 48px!important;
+    max-height: 48px!important;
 }
 
 md-list-item > button,
@@ -15,6 +20,10 @@ md-list .md-button.selected md-icon {
 
 h3.heading, h4.heading {
     margin-bottom: 0;
+}
+
+.title {
+    margin: auto;
 }
 
 md-card md-card-header {
