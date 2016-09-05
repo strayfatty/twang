@@ -26,12 +26,33 @@ h3.heading, h4.heading {
     margin: auto;
 }
 
-md-card md-card-header {
-    md-card-avatar {
-        margin-right: 12px;
+md-card.stream {
+    md-card-header {
+        md-card-header-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-left: 5px;
+
+            span {
+                white-space: nowrap;
+            }
+        }
     }
 
-    md-card-header-text {
+    md-card-title {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    md-card-content {
         overflow: hidden;
+        text-overflow: ellipsis;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        span {
+            /* TODO: fix vanishing side nav */
+            /*white-space: nowrap;*/
+        }
     }
 }
