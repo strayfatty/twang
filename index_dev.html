@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ShowFeed</title>
+    <title>TWANG</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"/>
     <link rel="stylesheet" href="dist/vendor.min.css"/>
     <link rel="stylesheet" href="dist/app.min.css"/>
@@ -17,7 +17,9 @@
 </md-sidenav>
 <div layout="column" layout-fill>
     <div ui-view="header"></div>
-    <md-content flex layout-padding ui-view="content"></md-content>
+    <md-content flex>
+        <div layout-padding ui-view="content"></div>
+    </md-content>
 </div>
 <script src="dist/vendor.js"></script>
 <script src="dist/app.js"></script>
