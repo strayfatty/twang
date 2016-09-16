@@ -1,5 +1,5 @@
 <md-card class="stream">
-    <img class="md-card-image" ng-src="{{ vm.stream.preview.medium }}">
+    <img class="md-card-image" ng-src="{{ vm.stream.preview.medium }}" ng-click="vm.showPreview()">
     <md-card-header>
         <md-card-avatar>
             <img ng-src="{{ vm.stream.channel.logo }}">
@@ -16,6 +16,6 @@
     </md-card-title>
     <md-card-content><span>{{ vm.stream.channel.status }}</span></md-card-content>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button href="{{ vm.stream.channel.url }}" target="_blank">View</md-button>
+        <md-button href="{{ vm.stream.channel.url }}" target="_blank">Watch</md-button>
     </md-card-actions>
 </md-card>
