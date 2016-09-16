@@ -107,6 +107,15 @@
         $urlRouterProvider.otherwise('/dashboard');
     }
 }());
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .constant('twitchConfig', {
+            client_id: '7ikopbkspr7556owm9krqmalvr2w0i4'
+        });
+}());
 (function() {
     'use strict';
 
@@ -128,25 +137,66 @@
         .module('blocks.twitch')
         .factory('blocks.twitch.channels', TwitchChannels);
 
-    TwitchChannels.$inject = ['$http'];
+    TwitchChannels.$inject = ['blocks.twitch.client'];
 
-    function TwitchChannels($http) {
+    function TwitchChannels(twitchClient) {
         return {
             getByName: getByName,
         };
 
         function getByName(name) {
-            var url = "https://api.twitch.tv/kraken/channels/" + name;
-            url += "?callback=JSON_CALLBACK";
+            return twitchClient.get('channels/' + name);
+        }
+    };
+}());
+(function () {
+    'use strict';
 
-            return $http.jsonp(url)
-                .then(getCompleted);
+    angular
+        .module('blocks.twitch')
+        .factory('blocks.twitch.client', TwitchClient);
 
-            function getCompleted(response) {
+    TwitchClient.$inject = ['$http', 'twitchConfig'];
+
+    function TwitchClient($http, twitchConfig) {
+        return {
+            get: get
+        }
+
+        function get(api, params) {
+            var queryParams = angular.copy(params || {});
+
+            queryParams.callback = 'JSON_CALLBACK';
+            queryParams.client_id = twitchConfig.client_id;
+
+            return $http.jsonp(createUrl(api, queryParams))
+                .then(completed);
+
+            function completed(response) {
                 return response.data;
             }
         }
-    };
+
+        function createUrl(api, queryParams) {
+            var url = 'https://api.twitch.tv/kraken/' + api;
+            return url + createQuery(queryParams);
+        }
+
+        function createQuery(queryParams) {
+            return '?' + Object.keys(queryParams)
+                .map(function (key) { return toQueryParam(key, queryParams[key]); })
+                .filter(function (element) { return !!element; })
+                .join('&');
+        }
+
+        function toQueryParam(key, value) {
+            if (!key || !value) {
+                return null;
+            }
+
+            return encodeURIComponent(key) + '=' + encodeURIComponent(value);
+        }
+    }
 }());
 (function(){
     'use strict';
@@ -155,50 +205,41 @@
         .module('blocks.twitch')
         .factory('blocks.twitch.search', TwitchSearch);
 
-    TwitchSearch.$inject = ['$http'];
+    TwitchSearch.$inject = ['blocks.twitch.client'];
 
-    function TwitchSearch($http) {
+    function TwitchSearch(twitchClient) {
         return {
             streams: streams,
             games: games
         };
 
         function streams(query, limit, offset) {
-            var url = "https://api.twitch.tv/kraken/search/streams";
-            url += "?callback=JSON_CALLBACK";
-            url += "&q=" + query;
+            var params = {
+                q: query,
+                limit: limit,
+                offset: offset
+            };
 
-            if (limit) {
-                url += "&limit=" + limit;
-            }
+            return twitchClient.get('search/streams', params)
+              .then(getCompleted);
 
-            if (offset) {
-                url += "&offset=" + offset
-            }
-
-            return $http.jsonp(url)
-                .then(streamsCompleted);
-
-            function streamsCompleted(response) {
-                return response.data.streams;
+            function getCompleted(response) {
+                return response.streams;
             }
         }
 
         function games(query, live) {
-            var url = "https://api.twitch.tv/kraken/search/games";
-            url += "?callback=JSON_CALLBACK";
-            url += "&type=suggest"
-            url += "&q=" + query;
+            var params = {
+                type: 'suggest',
+                q: query,
+                live: live
+            };
 
-            if (live) {
-                url += "&live=true";
-            }
+            return twitchClient.get('search/games', params)
+                .then(getCompleted);
 
-            return $http.jsonp(url)
-                .then(gamesCompleted);
-
-            function gamesCompleted(response) {
-                return response.data.games;
+            function getCompleted(response) {
+                return response.games;
             }
         };
     };
@@ -210,54 +251,32 @@
         .module('blocks.twitch')
         .factory('blocks.twitch.streams', TwitchStreams);
 
-    TwitchStreams.$inject = ['$http'];
+    TwitchStreams.$inject = ['blocks.twitch.client'];
 
-    function TwitchStreams($http) {
+    function TwitchStreams(twitchClient) {
         return {
             getByGame: getByGame,
             getByChannel: getByChannel
         };
 
         function getByGame(game, limit, offset) {
-            var url = "https://api.twitch.tv/kraken/streams";
-            url += "?callback=JSON_CALLBACK";
-            url += "&game=" + game;
+            var params = {
+                game: game,
+                limit: limit,
+                offset: offset
+            };
 
-            if (limit) {
-                url += "&limit=" + limit;
-            }
-
-            if (offset) {
-                url += "&offset=" + offset
-            }
-
-            return $http.jsonp(url)
-                .then(getByGameCompleted);
-
-            function getByGameCompleted(response) {
-                return response.data;
-            }
+            return twitchClient.get('streams', params);
         }
 
         function getByChannel(channel, limit, offset) {
-            var url = "https://api.twitch.tv/kraken/streams";
-            url += "?callback=JSON_CALLBACK";
-            url += "&channel=" + channel;
+            var params = {
+                channel: channel,
+                limit: limit,
+                offset: offset
+            };
 
-            if (limit) {
-                url += "&limit=" + limit;
-            }
-
-            if (offset) {
-                url += "&offset=" + offset
-            }
-
-            return $http.jsonp(url)
-                .then(getByChannelCompleted);
-
-            function getByChannelCompleted(response) {
-                return response.data;
-            }
+            return twitchClient.get('streams', params);
         }
     };
 }());

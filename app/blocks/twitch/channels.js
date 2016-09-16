@@ -5,23 +5,15 @@
         .module('blocks.twitch')
         .factory('blocks.twitch.channels', TwitchChannels);
 
-    TwitchChannels.$inject = ['$http'];
+    TwitchChannels.$inject = ['blocks.twitch.client'];
 
-    function TwitchChannels($http) {
+    function TwitchChannels(twitchClient) {
         return {
             getByName: getByName,
         };
 
         function getByName(name) {
-            var url = "https://api.twitch.tv/kraken/channels/" + name;
-            url += "?callback=JSON_CALLBACK";
-
-            return $http.jsonp(url)
-                .then(getCompleted);
-
-            function getCompleted(response) {
-                return response.data;
-            }
+            return twitchClient.get('channels/' + name);
         }
     };
 }());

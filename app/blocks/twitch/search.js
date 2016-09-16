@@ -5,50 +5,41 @@
         .module('blocks.twitch')
         .factory('blocks.twitch.search', TwitchSearch);
 
-    TwitchSearch.$inject = ['$http'];
+    TwitchSearch.$inject = ['blocks.twitch.client'];
 
-    function TwitchSearch($http) {
+    function TwitchSearch(twitchClient) {
         return {
             streams: streams,
             games: games
         };
 
         function streams(query, limit, offset) {
-            var url = "https://api.twitch.tv/kraken/search/streams";
-            url += "?callback=JSON_CALLBACK";
-            url += "&q=" + query;
+            var params = {
+                q: query,
+                limit: limit,
+                offset: offset
+            };
 
-            if (limit) {
-                url += "&limit=" + limit;
-            }
+            return twitchClient.get('search/streams', params)
+              .then(getCompleted);
 
-            if (offset) {
-                url += "&offset=" + offset
-            }
-
-            return $http.jsonp(url)
-                .then(streamsCompleted);
-
-            function streamsCompleted(response) {
-                return response.data.streams;
+            function getCompleted(response) {
+                return response.streams;
             }
         }
 
         function games(query, live) {
-            var url = "https://api.twitch.tv/kraken/search/games";
-            url += "?callback=JSON_CALLBACK";
-            url += "&type=suggest"
-            url += "&q=" + query;
+            var params = {
+                type: 'suggest',
+                q: query,
+                live: live
+            };
 
-            if (live) {
-                url += "&live=true";
-            }
+            return twitchClient.get('search/games', params)
+                .then(getCompleted);
 
-            return $http.jsonp(url)
-                .then(gamesCompleted);
-
-            function gamesCompleted(response) {
-                return response.data.games;
+            function getCompleted(response) {
+                return response.games;
             }
         };
     };
