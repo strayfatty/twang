@@ -8,17 +8,19 @@
     TwitchClient.$inject = ['$http', 'twitchConfig'];
 
     function TwitchClient($http, twitchConfig) {
+        var httpConfig = {
+            'headers': {
+                'Accept': 'application/vnd.twitchtv.v5+json',
+                'Client-ID': twitchConfig['Client-ID']
+            }
+        }
+
         return {
             get: get
         }
 
         function get(api, params) {
-            var queryParams = angular.copy(params || {});
-
-            queryParams.callback = 'JSON_CALLBACK';
-            queryParams.client_id = twitchConfig.client_id;
-
-            return $http.jsonp(createUrl(api, queryParams))
+            return $http.get(createUrl(api, params), httpConfig)
                 .then(completed);
 
             function completed(response) {
@@ -32,7 +34,12 @@
         }
 
         function createQuery(queryParams) {
-            return '?' + Object.keys(queryParams)
+            var keys = Object.keys(queryParams || {});
+            if (keys.length === 0) {
+                return '';
+            }
+
+            return '?' + keys
                 .map(function (key) { return toQueryParam(key, queryParams[key]); })
                 .filter(function (element) { return !!element; })
                 .join('&');

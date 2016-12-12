@@ -33,9 +33,13 @@
         }
 
         function getStreams(channels) {
+            if (!channels || channels.length === 0) {
+                return [];
+            }
+
             var channel = "";
             channels.forEach(function (element) {
-                channel += element.name + ',';
+                channel += element._id + ',';
             });
 
             return twitchStreams.getByChannel(channel, channels.length, 0)

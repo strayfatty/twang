@@ -4,6 +4,6 @@
     angular
         .module('app')
         .constant('twitchConfig', {
-            client_id: '7ikopbkspr7556owm9krqmalvr2w0i4'
+            'Client-ID': '7ikopbkspr7556owm9krqmalvr2w0i4'
         });
 }());
