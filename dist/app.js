@@ -113,7 +113,7 @@
     angular
         .module('app')
         .constant('twitchConfig', {
-            client_id: '7ikopbkspr7556owm9krqmalvr2w0i4'
+            'Client-ID': '7ikopbkspr7556owm9krqmalvr2w0i4'
         });
 }());
 (function() {
@@ -159,17 +159,19 @@
     TwitchClient.$inject = ['$http', 'twitchConfig'];
 
     function TwitchClient($http, twitchConfig) {
+        var httpConfig = {
+            'headers': {
+                'Accept': 'application/vnd.twitchtv.v5+json',
+                'Client-ID': twitchConfig['Client-ID']
+            }
+        }
+
         return {
             get: get
         }
 
         function get(api, params) {
-            var queryParams = angular.copy(params || {});
-
-            queryParams.callback = 'JSON_CALLBACK';
-            queryParams.client_id = twitchConfig.client_id;
-
-            return $http.jsonp(createUrl(api, queryParams))
+            return $http.get(createUrl(api, params), httpConfig)
                 .then(completed);
 
             function completed(response) {
@@ -183,7 +185,12 @@
         }
 
         function createQuery(queryParams) {
-            return '?' + Object.keys(queryParams)
+            var keys = Object.keys(queryParams || {});
+            if (keys.length === 0) {
+                return '';
+            }
+
+            return '?' + keys
                 .map(function (key) { return toQueryParam(key, queryParams[key]); })
                 .filter(function (element) { return !!element; })
                 .join('&');
@@ -209,39 +216,37 @@
 
     function TwitchSearch(twitchClient) {
         return {
+            channels: channels,
             streams: streams,
             games: games
         };
 
+        function channels(query, limit, offset) {
+            return search('search/channels', query, limit, offset);
+        }
+
         function streams(query, limit, offset) {
+            return search('search/streams', query, limit, offset);
+        }
+
+        function games(query, limit, offset) {
+            return search('search/games', query, limit, offset);
+        };
+
+        function search(api, query, limit, offset) {
             var params = {
-                q: query,
+                query: query,
                 limit: limit,
                 offset: offset
             };
 
-            return twitchClient.get('search/streams', params)
-              .then(getCompleted);
-
-            function getCompleted(response) {
-                return response.streams;
-            }
-        }
-
-        function games(query, live) {
-            var params = {
-                type: 'suggest',
-                q: query,
-                live: live
-            };
-
-            return twitchClient.get('search/games', params)
+            return twitchClient.get(api, params)
                 .then(getCompleted);
 
             function getCompleted(response) {
-                return response.games;
+                return response.channels || response.streams || response.games;
             }
-        };
+        }
     };
 }());
 (function(){
@@ -397,25 +402,7 @@
         }
 
         function search(searchText) {
-            var promises = [
-                twitchChannels.getByName(searchText),
-                twitchSearch.streams(searchText)
-            ];
-
-            return $q.all(promises)
-                .then(combine);
-
-            function combine(responses) {
-                var channel = responses[0];
-                var channels = responses[1].map(function (stream) { return stream.channel; });
-
-                if (channel && channel._id) {
-                    channels = channels.filter(function (element) { return element.name != channel.name; });
-                    channels.unshift(channel);
-                }
-
-                return channels;
-            }
+            return twitchSearch.channels(searchText);
         }
 
         function add(channel) {
@@ -500,9 +487,13 @@
         }
 
         function getStreams(channels) {
+            if (!channels || channels.length === 0) {
+                return [];
+            }
+
             var channel = "";
             channels.forEach(function (element) {
-                channel += element.name + ',';
+                channel += element._id + ',';
             });
 
             return twitchStreams.getByChannel(channel, channels.length, 0)

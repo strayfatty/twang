@@ -26,25 +26,7 @@
         }
 
         function search(searchText) {
-            var promises = [
-                twitchChannels.getByName(searchText),
-                twitchSearch.streams(searchText)
-            ];
-
-            return $q.all(promises)
-                .then(combine);
-
-            function combine(responses) {
-                var channel = responses[0];
-                var channels = responses[1].map(function (stream) { return stream.channel; });
-
-                if (channel && channel._id) {
-                    channels = channels.filter(function (element) { return element.name != channel.name; });
-                    channels.unshift(channel);
-                }
-
-                return channels;
-            }
+            return twitchSearch.channels(searchText);
         }
 
         function add(channel) {
