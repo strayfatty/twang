@@ -17,7 +17,8 @@
             var params = {
                 game: game,
                 limit: limit,
-                offset: offset
+                offset: offset,
+                stream_type: 'live'
             };
 
             return twitchClient.get('streams', params);
@@ -27,7 +28,8 @@
             var params = {
                 channel: channel,
                 limit: limit,
-                offset: offset
+                offset: offset,
+                stream_type: 'live'
             };
 
             return twitchClient.get('streams', params);

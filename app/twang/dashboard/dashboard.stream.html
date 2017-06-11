@@ -1,4 +1,4 @@
-<md-card class="stream">
+<md-card class="stream" ng-class="{ 'not-live': vm.stream.stream_type !== 'live' }">
     <img class="md-card-image" ng-src="{{ vm.stream.preview.medium }}" ng-click="vm.showPreview()">
     <md-card-header>
         <md-card-avatar>
