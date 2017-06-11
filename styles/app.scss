@@ -26,6 +26,10 @@ h3.heading, h4.heading {
     margin: auto;
 }
 
+.not-live {
+    opacity: 0.25;
+}
+
 md-card.stream {
     md-card-header {
         md-card-header-text {
