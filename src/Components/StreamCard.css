@@ -1,0 +1,103 @@
+.stream-card {
+    flex: 1 0 auto;
+    align-self: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    margin-bottom: 1em;
+    max-width: 100%;
+    padding: 0 5px;
+    width: 16.67rem;
+}
+
+.stream-card--blank {
+    margin-bottom: 0;
+}
+
+.stream-card__preview {
+    flex: 0 0 auto;
+    align-self: auto;
+}
+
+.stream-card__thumbnail {
+    width: 100%;
+}
+
+.stream-card__user {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.stream-card__user-logo {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    width: 40px;
+    height: 40px;
+}
+
+.stream-card__user-text {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    padding-left: 5px;
+}
+
+.stream-card__user-name {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-shadow 0.1s linear;
+}
+
+.stream-card__user-name:hover {
+    color: #333333;
+    text-decoration: none;
+    text-shadow: 1px 1px 3px rgba(85, 85, 85, 0.5);
+}
+
+.stream-card__viewers {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    font-size: 14px;
+    color: rgba(0,0,0,0.54);
+}
+
+.stream-card__game {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.stream-card__title {
+    flex: 0 0 auto;
+    align-self: auto;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
