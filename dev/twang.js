@@ -3983,8 +3983,8 @@ var Twitch = /** @class */ (function () {
         var base = 'https://id.twitch.tv/oauth2/authorize';
         var clientId = '?client_id=' + Twitch.client_id;
         // const redirectUri = '&redirect_uri=http%3A%2F%2Flocalhost%2Ftwang%2Fdev%2F%23!%2Floginresult';
-        // const redirectUri = '&redirect_uri=https%3A%2F%2Fstrayfatty.github.io%2Ftwang%2F%23!%2F2Floginresult';
-        var redirectUri = '&redirect_uri=https%3A%2F%2Fstrayfatty.github.io%2Ftwang%2Fdev%2F%23!%2F2Floginresult';
+        // const redirectUri = '&redirect_uri=https%3A%2F%2Fstrayfatty.github.io%2Ftwang%2F%23!%2Floginresult';
+        var redirectUri = '&redirect_uri=https%3A%2F%2Fstrayfatty.github.io%2Ftwang%2Fdev%2F%23!%2Floginresult';
         var responseType = '&response_type=token';
         return base + clientId + redirectUri + responseType;
     };
