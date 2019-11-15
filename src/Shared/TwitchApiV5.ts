@@ -142,7 +142,7 @@ function mapTwitchStream(source: TwitchStream): Stream {
         id: '' + source._id,
         userId: '' + source.channel._id,
         userName: source.channel.display_name,
-        userLogo: source.channel.logo,
+        userLogo: (source.channel.logo || '').replace(/300x300/, '50x50'),
         gameId: null,
         gameName: source.game,
         type: 'live',
