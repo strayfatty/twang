@@ -1,0 +1,80 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.main-navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: center;
+
+    background-color: lightgray;
+    padding: 10px 20px;
+}
+
+.main-title {
+    flex: 1;
+    align-self: center;
+
+    cursor: default;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.main-login,
+.main-games,
+.main-logout {
+    flex: 0 0 auto;
+    align-self: center;
+
+    background: inherit;
+    border: none;
+    color: #555555;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    -webkit-transition: text-shadow 0.1s linear;
+       -moz-transition: text-shadow 0.1s linear;
+         -o-transition: text-shadow 0.1s linear;
+            transition: text-shadow 0.1s linear;
+}
+
+.main-login:hover,
+.main-games:hover,
+.main-logout:hover {
+    color: #333333;
+    text-decoration: none;
+    text-shadow: 1px 1px 3px rgba(85, 85, 85, 0.5);
+}
+
+.main-games,
+.main-logout {
+    display: none;
+}
+
+.main--authenticated .main-login {
+    display: none;
+}
+
+.main--authenticated .main-games,
+.main--authenticated .main-logout {
+    display: block;
+}
+
+.main-content {
+    flex: 1;
+    align-self: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    padding: 10px 20px;
+}

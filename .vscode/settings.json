@@ -1,0 +1,16 @@
+{
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescriptHero.imports.stringQuoteStyle": "'",
+  "typescriptHero.imports.grouping": [
+    "/^(?!(Components|Icons|Shared|Pages))/",
+    "/Shared/",
+    "/Icons/",
+    "/Components/",
+    "/Pages/",
+    "/!./"
+  ]
+}
+  

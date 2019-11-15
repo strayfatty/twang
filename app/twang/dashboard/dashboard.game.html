@@ -1,7 +1,0 @@
-<h3 class="heading" ng-class="{ 'ng-hide': vm.streams.length == 0 }">{{ vm.game.name }}</h3>
-<md-divider ng-class="{ 'ng-hide': vm.streams.length == 0 }"></md-divider>
-<div ng-class="{ 'ng-hide': vm.streams.length == 0 }" layout="row" layout-sm="column" layout-xs="column">
-    <div flex flex-gt-sm="50" flex-gt-md="25" ng-repeat="stream in vm.streams">
-        <dashboard-stream stream="stream" show-game-title="false"></dashboard-stream>
-    </div>
-</div>
