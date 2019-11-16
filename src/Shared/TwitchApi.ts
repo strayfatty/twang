@@ -20,7 +20,15 @@ export interface Game {
     boxArtUrl: string;
 }
 
+export interface User {
+    id?: string;
+    login?: string;
+    displayName?: string;
+    profileImageUrl?: string;
+}
+
 export interface TwitchApi {
+    getCurrentUser(): Promise<User>;
     getFollowedStreams(): Promise<Stream[]>;
     getGameStreams(name: string): Promise<Stream[]>;
     searchGames(query: string): Promise<Game[]>;

@@ -2,12 +2,14 @@ import * as m from 'mithril';
 
 import { buildQueryString } from 'Shared/Api';
 import { Auth } from 'Shared/Auth';
-import { Game, Stream, TwitchApi } from 'Shared/TwitchApi';
+import { Game, Stream, TwitchApi, User } from 'Shared/TwitchApi';
+import { TwitchApiNew } from 'Shared/TwitchApiNew';
 import { TwitchApiV5 } from 'Shared/TwitchApiV5';
 
 export class Twitch {
     static client_id: string = '7ikopbkspr7556owm9krqmalvr2w0i4';
-    static api: TwitchApi = new TwitchApiV5(Twitch.client_id, Auth.access_token)
+    static apiNew: TwitchApi = new TwitchApiNew(Twitch.client_id, Auth.access_token)
+    static apiV5: TwitchApi = new TwitchApiV5(Twitch.client_id, Auth.access_token)
 
     static loginUrl(): string {
         const base = 'https://id.twitch.tv/oauth2/authorize';
@@ -28,15 +30,19 @@ export class Twitch {
         m.request({ url: base + query, method: 'POST' });
     }
 
+    static getCurrentUser(): Promise<User> {
+        return Twitch.apiNew.getCurrentUser();
+    }
+
     static getFollowedStreams(): Promise<Stream[]> {
-        return this.api.getFollowedStreams();
+        return Twitch.apiV5.getFollowedStreams();
     }
 
     static getGameStreams(name: string): Promise<Stream[]> {
-        return this.api.getGameStreams(name);
+        return Twitch.apiV5.getGameStreams(name);
     }
 
     static searchGames(query: string): Promise<Game[]> {
-        return this.api.searchGames(query);
+        return Twitch.apiV5.searchGames(query);
     }
 }

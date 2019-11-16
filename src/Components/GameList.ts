@@ -1,7 +1,7 @@
 import './GameList.css';
 import * as m from 'mithril';
 
-import { GameStore } from 'Shared/GameStore';
+import { Model } from 'Shared/Model';
 import { Game } from 'Shared/TwitchApi';
 
 import { Trash } from 'Icons/Solid/Trash';
@@ -17,7 +17,7 @@ export class GameList implements m.ClassComponent<GameListAttrs> {
     games: string[];
 
     oninit() {
-        this.games = GameStore.getGames();
+        this.games = Model.getGames();
     }
 
     view(vnode: m.Vnode<GameListAttrs>) {
@@ -33,7 +33,7 @@ export class GameList implements m.ClassComponent<GameListAttrs> {
             m('.modal__footer', [
                 m('button.modal__button', {
                     onclick: () => {
-                        GameStore.setGames(this.games);
+                        Model.setGames(this.games);
                         vnode.attrs.onclose();
                     }
                 }, 'Save'),

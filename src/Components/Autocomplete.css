@@ -1,6 +1,6 @@
 .autocomplete {
-    height: 24px;
-    max-height: 24px;
+    height: 28px;
+    max-height: 28px;
     position: relative;
 }
 
@@ -8,7 +8,7 @@
     border: 1px solid #c8c8c8;
     box-sizing: border-box;
     font-size: 16px;
-    height: 24px;
+    height: 28px;
     left: 0;
     padding: 0 2px;
     position: absolute;
@@ -28,14 +28,14 @@
     left: 0;
     min-width: 100%;
     position: absolute;
-    top: 25px;
+    top: 29px;
     z-index: 9999;
 }
 
 .autocomplete__suggestion {
     cursor: pointer;
     font-size: 16px;
-    padding: 2px;
+    padding: 5px;
     user-select: none;
     white-space: nowrap;
 }

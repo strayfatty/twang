@@ -15,6 +15,8 @@
     align-content: stretch;
     align-items: stretch;
     justify-content: flex-end;
+
+    padding: 5px 0;
 }
 
 .game-list__item:hover {
