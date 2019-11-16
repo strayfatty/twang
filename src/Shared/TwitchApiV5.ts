@@ -1,10 +1,15 @@
 import * as m from 'mithril';
 
 import { buildQueryString } from 'Shared/Api';
-import { Game, Stream, TwitchApi } from 'Shared/TwitchApi';
+import { Game, Stream, TwitchApi, User } from 'Shared/TwitchApi';
 
 export class TwitchApiV5 implements TwitchApi {
     constructor(private client_id: string, private access_token: () => string) {
+    }
+
+    getCurrentUser(): Promise<User> {
+        console.error('not implemented');
+        return null;
     }
 
     getFollowedStreams(): Promise<Stream[]> {

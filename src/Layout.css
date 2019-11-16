@@ -26,9 +26,7 @@
     font-weight: bold;
 }
 
-.main-login,
-.main-games,
-.main-logout {
+.main-login {
     flex: 0 0 auto;
     align-self: center;
 
@@ -36,7 +34,7 @@
     border: none;
     color: #555555;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     -webkit-transition: text-shadow 0.1s linear;
        -moz-transition: text-shadow 0.1s linear;
@@ -44,26 +42,10 @@
             transition: text-shadow 0.1s linear;
 }
 
-.main-login:hover,
-.main-games:hover,
-.main-logout:hover {
+.main-login:hover {
     color: #333333;
     text-decoration: none;
     text-shadow: 1px 1px 3px rgba(85, 85, 85, 0.5);
-}
-
-.main-games,
-.main-logout {
-    display: none;
-}
-
-.main--authenticated .main-login {
-    display: none;
-}
-
-.main--authenticated .main-games,
-.main--authenticated .main-logout {
-    display: block;
 }
 
 .main-content {

@@ -1,10 +1,15 @@
 import * as m from 'mithril';
 
 import { buildQueryString } from 'Shared/Api';
-import { Game, Stream, TwitchApi } from 'Shared/TwitchApi';
+import { Game, Stream, TwitchApi, User } from 'Shared/TwitchApi';
 
 export class TwitchApiNew implements TwitchApi {
     constructor(private client_id: string, private access_token: () => string) {
+    }
+
+    getCurrentUser(): Promise<User> {
+        return this.users()
+            .then(response => mapTwitchUser(response.data[0]));
     }
 
     getFollowedStreams(): Promise<Stream[]> {
@@ -64,6 +69,7 @@ export class TwitchApiNew implements TwitchApi {
 
 export interface TwitchUser {
     id: string;
+    login: string;
     display_name: string;
     profile_image_url: string;
 }
@@ -105,4 +111,13 @@ function createUrl(endpoint: string, params?: any) {
     const base = 'https://api.twitch.tv/helix/';
     const query = buildQueryString(params);
     return base + endpoint + query;
+}
+
+function mapTwitchUser(source: TwitchUser): User {
+    return {
+        id: source.id,
+        login: source.login,
+        displayName: source.display_name,
+        profileImageUrl: (source.profile_image_url || '').replace(/300x300/, '50x50')
+    };
 }
