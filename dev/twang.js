@@ -3126,91 +3126,6 @@ exports.Autocomplete = Autocomplete;
 
 /***/ }),
 
-/***/ "./src/Components/Following.ts":
-/*!*************************************!*\
-  !*** ./src/Components/Following.ts ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
-var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
-var StreamList_1 = __webpack_require__(/*! Components/StreamList */ "./src/Components/StreamList.ts");
-var Following = /** @class */ (function () {
-    function Following() {
-        this.streams = null;
-    }
-    Following.prototype.view = function () {
-        this.fetchStreams();
-        return m(StreamList_1.StreamList, {
-            title: 'Following',
-            href: 'https://www.twitch.tv/directory/following',
-            streams: this.streams
-        });
-    };
-    Following.prototype.fetchStreams = function () {
-        var _this = this;
-        if (this.promise != null) {
-            return;
-        }
-        this.promise = Twitch_1.Twitch.getFollowedStreams()
-            .then(function (response) { return _this.streams = response; });
-    };
-    return Following;
-}());
-exports.Following = Following;
-
-
-/***/ }),
-
-/***/ "./src/Components/Game.ts":
-/*!********************************!*\
-  !*** ./src/Components/Game.ts ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
-var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
-var StreamList_1 = __webpack_require__(/*! Components/StreamList */ "./src/Components/StreamList.ts");
-var Game = /** @class */ (function () {
-    function Game() {
-        this.streams = null;
-    }
-    Game.prototype.view = function (vnode) {
-        if (this.name != vnode.attrs.name) {
-            this.promise = null;
-            this.name = vnode.attrs.name;
-            this.streams = null;
-        }
-        this.fetchStreams();
-        return m(StreamList_1.StreamList, {
-            title: this.name,
-            href: 'https://www.twitch.tv/directory/game/' + encodeURIComponent(this.name),
-            streams: this.streams
-        });
-    };
-    Game.prototype.fetchStreams = function () {
-        var _this = this;
-        if (this.promise != null) {
-            return;
-        }
-        this.promise = Twitch_1.Twitch.getGameStreams(this.name)
-            .then(function (response) { return _this.streams = response; });
-    };
-    return Game;
-}());
-exports.Game = Game;
-
-
-/***/ }),
-
 /***/ "./src/Components/GameList.css":
 /*!*************************************!*\
   !*** ./src/Components/GameList.css ***!
@@ -3241,7 +3156,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(/*! ./GameList.css */ "./src/Components/GameList.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
-var GameStore_1 = __webpack_require__(/*! Shared/GameStore */ "./src/Shared/GameStore.ts");
+var Model_1 = __webpack_require__(/*! Shared/Model */ "./src/Shared/Model.ts");
 var Trash_1 = __webpack_require__(/*! Icons/Solid/Trash */ "./src/Icons/Solid/Trash.ts");
 var GameSearch_1 = __webpack_require__(/*! Components/GameSearch */ "./src/Components/GameSearch.ts");
 var Modal_1 = __webpack_require__(/*! Components/Modal */ "./src/Components/Modal.ts");
@@ -3249,7 +3164,7 @@ var GameList = /** @class */ (function () {
     function GameList() {
     }
     GameList.prototype.oninit = function () {
-        this.games = GameStore_1.GameStore.getGames();
+        this.games = Model_1.Model.getGames();
     };
     GameList.prototype.view = function (vnode) {
         var _this = this;
@@ -3265,7 +3180,7 @@ var GameList = /** @class */ (function () {
             m('.modal__footer', [
                 m('button.modal__button', {
                     onclick: function () {
-                        GameStore_1.GameStore.setGames(_this.games);
+                        Model_1.Model.setGames(_this.games);
                         vnode.attrs.onclose();
                     }
                 }, 'Save'),
@@ -3381,6 +3296,74 @@ var Loader = /** @class */ (function () {
     return Loader;
 }());
 exports.Loader = Loader;
+
+
+/***/ }),
+
+/***/ "./src/Components/Menu.css":
+/*!*********************************!*\
+  !*** ./src/Components/Menu.css ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/Components/Menu.ts":
+/*!********************************!*\
+  !*** ./src/Components/Menu.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(/*! ./Menu.css */ "./src/Components/Menu.css");
+var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
+var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
+var Model_1 = __webpack_require__(/*! Shared/Model */ "./src/Shared/Model.ts");
+var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
+var GameList_1 = __webpack_require__(/*! Components/GameList */ "./src/Components/GameList.ts");
+var Menu = /** @class */ (function () {
+    function Menu() {
+        this.showMenu = false;
+        this.showGames = false;
+    }
+    Menu.prototype.view = function () {
+        var _this = this;
+        var user = Model_1.Model.getCurrentUser() || {};
+        return m('.menu', [
+            m('button.menu__button', {
+                onclick: function () { _this.showMenu = !_this.showMenu; }
+            }, [
+                m('img.menu__avatar', {
+                    alt: user.displayName,
+                    src: user.profileImageUrl
+                })
+            ]),
+            !this.showMenu ? null : m('.menu__list', [
+                m('button.menu__item', {
+                    onclick: function () {
+                        _this.showMenu = false;
+                        _this.showGames = true;
+                    }
+                }, 'Followed Games'),
+                m('button.menu__item', {
+                    onclick: function () {
+                        Twitch_1.Twitch.revoke(Auth_1.Auth.access_token());
+                        Auth_1.Auth.clear();
+                    }
+                }, 'Log Out')
+            ]),
+            this.showGames ? m(GameList_1.GameList, { onclose: function () { _this.showGames = false; } }) : null
+        ]);
+    };
+    return Menu;
+}());
+exports.Menu = Menu;
 
 
 /***/ }),
@@ -3703,35 +3686,25 @@ __webpack_require__(/*! ./Layout.css */ "./src/Layout.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
 var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
-var GameList_1 = __webpack_require__(/*! Components/GameList */ "./src/Components/GameList.ts");
+var Menu_1 = __webpack_require__(/*! Components/Menu */ "./src/Components/Menu.ts");
 var Layout = /** @class */ (function () {
     function Layout() {
-        this.showGames = false;
     }
     Layout.prototype.view = function (vnode) {
-        var _this = this;
         var isAuthenticated = !!Auth_1.Auth.access_token();
         var authClass = isAuthenticated ? '.main--authenticated' : '';
         return m('.main' + authClass, [
             m('.main-navbar', [
                 m('.main-title', 'TWANG'),
-                m('button.main-login', {
-                    onclick: function () {
-                        window.location.href = Twitch_1.Twitch.loginUrl();
-                    }
-                }, 'Log In'),
-                m('button.main-games', {
-                    onclick: function () { return _this.showGames = true; }
-                }, 'Followed Games'),
-                m('button.main-logout', {
-                    onclick: function () {
-                        Twitch_1.Twitch.revoke(Auth_1.Auth.access_token());
-                        Auth_1.Auth.clear();
-                    }
-                }, 'Log Out')
+                isAuthenticated
+                    ? m('.main-menu', m(Menu_1.Menu))
+                    : m('button.main-login', {
+                        onclick: function () {
+                            window.location.href = Twitch_1.Twitch.loginUrl();
+                        }
+                    }, 'Log In')
             ]),
             m('.main-content', isAuthenticated ? vnode.children : []),
-            this.showGames ? m(GameList_1.GameList, { onclose: function () { _this.showGames = false; } }) : null
         ]);
     };
     return Layout;
@@ -3771,21 +3744,34 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(/*! ./Dashboard.css */ "./src/Pages/Dashboard.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
-var Following_1 = __webpack_require__(/*! Components/Following */ "./src/Components/Following.ts");
-var Game_1 = __webpack_require__(/*! Components/Game */ "./src/Components/Game.ts");
-var GameStore_1 = __webpack_require__(/*! Shared/GameStore */ "./src/Shared/GameStore.ts");
+var Model_1 = __webpack_require__(/*! Shared/Model */ "./src/Shared/Model.ts");
+var StreamList_1 = __webpack_require__(/*! Components/StreamList */ "./src/Components/StreamList.ts");
 var Dashboard = /** @class */ (function () {
     function Dashboard() {
     }
     Dashboard.prototype.view = function () {
-        var games = GameStore_1.GameStore.getGames();
+        var games = Model_1.Model.getGames();
         return __spreadArrays([
-            m(Following_1.Following)
-        ], games.map(function (x) { return m(Game_1.Game, { name: x }); }));
+            following()
+        ], games.map(function (name) { return game(name); }));
     };
     return Dashboard;
 }());
 exports.Dashboard = Dashboard;
+function following() {
+    return m(StreamList_1.StreamList, {
+        title: 'Following',
+        href: 'https://www.twitch.tv/directory/following',
+        streams: Model_1.Model.getFollowedStreams()
+    });
+}
+function game(name) {
+    return m(StreamList_1.StreamList, {
+        title: name,
+        href: 'https://www.twitch.tv/directory/game/' + encodeURIComponent(name),
+        streams: Model_1.Model.getGameStreams(name)
+    });
+}
 
 
 /***/ }),
@@ -3934,30 +3920,54 @@ exports.debounce = debounce;
 
 /***/ }),
 
-/***/ "./src/Shared/GameStore.ts":
-/*!*********************************!*\
-  !*** ./src/Shared/GameStore.ts ***!
-  \*********************************/
+/***/ "./src/Shared/Model.ts":
+/*!*****************************!*\
+  !*** ./src/Shared/Model.ts ***!
+  \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var GameStore = /** @class */ (function () {
-    function GameStore() {
+var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
+var cache = {};
+var Model = /** @class */ (function () {
+    function Model() {
     }
-    GameStore.getGames = function () {
+    Model.getGames = function () {
         var value = window.localStorage.getItem('games') || '[]';
         return JSON.parse(value);
     };
-    GameStore.setGames = function (games) {
+    Model.setGames = function (games) {
         var value = JSON.stringify(games);
         window.localStorage.setItem('games', value);
+        cache = {};
     };
-    return GameStore;
+    Model.getCurrentUser = function () {
+        return getValue('_user_', Twitch_1.Twitch.getCurrentUser);
+    };
+    Model.getFollowedStreams = function () {
+        return getValue('_followed_', Twitch_1.Twitch.getFollowedStreams);
+    };
+    Model.getGameStreams = function (name) {
+        return getValue(name, Twitch_1.Twitch.getGameStreams);
+    };
+    return Model;
 }());
-exports.GameStore = GameStore;
+exports.Model = Model;
+function getValue(key, callback) {
+    var item = cache[key];
+    if (!item) {
+        item = { promise: null, value: null };
+        cache[key] = item;
+    }
+    if (!item.promise) {
+        item.promise = callback(key)
+            .then(function (value) { return item.value = value; });
+    }
+    return item.value;
+}
 
 
 /***/ }),
@@ -3975,18 +3985,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Api_1 = __webpack_require__(/*! Shared/Api */ "./src/Shared/Api.ts");
 var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
+var TwitchApiNew_1 = __webpack_require__(/*! Shared/TwitchApiNew */ "./src/Shared/TwitchApiNew.ts");
 var TwitchApiV5_1 = __webpack_require__(/*! Shared/TwitchApiV5 */ "./src/Shared/TwitchApiV5.ts");
 var Twitch = /** @class */ (function () {
     function Twitch() {
     }
     Twitch.loginUrl = function () {
+        var location = window.location.origin + window.location.pathname;
+        var redirectUri = location + '#!/loginresult';
         var base = 'https://id.twitch.tv/oauth2/authorize';
-        var clientId = '?client_id=' + Twitch.client_id;
-        // const redirectUri = '&redirect_uri=http%3A%2F%2Flocalhost%2Ftwang%2Fdev%2F%23!%2Floginresult';
-        // const redirectUri = '&redirect_uri=https%3A%2F%2Fstrayfatty.github.io%2Ftwang%2F%23!%2Floginresult';
-        var redirectUri = '&redirect_uri=https%3A%2F%2Fstrayfatty.github.io%2Ftwang%2Fdev%2F%23!%2Floginresult';
-        var responseType = '&response_type=token';
-        return base + clientId + redirectUri + responseType;
+        var params = {
+            client_id: Twitch.client_id,
+            redirect_uri: redirectUri,
+            response_type: 'token'
+        };
+        return base + Api_1.buildQueryString(params);
     };
     Twitch.revoke = function (access_token) {
         var params = {
@@ -3997,20 +4010,111 @@ var Twitch = /** @class */ (function () {
         var query = Api_1.buildQueryString(params);
         m.request({ url: base + query, method: 'POST' });
     };
+    Twitch.getCurrentUser = function () {
+        return Twitch.apiNew.getCurrentUser();
+    };
     Twitch.getFollowedStreams = function () {
-        return this.api.getFollowedStreams();
+        return Twitch.apiV5.getFollowedStreams();
     };
     Twitch.getGameStreams = function (name) {
-        return this.api.getGameStreams(name);
+        return Twitch.apiV5.getGameStreams(name);
     };
     Twitch.searchGames = function (query) {
-        return this.api.searchGames(query);
+        return Twitch.apiV5.searchGames(query);
     };
     Twitch.client_id = '7ikopbkspr7556owm9krqmalvr2w0i4';
-    Twitch.api = new TwitchApiV5_1.TwitchApiV5(Twitch.client_id, Auth_1.Auth.access_token);
+    Twitch.apiNew = new TwitchApiNew_1.TwitchApiNew(Twitch.client_id, Auth_1.Auth.access_token);
+    Twitch.apiV5 = new TwitchApiV5_1.TwitchApiV5(Twitch.client_id, Auth_1.Auth.access_token);
     return Twitch;
 }());
 exports.Twitch = Twitch;
+
+
+/***/ }),
+
+/***/ "./src/Shared/TwitchApiNew.ts":
+/*!************************************!*\
+  !*** ./src/Shared/TwitchApiNew.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
+var Api_1 = __webpack_require__(/*! Shared/Api */ "./src/Shared/Api.ts");
+var TwitchApiNew = /** @class */ (function () {
+    function TwitchApiNew(client_id, access_token) {
+        this.client_id = client_id;
+        this.access_token = access_token;
+    }
+    TwitchApiNew.prototype.getCurrentUser = function () {
+        return this.users()
+            .then(function (response) { return mapTwitchUser(response.data[0]); });
+    };
+    TwitchApiNew.prototype.getFollowedStreams = function () {
+        console.error('not implemented');
+        return null;
+    };
+    TwitchApiNew.prototype.getGameStreams = function (name) {
+        console.error('not implemented');
+        return null;
+    };
+    TwitchApiNew.prototype.searchGames = function (query) {
+        console.error('not implemented');
+        return null;
+    };
+    TwitchApiNew.prototype.users = function (id) {
+        return this.get('users', { id: id });
+    };
+    TwitchApiNew.prototype.userFollows = function (from_id, to_id, first, after) {
+        return this.get('users/follows', {
+            from_id: from_id,
+            to_id: to_id,
+            first: first,
+            after: after
+        });
+    };
+    TwitchApiNew.prototype.streams = function (user_id, game_id, first, after) {
+        return this.get('streams', {
+            user_id: user_id,
+            game_id: game_id,
+            first: first,
+            after: after
+        });
+    };
+    TwitchApiNew.prototype.games = function (id, name) {
+        return this.get('games', {
+            id: id,
+            name: name
+        });
+    };
+    TwitchApiNew.prototype.get = function (endpoint, params) {
+        return m.request({
+            url: createUrl(endpoint, params),
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.access_token()
+            }
+        });
+    };
+    return TwitchApiNew;
+}());
+exports.TwitchApiNew = TwitchApiNew;
+function createUrl(endpoint, params) {
+    var base = 'https://api.twitch.tv/helix/';
+    var query = Api_1.buildQueryString(params);
+    return base + endpoint + query;
+}
+function mapTwitchUser(source) {
+    return {
+        id: source.id,
+        login: source.login,
+        displayName: source.display_name,
+        profileImageUrl: (source.profile_image_url || '').replace(/300x300/, '50x50')
+    };
+}
 
 
 /***/ }),
@@ -4032,6 +4136,10 @@ var TwitchApiV5 = /** @class */ (function () {
         this.client_id = client_id;
         this.access_token = access_token;
     }
+    TwitchApiV5.prototype.getCurrentUser = function () {
+        console.error('not implemented');
+        return null;
+    };
     TwitchApiV5.prototype.getFollowedStreams = function () {
         return this.__streamsFollowed('live', 100, 0)
             .then(function (response) {
