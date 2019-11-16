@@ -12,11 +12,17 @@ export class Twitch {
     static apiV5: TwitchApi = new TwitchApiV5(Twitch.client_id, Auth.access_token)
 
     static loginUrl(): string {
+        const location = window.location.origin + window.location.pathname;
+        const redirectUri = location + '#!/loginresult';
+
         const base = 'https://id.twitch.tv/oauth2/authorize';
-        const clientId = '?client_id=' + Twitch.client_id;
-        const redirectUri = '&redirect_uri=http%3A%2F%2Flocalhost%2Ftwang%2Fdev%2F%23!%2Floginresult';
-        const responseType = '&response_type=token'
-        return base + clientId + redirectUri + responseType;
+        const params = {
+            client_id: Twitch.client_id,
+            redirect_uri: redirectUri,
+            response_type: 'token'
+        };
+
+        return base + buildQueryString(params);
     }
 
     static revoke(access_token: string): void {
