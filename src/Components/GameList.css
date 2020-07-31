@@ -1,43 +1,23 @@
 .game-list {
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 5px;
 }
 
 .game-list__item {
-    flex: 0 0 auto;
-    align-self: auto;
-
-    display: flex;
-    flex-direction: row;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-end;
-
-    padding: 5px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
 }
 
 .game-list__item:hover {
     background-color: #f6f6f6;
 }
 
-.game-list__search {
-    margin-bottom: 10px;
-}
-
 .game-list__name {
-    flex: 1;
-    align-self: center;
-
     font-weight: 500;
 }
 
 .game-list__remove {
-    flex: 0 0 auto;
-    align-self: center;
-
     cursor: pointer;
     background-color: transparent;
     border: none;

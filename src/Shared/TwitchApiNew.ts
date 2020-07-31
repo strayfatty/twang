@@ -61,7 +61,8 @@ export class TwitchApiNew implements TwitchApi {
             url: createUrl(endpoint, params),
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.access_token()
+                Authorization: 'Bearer ' + this.access_token(),
+                'Client-ID': this.client_id,
             }
         });
     }

@@ -18,11 +18,9 @@
 }
 
 .menu__list {
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-gap: 10px;
 
     background: lightgray;
     border-bottom-left-radius: 5px;
@@ -36,16 +34,13 @@
 }
 
 .menu__item {
-    flex: 0 0 auto;
-    align-self: auto;
-
     background: inherit;
     border: none;
     color: #555555;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    padding: 10px 0;
+    padding: 0;
     text-align: left;
     -webkit-transition: text-shadow 0.1s linear;
        -moz-transition: text-shadow 0.1s linear;
