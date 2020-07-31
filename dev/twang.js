@@ -3174,7 +3174,6 @@ var GameList = /** @class */ (function () {
             m('.modal__header', 'Followed Games'),
             m('.modal__content', [
                 m(GameSearch_1.GameSearch, {
-                    class: 'game-list__search',
                     onselect: function (game) { return _this.add(game); }
                 }),
                 m.apply(void 0, __spreadArrays(['.game-list'], this.games.map(function (x) { return _this.item(x); })))
@@ -3477,12 +3476,10 @@ var StreamCard = /** @class */ (function () {
             return m('.stream-card.stream-card--blank');
         }
         return m('.stream-card', [
-            m('.stream-card__preview', [
-                m('img.stream-card__thumbnail', {
-                    alt: stream.title,
-                    src: thumbnailUrl(stream.thumbnailUrl)
-                })
-            ]),
+            m('img.stream-card__preview', {
+                alt: stream.title,
+                src: thumbnailUrl(stream.thumbnailUrl)
+            }),
             m('.stream-card__user', [
                 m('img.stream-card__user-logo', {
                     src: stream.userLogo
@@ -3531,18 +3528,10 @@ function thumbnailUrl(template) {
 
 "use strict";
 
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StreamList = void 0;
 __webpack_require__(/*! ./StreamList.css */ "./src/Components/StreamList.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
-var Trash_1 = __webpack_require__(/*! Icons/Solid/Trash */ "./src/Icons/Solid/Trash.ts");
 var Loader_1 = __webpack_require__(/*! Components/Loader */ "./src/Components/Loader.ts");
 var StreamCard_1 = __webpack_require__(/*! Components/StreamCard */ "./src/Components/StreamCard.ts");
 var StreamList = /** @class */ (function () {
@@ -3559,20 +3548,10 @@ var StreamList = /** @class */ (function () {
                     href: vnode.attrs.href,
                     target: '_blank'
                 }, vnode.attrs.title),
-                vnode.attrs.ondelete ? m('button.stream-list__remove', {
-                    onclick: vnode.attrs.ondelete
-                }, m(Trash_1.Trash)) : null,
                 m('.stream-list__loader', m(Loader_1.Loader)),
                 m('.stream-list__empty', 'no streams found')
             ]),
-            m('.stream-list__content', __spreadArrays((streams || []).map(function (x) { return m(StreamCard_1.StreamCard, x); }), [
-                m(StreamCard_1.StreamCard, null),
-                m(StreamCard_1.StreamCard, null),
-                m(StreamCard_1.StreamCard, null),
-                m(StreamCard_1.StreamCard, null),
-                m(StreamCard_1.StreamCard, null),
-                m(StreamCard_1.StreamCard, null),
-            ]))
+            m('.stream-list__content', (streams || []).map(function (x) { return m(StreamCard_1.StreamCard, x); }))
         ]);
     };
     return StreamList;
@@ -4114,7 +4093,8 @@ var TwitchApiNew = /** @class */ (function () {
             url: createUrl(endpoint, params),
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.access_token()
+                Authorization: 'Bearer ' + this.access_token(),
+                'Client-ID': this.client_id,
             }
         });
     };
