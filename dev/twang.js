@@ -2971,6 +2971,7 @@ m.route(document.body, '/', {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Autocomplete = void 0;
 __webpack_require__(/*! ./Autocomplete.css */ "./src/Components/Autocomplete.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Debounce_1 = __webpack_require__(/*! Shared/Debounce */ "./src/Shared/Debounce.ts");
@@ -3154,6 +3155,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameList = void 0;
 __webpack_require__(/*! ./GameList.css */ "./src/Components/GameList.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Model_1 = __webpack_require__(/*! Shared/Model */ "./src/Shared/Model.ts");
@@ -3230,6 +3232,7 @@ exports.GameList = GameList;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameSearch = void 0;
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
 var Autocomplete_1 = __webpack_require__(/*! Components/Autocomplete */ "./src/Components/Autocomplete.ts");
@@ -3285,6 +3288,7 @@ function search(filter) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Loader = void 0;
 __webpack_require__(/*! ./Loader.css */ "./src/Components/Loader.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Loader = /** @class */ (function () {
@@ -3321,6 +3325,7 @@ exports.Loader = Loader;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Menu = void 0;
 __webpack_require__(/*! ./Menu.css */ "./src/Components/Menu.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
@@ -3389,6 +3394,7 @@ exports.Menu = Menu;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Modal = void 0;
 __webpack_require__(/*! ./Modal.css */ "./src/Components/Modal.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 // see: https://github.com/spacejack/mithril-modal
@@ -3459,6 +3465,7 @@ exports.Modal = Modal;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StreamCard = void 0;
 __webpack_require__(/*! ./StreamCard.css */ "./src/Components/StreamCard.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var StreamCard = /** @class */ (function () {
@@ -3532,6 +3539,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StreamList = void 0;
 __webpack_require__(/*! ./StreamList.css */ "./src/Components/StreamList.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Trash_1 = __webpack_require__(/*! Icons/Solid/Trash */ "./src/Icons/Solid/Trash.ts");
@@ -3595,6 +3603,7 @@ exports.StreamList = StreamList;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Icon = void 0;
 __webpack_require__(/*! ./Icon.css */ "./src/Icons/Icon.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Icon = /** @class */ (function () {
@@ -3636,6 +3645,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Trash = void 0;
 var svg = __webpack_require__(/*! ./svgs/trash.svg */ "./src/Icons/Solid/svgs/trash.svg");
 var Icon_1 = __webpack_require__(/*! Icons/Icon */ "./src/Icons/Icon.ts");
 var Trash = /** @class */ (function (_super) {
@@ -3682,6 +3692,7 @@ module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 51
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Layout = void 0;
 __webpack_require__(/*! ./Layout.css */ "./src/Layout.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
@@ -3742,6 +3753,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Dashboard = void 0;
 __webpack_require__(/*! ./Dashboard.css */ "./src/Pages/Dashboard.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Model_1 = __webpack_require__(/*! Shared/Model */ "./src/Shared/Model.ts");
@@ -3797,6 +3809,7 @@ function game(name) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoginResult = void 0;
 __webpack_require__(/*! ./LoginResult.css */ "./src/Pages/LoginResult.css");
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
@@ -3833,6 +3846,7 @@ exports.LoginResult = LoginResult;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildQueryString = void 0;
 function buildQueryString(params) {
     var args = [];
     Object.keys(params || {}).forEach(function (key) { return encode(key, params[key]); });
@@ -3866,6 +3880,7 @@ exports.buildQueryString = buildQueryString;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Auth = void 0;
 var Auth = /** @class */ (function () {
     function Auth() {
     }
@@ -3904,6 +3919,7 @@ function store(key, value) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.debounce = void 0;
 function debounce(func, delay) {
     var timeout = null;
     return function () {
@@ -3930,6 +3946,7 @@ exports.debounce = debounce;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Model = void 0;
 var Twitch_1 = __webpack_require__(/*! Shared/Twitch */ "./src/Shared/Twitch.ts");
 var cache = {};
 var Model = /** @class */ (function () {
@@ -3982,6 +3999,7 @@ function getValue(key, callback) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Twitch = void 0;
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Api_1 = __webpack_require__(/*! Shared/Api */ "./src/Shared/Api.ts");
 var Auth_1 = __webpack_require__(/*! Shared/Auth */ "./src/Shared/Auth.ts");
@@ -4042,6 +4060,7 @@ exports.Twitch = Twitch;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TwitchApiNew = void 0;
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Api_1 = __webpack_require__(/*! Shared/Api */ "./src/Shared/Api.ts");
 var TwitchApiNew = /** @class */ (function () {
@@ -4129,6 +4148,7 @@ function mapTwitchUser(source) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TwitchApiV5 = void 0;
 var m = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
 var Api_1 = __webpack_require__(/*! Shared/Api */ "./src/Shared/Api.ts");
 var TwitchApiV5 = /** @class */ (function () {
