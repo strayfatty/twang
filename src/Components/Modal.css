@@ -9,9 +9,8 @@
 }
 
 .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
 
     animation: modal-fade-in 0.2s;
     background-color: rgba(255,255,255,0.75);
@@ -28,6 +27,9 @@
 }
 
 .modal__frame {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
     background-color: #fff;
     border: #ccc 1px solid;
     border-radius: 10px;
@@ -43,30 +45,28 @@
 }
 
 .modal__content {
-    padding: 5px 10px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-gap: 5px;
+    padding: 0 10px;
 }
 
 .modal__footer {
-    display: flex;
-    flex-direction: row;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    place-items: end;
 
     padding: 5px 10px;
 }
 
 .modal__button {
-    flex: 0 0 auto;
-    align-self: center;
-
     background: inherit;
     border: none;
     color: #555555;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    padding: 10px;
+    padding: 5px 10px;
     -webkit-transition: text-shadow 0.1s linear;
        -moz-transition: text-shadow 0.1s linear;
          -o-transition: text-shadow 0.1s linear;

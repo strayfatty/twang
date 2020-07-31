@@ -1,35 +1,24 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 .main-navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
 
     background-color: lightgray;
     padding: 10px 20px;
 }
 
 .main-title {
-    flex: 1;
-    align-self: center;
-
     cursor: default;
     font-size: 22px;
     font-weight: bold;
+    margin: auto 0;
 }
 
 .main-login {
-    flex: 0 0 auto;
-    align-self: center;
-
     background: inherit;
     border: none;
     color: #555555;
@@ -49,14 +38,8 @@
 }
 
 .main-content {
-    flex: 1;
-    align-self: auto;
-
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-start;
+    display: grid;
+    grid-gap: 10px;
 
     padding: 10px 20px;
 }

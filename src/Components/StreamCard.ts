@@ -11,12 +11,10 @@ export class StreamCard implements m.Component<Stream> {
         }
 
         return m('.stream-card', [
-            m('.stream-card__preview', [
-                m('img.stream-card__thumbnail', {
-                    alt: stream.title,
-                    src: thumbnailUrl(stream.thumbnailUrl)
-                })
-            ]),
+            m('img.stream-card__preview', {
+                alt: stream.title,
+                src: thumbnailUrl(stream.thumbnailUrl)
+            }),
             m('.stream-card__user', [
                 m('img.stream-card__user-logo', {
                     src: stream.userLogo

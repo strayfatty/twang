@@ -25,7 +25,6 @@ export class GameList implements m.ClassComponent<GameListAttrs> {
             m('.modal__header', 'Followed Games'),
             m('.modal__content', [
                 m(GameSearch, {
-                    class: 'game-list__search',
                     onselect: (game: Game) => this.add(game)
                 }),
                 m('.game-list', ...this.games.map(x => this.item(x)))
