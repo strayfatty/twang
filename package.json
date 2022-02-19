@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack --config webpack.dev.js --watch",
-    "build-dev": "webpack --config webpack.dev.js",
-    "build-prod": "webpack --config webpack.prod.js"
+    "start": "vite",
+    "build": "vite build --config vite.config.js"
   },
   "repository": {
     "type": "git",
@@ -18,20 +17,10 @@
   },
   "homepage": "https://github.com/strayfatty/twang",
   "devDependencies": {
-    "@types/mithril": "^2.0.3",
-    "concat-cli": "^4.0.0",
-    "css-loader": "^3.6.0",
-    "mini-css-extract-plugin": "^0.8.2",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "svg-inline-loader": "^0.8.2",
-    "ts-loader": "^6.2.2",
-    "typescript": "^3.9.7",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-merge": "^4.2.2"
-  },
-  "dependencies": {
-    "mithril": "^2.0.4"
+    "@types/mithril": "^2.0.8",
+    "mithril": "^2.0.4",
+    "typescript": "^4.5.5",
+    "vite": "^2.8.0",
+    "vite-plugin-checker": "^0.4.0"
   }
 }
