@@ -1,4 +1,4 @@
-import * as m from 'mithril';
+import m from 'mithril';
 
 
 import { Model } from 'Shared/Model';
