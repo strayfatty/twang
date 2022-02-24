@@ -1,16 +1,19 @@
-import m from 'mithril';
+import m from "mithril";
 
+import { Storage } from "Shared/Storage";
+import { Layout } from "Pages/Layout";
+import { LayoutModel } from "Pages/LayoutModel";
+import { Dashboard } from "Pages/Dashboard/Dashboard";
+import { DashboardModel } from "Pages/Dashboard/DashboardModel";
+import { TwitchApi } from "Twitch/TwitchApi";
 
-import { Model } from 'Shared/Model';
-import { Api } from 'Shared/Api';
+const storage = new Storage();
+const twitchApi = new TwitchApi(storage);
+//const twitchClient = new TwitchClient(twitchApi);
 
-console.log(Model.getGames());
-console.log(Api.getGames());
-// import { Layout } from 'Layout';
-// import { Dashboard } from 'Pages/Dashboard';
+const layoutModel = new LayoutModel(twitchApi);
+const dashboardModel = new DashboardModel(/*twitchClient*/);
 
-
-// m.mount(document.body, { view: () => m(Layout, m(Dashboard)) });
-console.log("hallo21!!");
-
-m.mount(document.body, { view: () => m("", "1234") });
+m.mount(document.body, {
+    view: () => m(Layout, layoutModel, m(Dashboard, dashboardModel))
+});

@@ -1,14 +1,25 @@
-// import * as m from 'mithril';
+import { Storage } from "Shared/Storage";
+import { TwitchApi } from "Twitch/TwitchApi";
 
+const storage = new Storage();
+const twitchApi = new TwitchApi(storage);
 
-import { Model } from 'Shared/Model';
-import { Api } from 'Shared/Api';
+login()
+    .finally(() => location.href = "/")
 
-console.log(Model.getGames());
-console.log(Api.getGames());
-// import { Layout } from 'Layout';
-// import { Dashboard } from 'Pages/Dashboard';
+async function login(): Promise<void> {
+    if (twitchApi.isAuthenticated()) {
+        await twitchApi.logout();
+    }
 
+    const params = new URLSearchParams(location.hash?.substring(1));
+    const accessToken = params.get("access_token");
+    if (!accessToken) {
+        return;
+    }
 
-// m.mount(document.body, { view: () => m(Layout, m(Dashboard)) });
-console.log("hallo21!!");
+    storage.setAccessToken(accessToken);
+
+    const { data } = await twitchApi.get_users({});
+    storage.setUserId(data[0].id);
+}
