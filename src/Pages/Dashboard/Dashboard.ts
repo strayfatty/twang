@@ -1,9 +1,21 @@
 import m from "mithril";
 import { DashboardModel } from "Pages/Dashboard/DashboardModel";
+import { StreamList } from "Components/StreamList";
 
 export class Dashboard implements m.ClassComponent<DashboardModel> {
-    view(vnode: m.Vnode<DashboardModel, this>): void | m.Children {
+    oninit(vnode: m.Vnode<DashboardModel>) {
+        vnode.attrs.onChange = () => m.redraw();
+    }
+
+    view(vnode: m.Vnode<DashboardModel>): void | m.Children {
         const model = vnode.attrs;
-        return m("", "hallo");
+        return m(".dashboard", model.games.map(game => {
+            const streams = model.streams[game.id];
+            return m(StreamList, {
+                url: game.url,
+                title: game.name,
+                streams: streams
+            })
+        }));
     }
 }

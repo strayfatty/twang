@@ -20,6 +20,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: [
+            { find: /^Components\/(.*)/, replacement: resolve(__dirname, "src/Components/$1") },
             { find: /^Shared\/(.*)/, replacement: resolve(__dirname, "src/Shared/$1") },
             { find: /^Pages\/(.*)/, replacement: resolve(__dirname, "src/Pages/$1") },
             { find: /^Twitch\/(.*)/, replacement: resolve(__dirname, "src/Twitch/$1") }

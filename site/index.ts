@@ -9,10 +9,9 @@ import { TwitchApi } from "Twitch/TwitchApi";
 
 const storage = new Storage();
 const twitchApi = new TwitchApi(storage);
-//const twitchClient = new TwitchClient(twitchApi);
 
 const layoutModel = new LayoutModel(twitchApi);
-const dashboardModel = new DashboardModel(/*twitchClient*/);
+const dashboardModel = new DashboardModel(storage, twitchApi);
 
 m.mount(document.body, {
     view: () => m(Layout, layoutModel, m(Dashboard, dashboardModel))

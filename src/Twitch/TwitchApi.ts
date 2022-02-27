@@ -19,7 +19,8 @@ export class TwitchApi {
         const params = {
             client_id: client_id,
             redirect_uri: redirectUri,
-            response_type: "token"
+            response_type: "token",
+            scope: "user:read:follows"
         };
 
         return base + buildQueryString(params);
@@ -39,6 +40,14 @@ export class TwitchApi {
         login?: string | string[];
     }): Promise<Response<User>> {
         return this.get<User>("users", query);
+    }
+
+    get_streams_followed(query: {
+        user_id: string;
+        after?: string;
+        first?: number;
+    }): Promise<Response<Stream>> {
+        return this.get<Stream>("streams/followed", query);
     }
 
     private async revoke(): Promise<void> {
@@ -69,7 +78,7 @@ type Response<T> = {
     data: T[];
 };
 
-type User = {
+export type User = {
     id: string;
     login: string;
     display_name: string;
@@ -82,3 +91,18 @@ type User = {
     email?: string;
     created_at: string;
 };
+
+export type Stream = {
+    id: string;
+    user_id: string;
+    user_login: string;
+    user_name: string;
+    game_id: string;
+    game_name: string;
+    type: "live" | "";
+    title: string;
+    viewer_count: number;
+    started_at: string;
+    language: string;
+    thumbnail_url: string;
+}
