@@ -31,7 +31,6 @@ export class DashboardModel {
             url: "https://www.twitch.tv/directory/following",
             load: () => this.loadFollowedStreams()
         });
-        // TODO add followed games from storage
     }
 
     private async loadFollowedStreams(): Promise<void> {
