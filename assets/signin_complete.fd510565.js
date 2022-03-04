@@ -1,0 +1,1 @@
+import{S as n,T as o}from"./TwitchApi.08d3459c.js";const s=new n,t=new o(s);c().finally(()=>location.href="/");async function c(){t.isAuthenticated()&&await t.logout();const a=new URLSearchParams(location.hash?.substring(1)).get("access_token");if(!a)return;s.setAccessToken(a);const{data:e}=await t.get_users({});s.setUserId(e[0].id)}
