@@ -1,40 +1,23 @@
-import './StreamCard.css';
-import * as m from 'mithril';
+import "./StreamCard.css";
+import m from "mithril";
+import { StreamCardModel } from "Components/StreamCardModel";
 
-import { Stream } from 'Shared/TwitchApi';
-
-export class StreamCard implements m.Component<Stream> {
-    view(vnode: m.Vnode<Stream>) {
-        const stream = vnode.attrs;
-        if (!stream.id) {
-            return m('.stream-card.stream-card--blank');
-        }
-
-        return m('.stream-card', [
-            m('img.stream-card__preview', {
-                alt: stream.title,
-                src: thumbnailUrl(stream.thumbnailUrl)
+export class StreamCard implements m.Component<StreamCardModel> {
+    view(vnode: m.Vnode<StreamCardModel>) {
+        const model = vnode.attrs;
+        return m(".stream-card", [
+            m("img.stream-card__preview", {
+                alt: model.title,
+                src: model.thumbnailUrl
             }),
-            m('.stream-card__user', [
-                m('img.stream-card__user-logo', {
-                    src: stream.userLogo
-                }),
-                m('.stream-card__user-text', [
-                    m('a.stream-card__user-name', {
-                        href: stream.url,
-                        target: '_blank'
-                    }, stream.userName),
-                    m('.stream-card__viewers', stream.viewers + ' viewers')
-                ])
-            ]),
-            m('.stream-card__game', { title: stream.gameName }, stream.gameName),
-            m('.stream-card__title', { title: stream.title }, stream.title)
+            model.profileImageUrl ? m("img.stream-card__profile-image", {src: model.profileImageUrl}) : null,
+            m("a.stream-card__user", {
+                href: model.url,
+                target: "_blank"
+            }, model.userName),
+            m(".stream-card__viewers", `${model.viewers} viewers`),
+            m(".stream-card__game", { title: model.gameName }, model.gameName),
+            m(".stream-card__title", { title: model.title }, model.title)
         ])
     }
-}
-
-function thumbnailUrl(template: string): string {
-    return (template || '')
-        .replace(/{width}/, '320')
-        .replace(/{height}/, '180');
 }

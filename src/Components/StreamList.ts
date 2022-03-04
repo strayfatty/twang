@@ -1,32 +1,24 @@
-import './StreamList.css';
-import * as m from 'mithril';
+import "./StreamList.css";
+import m from "mithril";
+import { StreamListModel } from "Components/StreamListModel";
+import { StreamCard } from "Components/StreamCard";
 
-import { Loader } from 'Components/Loader';
-import { StreamCard } from 'Components/StreamCard';
-
-interface StreamListAttrs {
-    title: string,
-    href: string,
-    streams: any[]
-}
-
-export class StreamList implements m.Component<StreamListAttrs> {
-    view(vnode: m.Vnode<StreamListAttrs>) {
-        const streams = vnode.attrs.streams;
-        const loading = streams == null;
-        const empty = !loading && streams.length === 0;
-        const modifiers = loading ? 'stream-list--loading' : (empty ? 'stream-list--empty' : '');
-
-        return m('.stream-list', { class: modifiers }, [
-            m('.stream-list__header', [
-                m('a.stream-list__title', {
-                    href: vnode.attrs.href,
-                    target: '_blank'
-                }, vnode.attrs.title),
-                m('.stream-list__loader', m(Loader)),
-                m('.stream-list__empty', 'no streams found')
-            ]),
-            m('.stream-list__content', (streams || []).map(x => m(StreamCard, x)))
-        ])
+export class StreamList implements m.Component<StreamListModel> {
+    view(vnode: m.Vnode<StreamListModel>) {
+        const model = vnode.attrs;
+        const streams = model.streams || [];
+        return m(".stream-list", {
+            class: model.streams == null
+                ? "is-loading"
+                : streams.length === 0 ? "is-empty" : null
+        }, [
+            m("a.stream-list__title", {
+                href: model.url,
+                target: "_blank"
+            }, model.title),
+            m(".stream-list__loading"),
+            m(".stream-list__empty", "no streams found"),
+            m(".stream-list__streams", streams.map(stream => m(StreamCard, stream)))
+        ]);
     }
 }

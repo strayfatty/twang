@@ -1,0 +1,41 @@
+body {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    font-family: sans-serif;
+    height: 100vh;
+    margin: 0;
+}
+
+.layout__header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    border-bottom: 1px solid #dee2e6;
+    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 5%);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+}
+
+.layout__brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.layout__content {
+    display: grid;
+    grid-template-rows: 1fr;
+    padding: 10px 20px;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    transition: text-shadow .1s linear;
+}
+
+a:hover {
+    color: #333333;
+    text-decoration: none;
+    text-shadow: 1px 1px 3px rgb(85 85 85 / 50%);
+}
