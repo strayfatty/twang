@@ -10,9 +10,7 @@ export class StreamCard implements m.Component<StreamCardModel> {
                 alt: model.title,
                 src: model.thumbnailUrl
             }),
-            m("img.stream-card__profile-image", {
-                src: model.profileImageUrl
-            }),
+            model.profileImageUrl ? m("img.stream-card__profile-image", {src: model.profileImageUrl}) : null,
             m("a.stream-card__user", {
                 href: model.url,
                 target: "_blank"

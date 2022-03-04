@@ -38,10 +38,25 @@ export class DashboardModel {
         const query = { user_id: this.storage.getUserId() };
         const { data } = await this.twitch.get_streams_followed(query);
 
-        // TODO: load user profile pictures
         const streams = data.map(toStreamCardModel);
         this.streams[""] = streams;
         this.onChange();
+
+        await this.loadProfileImages(streams);
+        this.onChange();
+    }
+
+    private async loadProfileImages(streams: StreamCardModel[]): Promise<void> {
+        const ids = streams.map(x => x.userId)
+            .filter((value, index, self) => self.indexOf(value) === index);
+
+        const { data } = await this.twitch.get_users({ id: ids });
+        const pictures = data.reduce((acc: { [key: string]: string }, curr) => {
+            acc[curr.id] = curr.profile_image_url;
+            return acc;
+        }, {});
+
+        streams.forEach(stream => stream.profileImageUrl = pictures[stream.userId]);
     }
 }
 
@@ -49,6 +64,7 @@ function toStreamCardModel(stream: Stream): StreamCardModel {
     return {
         url: `https://twitch.tv/${stream.user_login}`,
         title: stream.title,
+        userId: stream.user_id,
         userName: stream.user_name,
         gameName: stream.game_name,
         thumbnailUrl: (stream.thumbnail_url || "")
