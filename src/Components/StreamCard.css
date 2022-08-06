@@ -30,7 +30,7 @@
 .stream-card__viewers {
     grid-area: viewers;
     font-size: 14px;
-    color: rgba(0,0,0,0.54);
+    opacity: .6;
 }
 
 .stream-card__game {
@@ -43,4 +43,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: bold;
+    font-size: 0.8em;
 }

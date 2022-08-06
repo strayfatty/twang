@@ -1,0 +1,25 @@
+:root {
+    --draculaBackground: #282a36;
+    --draculaCurrentLine: #44475a;
+    --draculaForeground: #f8f8f2;
+    --draculaComment: #6272a4;
+    --draculaCyan: #8be9fd;
+    --draculaGreen: #50fa7b;
+    --draculaOrange: #ffb86c;
+    --draculaPink: #ff79c6;
+    --draculaPurple: #bd93f9;
+    --draculaRed: #ff5555;
+    --draculaYellow: #f1fa8c;
+}
+
+a {
+    border-color: var(--draculaForeground);
+    color: var(--draculaForeground);
+    text-decoration: none;
+    transition: all .3s linear;
+}
+
+a:hover {
+    border-color: var(--draculaPurple);
+    color: var(--draculaPurple);
+}
