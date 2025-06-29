@@ -1,9 +1,12 @@
+import { inject } from "@vercel/analytics"
+
 import { Storage } from "Shared/Storage";
 import { TwitchApi } from "Twitch/TwitchApi";
 
 const storage = new Storage();
 const twitchApi = new TwitchApi(storage);
 
+inject();
 login()
     .finally(() => location.href = "/")
 
