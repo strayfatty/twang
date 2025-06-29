@@ -1,9 +1,11 @@
+import { injectAnalytics } from "Shared/injectAnalytics";
 import { Storage } from "Shared/Storage";
 import { TwitchApi } from "Twitch/TwitchApi";
 
 const storage = new Storage();
 const twitchApi = new TwitchApi(storage);
 
+injectAnalytics();
 login()
     .finally(() => location.href = "/")
 
