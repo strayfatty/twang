@@ -1,6 +1,6 @@
 import m, { ChildArrayOrPrimitive } from 'mithril';
 
-export abstract class MithrilComponent<Props> implements m.ClassComponent<Props> {
+export abstract class MithrilComponent<Props = {}> implements m.ClassComponent<Props> {
     private __tsx_props: Props & {
         class?: string | undefined;
         key?: string | number | undefined;

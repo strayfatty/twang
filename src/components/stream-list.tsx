@@ -1,6 +1,6 @@
 import "./stream-list.css";
 import m from "mithril";
-import { StreamCard } from "Components/stream-card";
+import { StreamCard } from "components/stream-card";
 import { MithrilComponent } from "./mithril-component";
 import { Stream } from "lib/twitch";
 

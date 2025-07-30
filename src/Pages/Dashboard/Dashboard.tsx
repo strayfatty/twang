@@ -1,21 +1,30 @@
 import m from "mithril";
-import { DashboardModel } from "Pages/Dashboard/DashboardModel";
-import { StreamList } from "Components/stream-list";
+import { StreamList } from "components/stream-list";
+import { getStreamsFollowed, getUserId, isAuthenticated, Stream } from "lib/twitch";
+import { MithrilComponent } from "components/mithril-component";
 
-export class Dashboard implements m.ClassComponent<DashboardModel> {
-    oninit(vnode: m.Vnode<DashboardModel>) {
-        vnode.attrs.onChange = () => m.redraw();
+export class Dashboard extends MithrilComponent {
+    private streams: Stream[] = null;
+
+    async oninit(_: m.Vnode<{}, this>) {
+        if (!isAuthenticated()) {
+            return;
+        }
+
+        const userId = getUserId();
+        this.streams = await getStreamsFollowed({user_id: userId});
+        m.redraw();
     }
 
-    view(vnode: m.Vnode<DashboardModel>): void | m.Children {
-        const model = vnode.attrs;
-        return m(".dashboard", model.games.map(game => {
-            const streams = model.streams[game.id];
-            return m(StreamList, {
-                url: game.url,
-                title: game.name,
-                streams: streams
-            })
-        }));
+    render() {
+        if (!isAuthenticated()) {
+            return (<div />);
+        }
+
+        return (
+            <div class="dashboard">
+                <StreamList url="https://www.twitch.tv/directory/following" title="Following" streams={this.streams} />
+            </div>
+        );
     }
 }

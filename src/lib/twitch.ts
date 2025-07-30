@@ -99,7 +99,7 @@ export async function getStreamsFollowed(query: {
 async function revoke() {
     const params = {
         client_id: CLIENT_ID,
-        token: this.storage.getAccessToken()
+        token: getAccessToken()
     };
 
     const url = `https://id.twitch.tv/oauth2/revoke${buildQueryString(params)}`;
@@ -111,7 +111,7 @@ async function get<T>(endpoint: string, params?: any): Promise<T[]> {
     const response = await fetch(url, {
         method: "GET",
         headers: {
-            Authorization: "Bearer " + this.storage.getAccessToken(),
+            Authorization: "Bearer " + getAccessToken(),
             'Client-ID': CLIENT_ID
         }
     });
