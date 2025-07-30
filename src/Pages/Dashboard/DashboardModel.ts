@@ -1,11 +1,10 @@
-import { StreamCardModel } from "Components/StreamCardModel";
 import { Storage } from "Shared/Storage";
 import { Stream, TwitchApi } from "Twitch/TwitchApi";
 
 export class DashboardModel {
     isAuthenticated: boolean;
     games: Game[];
-    streams: { [key: string]: any[] };
+    streams: { [key: string]: Stream[] };
     onChange: () => void;
 
     constructor(private storage: Storage, private twitch: TwitchApi) {
@@ -37,16 +36,20 @@ export class DashboardModel {
         const query = { user_id: this.storage.getUserId() };
         const { data } = await this.twitch.get_streams_followed(query);
 
-        const streams = data.map(toStreamCardModel);
-        this.streams[""] = streams;
+        data.forEach(stream => {
+            stream.thumbnail_url = (stream.thumbnail_url || "")
+                .replace(/{width}/, "320")
+                .replace(/{height}/, "180");
+        });
+        this.streams[""] = data;
         this.onChange();
 
-        await this.loadProfileImages(streams);
+        await this.loadProfileImages(data);
         this.onChange();
     }
 
-    private async loadProfileImages(streams: StreamCardModel[]): Promise<void> {
-        const ids = streams.map(x => x.userId)
+    private async loadProfileImages(streams: Stream[]): Promise<void> {
+        const ids = streams.map(x => x.user_id)
             .filter((value, index, self) => self.indexOf(value) === index);
 
         const { data } = await this.twitch.get_users({ id: ids });
@@ -55,23 +58,8 @@ export class DashboardModel {
             return acc;
         }, {});
 
-        streams.forEach(stream => stream.profileImageUrl = pictures[stream.userId]);
+        streams.forEach(stream => stream.profile_image_url = pictures[stream.user_id]);
     }
-}
-
-function toStreamCardModel(stream: Stream): StreamCardModel {
-    return {
-        url: `https://twitch.tv/${stream.user_login}`,
-        title: stream.title,
-        userId: stream.user_id,
-        userName: stream.user_name,
-        gameName: stream.game_name,
-        thumbnailUrl: (stream.thumbnail_url || "")
-            .replace(/{width}/, "320")
-            .replace(/{height}/, "180"),
-        profileImageUrl: "",
-        viewers: stream.viewer_count
-    };
 }
 
 type Game = {

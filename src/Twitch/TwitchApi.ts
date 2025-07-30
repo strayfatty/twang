@@ -105,4 +105,5 @@ export type Stream = {
     started_at: string;
     language: string;
     thumbnail_url: string;
+    profile_image_url: string;
 }

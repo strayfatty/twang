@@ -1,6 +1,6 @@
 import m from "mithril";
 import { DashboardModel } from "Pages/Dashboard/DashboardModel";
-import { StreamList } from "Components/StreamList";
+import { StreamList } from "Components/stream-list";
 
 export class Dashboard implements m.ClassComponent<DashboardModel> {
     oninit(vnode: m.Vnode<DashboardModel>) {
