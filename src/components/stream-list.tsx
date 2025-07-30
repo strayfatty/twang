@@ -1,8 +1,8 @@
 import "./stream-list.css";
 import m from "mithril";
 import { StreamCard } from "Components/stream-card";
-import { Stream } from "Twitch/TwitchApi";
 import { MithrilComponent } from "./mithril-component";
+import { Stream } from "lib/twitch";
 
 type Props = {
     url: string;
