@@ -6,7 +6,7 @@ import { getLoginUrl, isAuthenticated, logout } from "lib/twitch";
 export class Navigation extends MithrilComponent {
     render() {
         const onClick = async () => {
-            if (isAuthenticated()) {
+            if (!isAuthenticated()) {
                 location.href = getLoginUrl();
             } else {
                 await logout();

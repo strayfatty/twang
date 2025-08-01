@@ -7,11 +7,11 @@ export class Dashboard extends MithrilComponent {
     private streams: Stream[] = null;
 
     async oninit(_: m.Vnode<{}, this>) {
-        if (!isAuthenticated()) {
+        const userId = getUserId();
+        if (!userId || !isAuthenticated()) {
             return;
         }
 
-        const userId = getUserId();
         this.streams = await getStreamsFollowed({user_id: userId});
         m.redraw();
     }

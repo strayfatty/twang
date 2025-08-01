@@ -7,14 +7,14 @@ import { Stream } from "lib/twitch";
 type Props = {
     url: string;
     title: string;
-    streams: Stream[];
+    streams: Stream[] | null;
 };
 
 export class StreamList extends MithrilComponent<Props> {
     render(props: Props) {
         const state = props.streams == null
             ? "is-loading"
-            : props.streams.length === 0 ? "is-empty" : null
+            : props.streams.length === 0 ? "is-empty" : "";
 
         return (
             <div class={`stream-list ${state}`}>
@@ -22,7 +22,7 @@ export class StreamList extends MithrilComponent<Props> {
                 <div class="stream-list__loading" />
                 <div class="stream-list__empty">no streams found</div>
                 <div class="stream-list__streams">
-                    {props.streams?.map(stream => <StreamCard stream={stream} />)}
+                    {props.streams?.map(stream => <StreamCard key={stream.id} stream={stream} />)}
                 </div>
             </div>
         );

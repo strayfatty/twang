@@ -18,6 +18,12 @@ async function login(): Promise<void> {
 
     setAccessToken(accessToken);
 
-    const users = await getUsers({});
-    setUserId(users[0].id);
+    try {
+        const users = await getUsers({});
+        setUserId(users[0].id);
+    }
+    catch (error) {
+        console.error("Failed to get user data:", error);
+        await logout();
+    }
 }

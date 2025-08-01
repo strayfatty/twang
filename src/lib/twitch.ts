@@ -8,7 +8,7 @@ export type User = {
     id: string;
     login: string;
     display_name: string;
-    breadcaster_type: "partner" | "affiliate" | "";
+    broadcaster_type: "partner" | "affiliate" | "";
     description: string;
     offline_image_url: string;
     profile_image_url: string;
@@ -35,7 +35,7 @@ export type Stream = {
 }
 
 export function getUserId(): string {
-    return localStorage.getItem(USER_ID);
+    return localStorage.getItem(USER_ID) ?? "";
 }
 
 export function setUserId(value: string) {
@@ -43,7 +43,7 @@ export function setUserId(value: string) {
 }
 
 export function getAccessToken(): string {
-    return localStorage.getItem(ACCESS_TOKEN);
+    return localStorage.getItem(ACCESS_TOKEN) ?? "";
 }
 
 export function setAccessToken(value: string) {
@@ -74,8 +74,8 @@ export async function logout() {
         await revoke();
     }
 
-    setUserId(null);
-    setAccessToken(null);
+    localStorage.removeItem(USER_ID);
+    localStorage.removeItem(ACCESS_TOKEN);
 }
 
 export function getUsers(query: {
@@ -91,7 +91,7 @@ export async function getStreamsFollowed(query: {
     first?: number;
 }) {
     const streams = await get<Stream>("streams/followed", query);
-    streams.forEach(updateThumnailDimensions);
+    streams.forEach(updateThumbnailDimensions);
     await loadProfileImages(streams);
     return streams;
 }
@@ -120,21 +120,30 @@ async function get<T>(endpoint: string, params?: any): Promise<T[]> {
     return data;
 }
 
-async function updateThumnailDimensions(stream: Stream) {
+function updateThumbnailDimensions(stream: Stream) {
     stream.thumbnail_url = (stream.thumbnail_url || "")
         .replace(/{width}/, "320")
         .replace(/{height}/, "180");
 }
 
 async function loadProfileImages(streams: Stream[]) {
+    if (streams.length === 0) {
+        return;
+    }
+
     const ids = streams.map(x => x.user_id)
         .filter((value, index, self) => self.indexOf(value) === index);
 
-    const users = await getUsers({ id: ids });
-    const pictures = users.reduce((acc: { [key: string]: string }, curr) => {
-        acc[curr.id] = curr.profile_image_url;
-        return acc;
-    }, {});
+    try {
+        const users = await getUsers({ id: ids });
+        const pictures = users.reduce((acc: { [key: string]: string }, curr) => {
+            acc[curr.id] = curr.profile_image_url;
+            return acc;
+        }, {});
 
-    streams.forEach(stream => stream.profile_image_url = pictures[stream.user_id]);
+        streams.forEach(stream => stream.profile_image_url = pictures[stream.user_id]);
+    }
+    catch (error) {
+        console.warn("Failed to load profile images:", error);
+    }
 }
