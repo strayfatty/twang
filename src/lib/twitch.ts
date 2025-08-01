@@ -107,17 +107,27 @@ async function revoke() {
 }
 
 async function get<T>(endpoint: string, params?: any): Promise<T[]> {
-    const url = `https://api.twitch.tv/helix/${endpoint}${buildQueryString(params)}`;
-    const response = await fetch(url, {
-        method: "GET",
-        headers: {
-            Authorization: "Bearer " + getAccessToken(),
-            'Client-ID': CLIENT_ID
-        }
-    });
+    try {
+        const url = `https://api.twitch.tv/helix/${endpoint}${buildQueryString(params)}`;
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + getAccessToken(),
+                'Client-ID': CLIENT_ID
+            }
+        });
 
-    const { data } = await response.json();
-    return data;
+        if (!response.ok) {
+            throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+        }
+
+        const { data } = await response.json();
+        return data ?? [];
+    }
+    catch (error) {
+        console.error(`Failed to fetch ${endpoint}:`, error);
+        return [];
+    }
 }
 
 function updateThumbnailDimensions(stream: Stream) {
@@ -134,16 +144,11 @@ async function loadProfileImages(streams: Stream[]) {
     const ids = streams.map(x => x.user_id)
         .filter((value, index, self) => self.indexOf(value) === index);
 
-    try {
-        const users = await getUsers({ id: ids });
-        const pictures = users.reduce((acc: { [key: string]: string }, curr) => {
-            acc[curr.id] = curr.profile_image_url;
-            return acc;
-        }, {});
+    const users = await getUsers({ id: ids });
+    const pictures = users.reduce((acc: { [key: string]: string }, curr) => {
+        acc[curr.id] = curr.profile_image_url;
+        return acc;
+    }, {});
 
-        streams.forEach(stream => stream.profile_image_url = pictures[stream.user_id]);
-    }
-    catch (error) {
-        console.warn("Failed to load profile images:", error);
-    }
+    streams.forEach(stream => stream.profile_image_url = pictures[stream.user_id]);
 }
