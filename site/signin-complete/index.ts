@@ -1,17 +1,13 @@
-import { injectAnalytics } from "Shared/injectAnalytics";
-import { Storage } from "Shared/Storage";
-import { TwitchApi } from "Twitch/TwitchApi";
-
-const storage = new Storage();
-const twitchApi = new TwitchApi(storage);
+import { injectAnalytics } from "lib/injectAnalytics";
+import { getUsers, isAuthenticated, logout, setAccessToken, setUserId } from "lib/twitch";
 
 injectAnalytics();
 login()
     .finally(() => location.href = "/")
 
 async function login(): Promise<void> {
-    if (twitchApi.isAuthenticated()) {
-        await twitchApi.logout();
+    if (isAuthenticated()) {
+        await logout();
     }
 
     const params = new URLSearchParams(location.hash?.substring(1));
@@ -20,8 +16,14 @@ async function login(): Promise<void> {
         return;
     }
 
-    storage.setAccessToken(accessToken);
+    setAccessToken(accessToken);
 
-    const { data } = await twitchApi.get_users({});
-    storage.setUserId(data[0].id);
+    try {
+        const users = await getUsers({});
+        setUserId(users[0].id);
+    }
+    catch (error) {
+        console.error("Failed to get user data:", error);
+        await logout();
+    }
 }

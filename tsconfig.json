@@ -10,6 +10,7 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "lib": [ "DOM", "ES2020" ],
-      "types": []
+      "jsx": "react",
+      "jsxFactory": "m"
     }
   }
