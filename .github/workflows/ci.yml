@@ -17,3 +17,5 @@ jobs:
       run: pnpm i
     - name: pnpm check
       run: pnpm check
+    - name: pnpm build
+      run: pnpm build
