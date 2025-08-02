@@ -35,8 +35,8 @@ export default defineConfig({
                 replacement: resolve(__dirname, "src/lib/$1"),
             },
             {
-                find: /^Pages\/(.*)/,
-                replacement: resolve(__dirname, "src/Pages/$1"),
+                find: /^pages\/(.*)/,
+                replacement: resolve(__dirname, "src/pages/$1"),
             },
         ],
     },
