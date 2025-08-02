@@ -1,7 +1,7 @@
-import { Dashboard } from "components/dashboard";
-import { injectAnalytics } from "lib/injectAnalytics";
 import m from "mithril";
-import { Layout } from "pages/layout";
+import { Dashboard } from "~/components/dashboard";
+import { injectAnalytics } from "~/lib/injectAnalytics";
+import { Layout } from "~/pages/layout";
 
 injectAnalytics();
 m.mount(document.body, {

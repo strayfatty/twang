@@ -26,16 +26,8 @@ export default defineConfig({
     resolve: {
         alias: [
             {
-                find: /^components\/(.*)/,
-                replacement: resolve(__dirname, "src/components/$1"),
-            },
-            {
-                find: /^lib\/(.*)/,
-                replacement: resolve(__dirname, "src/lib/$1"),
-            },
-            {
-                find: /^pages\/(.*)/,
-                replacement: resolve(__dirname, "src/pages/$1"),
+                find: /^~\/(.*)/,
+                replacement: resolve(__dirname, "src/$1"),
             },
         ],
     },

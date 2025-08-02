@@ -1,11 +1,11 @@
-import { injectAnalytics } from "lib/injectAnalytics";
+import { injectAnalytics } from "~/lib/injectAnalytics";
 import {
     getUsers,
     isAuthenticated,
     logout,
     setAccessToken,
     setUserId,
-} from "lib/twitch";
+} from "~/lib/twitch";
 
 injectAnalytics();
 login().finally(() => {

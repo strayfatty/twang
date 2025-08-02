@@ -1,7 +1,7 @@
-import { MithrilComponent } from "components/mithril-component";
 import "./layout.css";
 import m from "mithril";
-import { Navigation } from "pages/navigation";
+import { MithrilComponent } from "~/components/mithril-component";
+import { Navigation } from "~/pages/navigation";
 
 export class Layout extends MithrilComponent {
     render(

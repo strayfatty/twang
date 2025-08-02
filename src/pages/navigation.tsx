@@ -1,7 +1,7 @@
 import "./navigation.css";
-import { MithrilComponent } from "components/mithril-component";
-import { getLoginUrl, isAuthenticated, logout } from "lib/twitch";
 import m from "mithril";
+import { MithrilComponent } from "~/components/mithril-component";
+import { getLoginUrl, isAuthenticated, logout } from "~/lib/twitch";
 
 export class Navigation extends MithrilComponent {
     render() {

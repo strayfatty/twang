@@ -1,12 +1,12 @@
-import { MithrilComponent } from "components/mithril-component";
-import { StreamList } from "components/stream-list";
+import m from "mithril";
+import { MithrilComponent } from "~/components/mithril-component";
+import { StreamList } from "~/components/stream-list";
 import {
     getStreamsFollowed,
     getUserId,
     isAuthenticated,
     Stream,
-} from "lib/twitch";
-import m from "mithril";
+} from "~/lib/twitch";
 
 export class Dashboard extends MithrilComponent {
     private streams: Stream[] = null;

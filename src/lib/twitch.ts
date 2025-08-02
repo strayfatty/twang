@@ -1,4 +1,4 @@
-import { buildQueryString } from "lib/buildQueryString";
+import { buildQueryString } from "~/lib/buildQueryString";
 
 const CLIENT_ID = "7ikopbkspr7556owm9krqmalvr2w0i4";
 const USER_ID = "twitch:user_id";

@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "baseUrl": "./src",
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./src/*"]
+        },
         "noImplicitAny": true,
         "module": "commonjs",
         "target": "ES2020",
