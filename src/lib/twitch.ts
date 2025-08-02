@@ -1,4 +1,4 @@
-import { buildQueryString } from "lib/buildQueryString";
+import { buildQueryString } from "~/lib/buildQueryString";
 
 const CLIENT_ID = "7ikopbkspr7556owm9krqmalvr2w0i4";
 const USER_ID = "twitch:user_id";
@@ -32,7 +32,7 @@ export type Stream = {
     language: string;
     thumbnail_url: string;
     profile_image_url: string;
-}
+};
 
 export function getUserId(): string {
     return localStorage.getItem(USER_ID) ?? "";
@@ -56,14 +56,14 @@ export function isAuthenticated(): boolean {
 
 export function getLoginUrl(): string {
     const location = window.location.origin + window.location.pathname;
-    const redirectUri = location + "signin-complete/";
+    const redirectUri = `${location}signin-complete/`;
 
     const base = "https://id.twitch.tv/oauth2/authorize";
     const params = {
         client_id: CLIENT_ID,
         redirect_uri: redirectUri,
         response_type: "token",
-        scope: "user:read:follows"
+        scope: "user:read:follows",
     };
 
     return base + buildQueryString(params);
@@ -99,7 +99,7 @@ export async function getStreamsFollowed(query: {
 async function revoke() {
     const params = {
         client_id: CLIENT_ID,
-        token: getAccessToken()
+        token: getAccessToken(),
     };
 
     const url = `https://id.twitch.tv/oauth2/revoke${buildQueryString(params)}`;
@@ -112,19 +112,20 @@ async function get<T>(endpoint: string, params?: any): Promise<T[]> {
         const response = await fetch(url, {
             method: "GET",
             headers: {
-                Authorization: "Bearer " + getAccessToken(),
-                'Client-ID': CLIENT_ID
-            }
+                Authorization: `Bearer ${getAccessToken()}`,
+                "Client-ID": CLIENT_ID,
+            },
         });
 
         if (!response.ok) {
-            throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+            throw new Error(
+                `API request failed: ${response.status} ${response.statusText}`,
+            );
         }
 
         const { data } = await response.json();
         return data ?? [];
-    }
-    catch (error) {
+    } catch (error) {
         console.error(`Failed to fetch ${endpoint}:`, error);
         return [];
     }
@@ -141,7 +142,8 @@ async function loadProfileImages(streams: Stream[]) {
         return;
     }
 
-    const ids = streams.map(x => x.user_id)
+    const ids = streams
+        .map((x) => x.user_id)
         .filter((value, index, self) => self.indexOf(value) === index);
 
     const users = await getUsers({ id: ids });
@@ -150,5 +152,7 @@ async function loadProfileImages(streams: Stream[]) {
         return acc;
     }, {});
 
-    streams.forEach(stream => stream.profile_image_url = pictures[stream.user_id]);
+    streams.forEach((stream) => {
+        stream.profile_image_url = pictures[stream.user_id];
+    });
 }

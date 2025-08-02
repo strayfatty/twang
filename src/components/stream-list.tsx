@@ -1,8 +1,8 @@
 import "./stream-list.css";
 import m from "mithril";
-import { StreamCard } from "components/stream-card";
-import { MithrilComponent } from "./mithril-component";
-import { Stream } from "lib/twitch";
+import { MithrilComponent } from "~/components/mithril-component";
+import { StreamCard } from "~/components/stream-card";
+import { Stream } from "~/lib/twitch";
 
 type Props = {
     url: string;
@@ -12,17 +12,29 @@ type Props = {
 
 export class StreamList extends MithrilComponent<Props> {
     render(props: Props) {
-        const state = props.streams == null
-            ? "is-loading"
-            : props.streams.length === 0 ? "is-empty" : "";
+        const stateClass =
+            props.streams == null
+                ? "is-loading"
+                : props.streams.length === 0
+                  ? "is-empty"
+                  : "";
 
         return (
-            <div class={`stream-list ${state}`}>
-                <a class="stream-list__title" href={props.url} target="_blank">{props.title}</a>
+            <div class={`stream-list ${stateClass}`}>
+                <a
+                    class="stream-list__title"
+                    href={props.url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                >
+                    {props.title}
+                </a>
                 <div class="stream-list__loading" />
                 <div class="stream-list__empty">no streams found</div>
                 <div class="stream-list__streams">
-                    {props.streams?.map(stream => <StreamCard key={stream.id} stream={stream} />)}
+                    {props.streams?.map((stream) => (
+                        <StreamCard key={stream.id} stream={stream} />
+                    ))}
                 </div>
             </div>
         );

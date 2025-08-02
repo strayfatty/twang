@@ -13,13 +13,11 @@
 }
 
 a {
-    border-color: var(--draculaForeground);
     color: var(--draculaForeground);
     text-decoration: none;
-    transition: all .3s linear;
+    transition: color 0.3s linear;
 }
 
 a:hover {
-    border-color: var(--draculaPurple);
     color: var(--draculaPurple);
 }
