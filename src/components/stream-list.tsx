@@ -21,7 +21,12 @@ export class StreamList extends MithrilComponent<Props> {
 
         return (
             <div class={`stream-list ${stateClass}`}>
-                <a class="stream-list__title" href={props.url} target="_blank" rel="noopener noreferrer nofollow">
+                <a
+                    class="stream-list__title"
+                    href={props.url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                >
                     {props.title}
                 </a>
                 <div class="stream-list__loading" />
