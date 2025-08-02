@@ -12,7 +12,7 @@ type Props = {
 
 export class StreamList extends MithrilComponent<Props> {
     render(props: Props) {
-        const state =
+        const stateClass =
             props.streams == null
                 ? "is-loading"
                 : props.streams.length === 0
@@ -20,8 +20,8 @@ export class StreamList extends MithrilComponent<Props> {
                   : "";
 
         return (
-            <div class={`stream-list ${state}`}>
-                <a class="stream-list__title" href={props.url} target="_blank">
+            <div class={`stream-list ${stateClass}`}>
+                <a class="stream-list__title" href={props.url} target="_blank" rel="noopener noreferrer nofollow">
                     {props.title}
                 </a>
                 <div class="stream-list__loading" />

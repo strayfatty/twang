@@ -16,18 +16,19 @@ export class StreamCard extends MithrilComponent<Props> {
                     class="stream-card__preview"
                     alt={stream.title}
                     src={stream.thumbnail_url}
-                ></img>
+                />
                 {stream.profile_image_url ? (
                     <img
                         class="stream-card__profile-image"
                         alt={stream.user_name}
                         src={stream.profile_image_url}
-                    ></img>
+                    />
                 ) : null}
                 <a
                     class="stream-card__user"
                     href={`https://twitch.tv/${stream.user_login}`}
                     target="_blank"
+                    rel="noopener noreferrer nofollow"
                 >
                     {stream.user_name}
                 </a>

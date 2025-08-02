@@ -10,7 +10,7 @@ export class Navigation extends MithrilComponent {
                 location.href = getLoginUrl();
             } else {
                 await logout();
-                location.href = "/";
+                m.route.set("/");
             }
         };
 
