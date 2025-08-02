@@ -1,6 +1,6 @@
 import m, { ChildArrayOrPrimitive } from "mithril";
 
-export abstract class MithrilComponent<Props = any>
+export abstract class MithrilComponent<Props = { [k: string]: never }>
     implements m.ClassComponent<Props>
 {
     __tsx_props: Props & {
