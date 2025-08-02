@@ -1,4 +1,4 @@
-import "./Navigation.css";
+import "./navigation.css";
 import { MithrilComponent } from "components/mithril-component";
 import { getLoginUrl, isAuthenticated, logout } from "lib/twitch";
 import m from "mithril";
