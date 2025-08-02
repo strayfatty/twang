@@ -1,9 +1,9 @@
 export function buildQueryString(params?: any): string {
     const args: string[] = [];
-    Object.keys(params || { }).forEach(key => encode(key, params[key]));
+    Object.keys(params || {}).forEach((key) => encode(key, params[key]));
 
-    var result =  args.join('&');
-    return !result ? '' : '?' + result;
+    var result = args.join("&");
+    return !result ? "" : `?${result}`;
 
     function encode(key: string, value: any) {
         if (Array.isArray(value)) {
@@ -13,7 +13,7 @@ export function buildQueryString(params?: any): string {
         } else if (value != null) {
             const uriKey = encodeURIComponent(key);
             const uriValue = encodeURIComponent(value);
-            args.push(uriKey + ((value !== "") ? '=' + uriValue : ''));
+            args.push(uriKey + (value !== "" ? `=${uriValue}` : ""));
         }
     }
 }

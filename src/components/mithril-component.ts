@@ -1,16 +1,21 @@
-import m, { ChildArrayOrPrimitive } from 'mithril';
+import m, { ChildArrayOrPrimitive } from "mithril";
 
-export abstract class MithrilComponent<Props = {}> implements m.ClassComponent<Props> {
+export abstract class MithrilComponent<Props = any>
+    implements m.ClassComponent<Props>
+{
     __tsx_props: Props & {
         class?: string | undefined;
         key?: string | number | undefined;
     };
 
-    view(vnode: m.Vnode<Props, this>): m.Children | null | void {
+    view(vnode: m.Vnode<Props, this>): m.Children | null | undefined {
         return this.render(vnode.attrs, vnode.children);
     }
 
-    abstract render(props: Props, children: ChildArrayOrPrimitive | undefined): m.Children | null | void;
+    abstract render(
+        props: Props,
+        children: ChildArrayOrPrimitive | undefined,
+    ): m.Children | null | undefined;
 }
 
 declare global {

@@ -1,7 +1,7 @@
 import "./Navigation.css";
-import m from "mithril";
 import { MithrilComponent } from "components/mithril-component";
 import { getLoginUrl, isAuthenticated, logout } from "lib/twitch";
+import m from "mithril";
 
 export class Navigation extends MithrilComponent {
     render() {
@@ -10,15 +10,17 @@ export class Navigation extends MithrilComponent {
                 location.href = getLoginUrl();
             } else {
                 await logout();
-                location.href = "/"
+                location.href = "/";
             }
         };
 
         return (
             <nav>
-                <a class="title" href="/">TWANG</a>
+                <a class="title" href="/">
+                    TWANG
+                </a>
                 <ul />
-                <button onclick={onClick}>
+                <button type="button" onclick={onClick}>
                     {isAuthenticated() ? "Logout" : "Login"}
                 </button>
             </nav>

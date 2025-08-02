@@ -1,29 +1,37 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": { "ignoreUnknown": false },
-  "formatter": {
-    "enabled": true,
-    "useEditorconfig": true
-  },
-  // "organizeImports": { "enabled": true },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "nursery": {
-        "useSortedClasses": {
-          "level": "warn",
-          "fix": "safe",
-          "options": {
-            "functions": ["clsx", "cva", "cn"]
-          }
+    "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "files": { "ignoreUnknown": false },
+    "formatter": {
+        "enabled": true,
+        "useEditorconfig": true
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "correctness": {
+                "noUnusedImports": "off"
+            },
+            "nursery": {
+                "useSortedClasses": {
+                    "level": "warn",
+                    "fix": "safe",
+                    "options": {
+                        "functions": ["clsx", "cva", "cn"]
+                    }
+                }
+            },
+            "suspicious": {
+                "noExplicitAny": "off"
+            },
+            "style": {
+                "useImportType": "off"
+            },
+            "recommended": true
         }
-      },
-      "recommended": true
     }
-  }
 }

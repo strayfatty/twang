@@ -1,9 +1,16 @@
 import { injectAnalytics } from "lib/injectAnalytics";
-import { getUsers, isAuthenticated, logout, setAccessToken, setUserId } from "lib/twitch";
+import {
+    getUsers,
+    isAuthenticated,
+    logout,
+    setAccessToken,
+    setUserId,
+} from "lib/twitch";
 
 injectAnalytics();
-login()
-    .finally(() => location.href = "/")
+login().finally(() => {
+    location.href = "/";
+});
 
 async function login(): Promise<void> {
     if (isAuthenticated()) {
@@ -21,8 +28,7 @@ async function login(): Promise<void> {
     try {
         const users = await getUsers({});
         setUserId(users[0].id);
-    }
-    catch (error) {
+    } catch (error) {
         console.error("Failed to get user data:", error);
         await logout();
     }

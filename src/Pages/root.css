@@ -16,7 +16,7 @@ a {
     border-color: var(--draculaForeground);
     color: var(--draculaForeground);
     text-decoration: none;
-    transition: all .3s linear;
+    transition: all 0.3s linear;
 }
 
 a:hover {
