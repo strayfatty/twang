@@ -16,7 +16,10 @@ export default defineConfig({
         }
     },
     plugins: [
-        checker({ typescript: true })
+        checker({
+            typescript: true,
+            biome: { command: 'check'}
+        })
     ],
     resolve: {
         alias: [
