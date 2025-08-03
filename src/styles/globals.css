@@ -1,0 +1,150 @@
+@import "tailwindcss" source("..");
+
+:root {
+    --draculaBackground: #282a36;
+    --draculaCurrentLine: #44475a;
+    --draculaForeground: #f8f8f2;
+    --draculaComment: #6272a4;
+    --draculaCyan: #8be9fd;
+    --draculaGreen: #50fa7b;
+    --draculaOrange: #ffb86c;
+    --draculaPink: #ff79c6;
+    --draculaPurple: #bd93f9;
+    --draculaRed: #ff5555;
+    --draculaYellow: #f1fa8c;
+}
+
+a {
+    color: var(--draculaForeground);
+    text-decoration: none;
+    transition: color 0.3s linear;
+}
+
+a:hover {
+    color: var(--draculaPurple);
+}
+
+body {
+    display: grid;
+    grid-template-rows: 44px 1fr;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--draculaBackground);
+    color: var(--draculaForeground);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+    padding: 10px 20px;
+}
+
+.stream-list {
+    display: grid;
+    grid-template-areas:
+        "title loader empty _"
+        "streams streams streams streams";
+    grid-template-columns: auto auto auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 5px;
+    align-items: baseline;
+}
+
+.stream-list__title {
+    grid-area: title;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.stream-list__loading {
+    display: none;
+    grid-area: loader;
+    align-self: center;
+    width: 1em;
+    height: 1em;
+    border: 3px transparent solid;
+    border-top: 3px var(--draculaPurple) solid;
+    border-right: 3px var(--draculaPurple) solid;
+    border-radius: 50%;
+    animation: spin 2s infinite linear;
+}
+
+.stream-list__empty {
+    display: none;
+    grid-area: empty;
+    font-weight: 700;
+    opacity: 0.6;
+}
+
+.stream-list__streams {
+    display: grid;
+    grid-area: streams;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 5px;
+    row-gap: 10px;
+    border-top: 1px solid var(--draculaComment);
+    padding-top: 5px;
+}
+
+.is-loading .stream-list__loading,
+.is-empty .stream-list__empty {
+    display: block;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* .stream-card { */
+/*     display: grid; */
+/*     grid-template-areas: */
+/*         "preview preview" */
+/*         "profile user" */
+/*         "profile viewers" */
+/*         "game game" */
+/*         "title title"; */
+/*     grid-template-columns: 40px 1fr; */
+/*     grid-template-rows: 1fr 20px 18px auto auto; */
+/*     gap: 2px 5px; */
+/* } */
+
+/* .stream-card__preview { */
+/*     grid-area: preview; */
+/*     width: 100%; */
+/* } */
+
+/* .stream-card__profile-image { */
+/*     grid-area: profile; */
+/*     width: 100%; */
+/*     height: 100%; */
+/* } */
+
+/* .stream-card__user { */
+/*     grid-area: user; */
+/*     font-weight: bold; */
+/* } */
+
+/* .stream-card__viewers { */
+/*     grid-area: viewers; */
+/*     font-size: 14px; */
+/*     opacity: 0.6; */
+/* } */
+
+/* .stream-card__game { */
+/*     grid-area: game; */
+/*     font-weight: bold; */
+/* } */
+
+/* .stream-card__title { */
+/*     grid-area: title; */
+/*     overflow: hidden; */
+/*     text-overflow: ellipsis; */
+/*     white-space: nowrap; */
+/*     font-weight: bold; */
+/*     font-size: 0.8em; */
+/* } */

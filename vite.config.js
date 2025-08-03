@@ -1,6 +1,7 @@
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
     root: "site",
@@ -22,6 +23,7 @@ export default defineConfig({
         checker({
             typescript: true,
         }),
+        tailwindcss(),
     ],
     resolve: {
         alias: [

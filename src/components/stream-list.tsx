@@ -1,8 +1,8 @@
-import "./stream-list.css";
 import m from "mithril";
 import { MithrilComponent } from "~/components/mithril-component";
 import { StreamCard } from "~/components/stream-card";
 import { Stream } from "~/lib/twitch";
+import { cn } from "~/lib/utils";
 
 type Props = {
     url: string;
@@ -12,15 +12,11 @@ type Props = {
 
 export class StreamList extends MithrilComponent<Props> {
     render(props: Props) {
-        const stateClass =
-            props.streams == null
-                ? "is-loading"
-                : props.streams.length === 0
-                  ? "is-empty"
-                  : "";
-
         return (
-            <div class={`stream-list ${stateClass}`}>
+            <div class={cn('stream-list', {
+                "is-loading": props.streams == null,
+                "is-empty": props.streams?.length === 0,
+            })}>
                 <a
                     class="stream-list__title"
                     href={props.url}
