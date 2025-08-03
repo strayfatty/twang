@@ -1,4 +1,5 @@
-@import "tailwindcss" source("..");
+@import "tailwindcss";
+@source "..";
 
 :root {
     --draculaBackground: #282a36;
