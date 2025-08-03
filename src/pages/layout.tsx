@@ -8,6 +8,6 @@ export class Layout extends MithrilComponent {
         _vnode: any,
         children: m.ChildArrayOrPrimitive | undefined,
     ): m.Children | null | undefined {
-        return [<Navigation/>, <section>{children}</section>];
+        return [<Navigation />, <section>{children}</section>];
     }
 }

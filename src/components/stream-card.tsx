@@ -10,7 +10,7 @@ export class StreamCard extends MithrilComponent<Props> {
     render(props: Props) {
         const stream = props.stream;
         return (
-            <div class="flex flex-col gap-1 w-full">
+            <div class="flex w-full flex-col gap-1">
                 <img
                     class="w-full"
                     alt={stream.title}
@@ -24,20 +24,20 @@ export class StreamCard extends MithrilComponent<Props> {
                     />
                     <div class="flex flex-col">
                         <a
-                            class="font-bold h-[22px]"
+                            class="h-[22px] font-bold"
                             href={`https://twitch.tv/${stream.user_login}`}
                             target="_blank"
                             rel="noopener noreferrer nofollow"
                         >
                             {stream.user_name}
                         </a>
-                        <div class="text-sm opacity-[0.6] h-[18px]">{`${stream.viewer_count} viewers`}</div>
+                        <div class="h-[18px] text-sm opacity-[0.6]">{`${stream.viewer_count} viewers`}</div>
                     </div>
                 </div>
-                <div class="font-bold truncate" title={stream.game_name}>
+                <div class="truncate font-bold" title={stream.game_name}>
                     {stream.game_name}
                 </div>
-                <div class="font-bold truncate text-xs" title={stream.title}>
+                <div class="truncate font-bold text-xs" title={stream.title}>
                     {stream.title}
                 </div>
             </div>

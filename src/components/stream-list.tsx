@@ -13,10 +13,12 @@ type Props = {
 export class StreamList extends MithrilComponent<Props> {
     render(props: Props) {
         return (
-            <div class={cn('stream-list', {
-                "is-loading": props.streams == null,
-                "is-empty": props.streams?.length === 0,
-            })}>
+            <div
+                class={cn("stream-list", {
+                    "is-loading": props.streams == null,
+                    "is-empty": props.streams?.length === 0,
+                })}
+            >
                 <a
                     class="stream-list__title"
                     href={props.url}
