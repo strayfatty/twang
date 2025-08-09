@@ -12,14 +12,14 @@ export class StreamCard extends MithrilComponent<Props> {
         return (
             <div class="flex w-full flex-col gap-1">
                 <img
-                    class="w-full"
+                    class="w-full rounded-md"
                     alt={stream.title}
                     src={stream.thumbnail_url}
                 />
                 <div class="flex flex-col">
                     <div class="flex gap-1">
                         <img
-                            class="size-[40px]"
+                            class="rounded-full size-[40px]"
                             alt={stream.user_name}
                             src={stream.profile_image_url}
                         />

@@ -1,6 +1,6 @@
 import m, { ChildArrayOrPrimitive, Children } from "mithril";
+import { MithrilComponent } from "~/components/mithril-component";
 import { cn } from "~/lib/utils";
-import { MithrilComponent } from "./mithril-component";
 
 type Props = {
     visible: boolean;
