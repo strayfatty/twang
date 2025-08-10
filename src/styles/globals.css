@@ -3,30 +3,18 @@
 
 @theme {
     --animate-spin: spin 2s linear infinite;
-}
 
-:root {
-    --draculaBackground: #282a36;
-    --draculaCurrentLine: #44475a;
-    --draculaForeground: #f8f8f2;
-    --draculaComment: #6272a4;
-    --draculaCyan: #8be9fd;
-    --draculaGreen: #50fa7b;
-    --draculaOrange: #ffb86c;
-    --draculaPink: #ff79c6;
-    --draculaPurple: #bd93f9;
-    --draculaRed: #ff5555;
-    --draculaYellow: #f1fa8c;
-}
-
-a {
-    color: var(--draculaForeground);
-    text-decoration: none;
-    transition: color 0.3s linear;
-}
-
-a:hover {
-    color: var(--draculaPurple);
+    --color-dracula-background: #282a36;
+    --color-dracula-current-line: #44475a;
+    --color-dracula-foreground: #f8f8f2;
+    --color-dracula-comment: #6272a4;
+    --color-dracula-cyan: #8be9fd;
+    --color-dracula-green: #50fa7b;
+    --color-dracula-orange: #ffb86c;
+    --color-dracula-pink: #ff79c6;
+    --color-dracula-purple: #bd93f9;
+    --color-dracula-red: #ff5555;
+    --color-dracula-yellow: #f1fa8c;
 }
 
 body {
@@ -34,7 +22,7 @@ body {
     grid-template-rows: 44px 1fr;
     height: 100vh;
     margin: 0;
-    background-color: var(--draculaBackground);
-    color: var(--draculaForeground);
+    background-color: var(--color-dracula-background);
+    color: var(--color-dracula-foreground);
     font-family: Arial, Helvetica, sans-serif;
 }

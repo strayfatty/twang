@@ -1,5 +1,6 @@
 import "./navigation.css";
 import m from "mithril";
+import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
 import { getLoginUrl, isAuthenticated, logout } from "~/lib/twitch";
 
@@ -16,9 +17,7 @@ export class Navigation extends MithrilComponent {
 
         return (
             <nav>
-                <a class="title" href="/">
-                    TWANG
-                </a>
+                <Link href="/" class="text-2xl font-bold">TWANG</Link>
                 <ul />
                 <button type="button" onclick={onClick}>
                     {isAuthenticated() ? "Logout" : "Login"}

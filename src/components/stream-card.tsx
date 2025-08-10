@@ -1,6 +1,7 @@
 import m from "mithril";
 import { MithrilComponent } from "~/components/mithril-component";
 import { Stream } from "~/lib/twitch";
+import { Link } from "~/components/link";
 
 type Props = {
     stream: Stream;
@@ -24,14 +25,7 @@ export class StreamCard extends MithrilComponent<Props> {
                             src={stream.profile_image_url}
                         />
                         <div class="flex flex-col">
-                            <a
-                                class="h-[22px] font-bold"
-                                href={`https://twitch.tv/${stream.user_login}`}
-                                target="_blank"
-                                rel="noopener noreferrer nofollow"
-                            >
-                                {stream.user_name}
-                            </a>
+                            <Link class="h-[22px] font-bold" href={`https://twitch.tv/${stream.user_login}`} target="_blank">{stream.user_name}</Link>
                             <div class="h-[18px] text-sm opacity-[0.6]">{`${stream.viewer_count} viewers`}</div>
                         </div>
                     </div>
