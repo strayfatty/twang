@@ -1,10 +1,10 @@
 import m from "mithril";
+import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
 import { Spinner } from "~/components/spinner";
 import { StreamCard } from "~/components/stream-card";
 import { Stream } from "~/lib/twitch";
 import { cn } from "~/lib/utils";
-import { Link } from "~/components/link";
 
 type Props = {
     url: string;
@@ -17,7 +17,13 @@ export class StreamList extends MithrilComponent<Props> {
         return (
             <div class="flex flex-col">
                 <div class="flex items-end gap-2">
-                    <Link class="font-bold text-2xl" href={props.url} target="_blank">{props.title}</Link>
+                    <Link
+                        class="font-bold text-2xl"
+                        href={props.url}
+                        target="_blank"
+                    >
+                        {props.title}
+                    </Link>
                     <Spinner visible={!props.streams} />
                     <div
                         class={cn("font-bold opacity-60", {

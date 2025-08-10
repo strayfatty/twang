@@ -1,4 +1,3 @@
-import "./navigation.css";
 import m from "mithril";
 import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
@@ -16,10 +15,13 @@ export class Navigation extends MithrilComponent {
         };
 
         return (
-            <nav>
-                <Link href="/" class="text-2xl font-bold">TWANG</Link>
-                <ul />
-                <button type="button" onclick={onClick}>
+            <nav class="flex justify-between px-4 items-center shadow-[0_5px_10px_0_rgb(0_0_0_/_15%)]">
+                <Link href="/" class="font-bold text-2xl">
+                    TWANG
+                </Link>
+                <button
+                    class="outline-none transition-colors duration-300 ease-linear cursor-pointer hover:text-dracula-purple font-bold"
+                    type="button" onclick={onClick}>
                     {isAuthenticated() ? "Logout" : "Login"}
                 </button>
             </nav>

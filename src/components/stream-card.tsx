@@ -1,7 +1,7 @@
 import m from "mithril";
+import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
 import { Stream } from "~/lib/twitch";
-import { Link } from "~/components/link";
 
 type Props = {
     stream: Stream;
@@ -20,12 +20,18 @@ export class StreamCard extends MithrilComponent<Props> {
                 <div class="flex flex-col">
                     <div class="flex gap-1">
                         <img
-                            class="rounded-full size-[40px]"
+                            class="size-[40px] rounded-full"
                             alt={stream.user_name}
                             src={stream.profile_image_url}
                         />
                         <div class="flex flex-col">
-                            <Link class="h-[22px] font-bold" href={`https://twitch.tv/${stream.user_login}`} target="_blank">{stream.user_name}</Link>
+                            <Link
+                                class="h-[22px] font-bold"
+                                href={`https://twitch.tv/${stream.user_login}`}
+                                target="_blank"
+                            >
+                                {stream.user_name}
+                            </Link>
                             <div class="h-[18px] text-sm opacity-[0.6]">{`${stream.viewer_count} viewers`}</div>
                         </div>
                     </div>

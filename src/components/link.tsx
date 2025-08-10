@@ -9,15 +9,21 @@ type Props = {
 };
 
 export class Link extends MithrilComponent<Props> {
-    render({"class": className, ...props}: Props, children: ChildArrayOrPrimitive | undefined): Children | null | undefined {
+    render(
+        { class: className, ...props }: Props,
+        children: ChildArrayOrPrimitive | undefined,
+    ): Children | null | undefined {
         return (
             <a
-                className={cn("no-underline transition-colors duration-300 ease-linear text-dracula-foreground hover:text-dracula-purple", className)}
+                className={cn(
+                    "text-dracula-foreground no-underline transition-colors duration-300 ease-linear hover:text-dracula-purple",
+                    className,
+                )}
                 rel="noopener noreferrer nofollow"
                 {...props}
             >
                 {children}
             </a>
-        )
+        );
     }
 }
