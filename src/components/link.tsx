@@ -15,7 +15,7 @@ export class Link extends MithrilComponent<Props> {
     ): Children | null | undefined {
         return (
             <a
-                className={cn(
+                class={cn(
                     "text-dracula-foreground no-underline transition-colors duration-300 ease-linear hover:text-dracula-purple",
                     className,
                 )}
