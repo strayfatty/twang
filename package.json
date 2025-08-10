@@ -2,6 +2,7 @@
     "name": "twang",
     "version": "1.0.0",
     "description": "",
+    "type": "module",
     "scripts": {
         "build": "vite build",
         "check": "biome check .",
@@ -28,7 +29,10 @@
         "vite-plugin-checker": "^0.10.2"
     },
     "dependencies": {
-        "@vercel/analytics": "^1.5.0"
+        "@tailwindcss/vite": "^4.1.11",
+        "@vercel/analytics": "^1.5.0",
+        "clsx": "^2.1.1",
+        "tailwindcss": "^4.1.11"
     },
     "packageManager": "pnpm@10.14.0"
 }
