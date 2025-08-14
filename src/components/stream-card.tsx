@@ -12,11 +12,16 @@ export class StreamCard extends MithrilComponent<Props> {
         const stream = props.stream;
         return (
             <div class="flex w-full flex-col gap-1">
-                <img
-                    class="w-full rounded-md"
-                    alt={stream.title}
-                    src={stream.thumbnail_url}
-                />
+                <div class="relative w-full overflow-hidden">
+                    <div style="padding-block-end: 56.25%" />
+                    <div class="absolute top-0 left-0 min-h-full w-full">
+                        <img
+                            class="w-full rounded-md"
+                            alt={stream.title}
+                            src={stream.thumbnail_url}
+                        />
+                    </div>
+                </div>
                 <div class="flex flex-col">
                     <div class="flex gap-1">
                         <img
