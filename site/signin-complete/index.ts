@@ -1,4 +1,3 @@
-import { injectAnalytics } from "~/lib/injectAnalytics";
 import {
     getUsers,
     isAuthenticated,
@@ -7,7 +6,6 @@ import {
     setUserId,
 } from "~/lib/twitch";
 
-injectAnalytics();
 login().finally(() => {
     location.href = "/";
 });
