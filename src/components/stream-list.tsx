@@ -1,4 +1,6 @@
 import m from "mithril";
+import { Button } from "~/components/button";
+import { RefreshCcwIcon } from "~/components/icons/refresh-ccw-icon";
 import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
 import { Spinner } from "~/components/spinner";
@@ -10,6 +12,8 @@ type Props = {
     url: string;
     title: string;
     streams: Stream[] | null;
+    loading: boolean;
+    onReload: () => void;
 };
 
 export class StreamList extends MithrilComponent<Props> {
@@ -24,10 +28,24 @@ export class StreamList extends MithrilComponent<Props> {
                     >
                         {props.title}
                     </Link>
-                    <Spinner visible={!props.streams} />
+                    <Button
+                        aria-label="Reload streams"
+                        class={cn("opacity-60 self-center", {
+                            hidden: props.loading,
+                        })}
+                        onclick={props.onReload}
+                        title="Reload streams"
+                    >
+                        <RefreshCcwIcon
+                            class="size-[16px]"
+                            title="Reload streams"
+                        />
+                    </Button>
+                    <Spinner visible={props.loading} />
                     <div
                         class={cn("font-bold opacity-60", {
-                            hidden: props.streams?.length !== 0,
+                            hidden:
+                                props.loading || props.streams?.length !== 0,
                         })}
                     >
                         no streams found

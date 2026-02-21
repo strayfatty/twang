@@ -10,15 +10,31 @@ import {
 
 export class Dashboard extends MithrilComponent {
     private streams: Stream[] = null;
+    private loading = false;
 
     async oninit(_: m.Vnode<any, this>) {
+        await this.loadStreams();
+    }
+
+    private async loadStreams() {
+        if (this.loading) {
+            return;
+        }
+
         const userId = getUserId();
         if (!userId || !isAuthenticated()) {
             return;
         }
 
-        this.streams = await getStreamsFollowed({ user_id: userId });
+        this.loading = true;
         m.redraw();
+
+        try {
+            this.streams = await getStreamsFollowed({ user_id: userId });
+        } finally {
+            this.loading = false;
+            m.redraw();
+        }
     }
 
     render() {
@@ -32,6 +48,8 @@ export class Dashboard extends MithrilComponent {
                     url="https://www.twitch.tv/directory/following"
                     title="Following"
                     streams={this.streams}
+                    loading={this.loading}
+                    onReload={() => void this.loadStreams()}
                 />
             </div>
         );
