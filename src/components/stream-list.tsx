@@ -5,9 +5,9 @@ import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
 import { Spinner } from "~/components/spinner";
 import { StreamCard } from "~/components/stream-card";
+import { timeSince } from "~/lib/time-since";
 import { Stream } from "~/lib/twitch";
 import { cn } from "~/lib/utils";
-import { timeSince } from "~/lib/time-since";
 
 type Props = {
     url: string;
@@ -78,5 +78,5 @@ function getReloadTitle(lastReloadAt: number | null) {
         return "Reload streams";
     }
 
-    return `Reload streams (last reloaded ${timeSince(lastReloadAt)})`
+    return `Reload streams (last reloaded ${timeSince(lastReloadAt)})`;
 }
