@@ -79,6 +79,7 @@ export class Dashboard extends MithrilComponent {
                     title="Following"
                     streams={this.streams}
                     loading={this.loading}
+                    lastReloadAt={this.lastReloadAt}
                     onReload={() => void this.loadStreams()}
                 />
             </div>
