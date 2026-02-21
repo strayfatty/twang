@@ -11,7 +11,7 @@ import {
 export class Dashboard extends MithrilComponent {
     private static readonly AUTO_RELOAD_INTERVAL_MS = 5 * 60 * 1000;
 
-    private streams: Stream[] = null;
+    private streams: Stream[] | null = null;
     private loading = false;
     private lastReloadAt: number | null = null;
 
