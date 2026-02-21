@@ -61,6 +61,11 @@ export class Dashboard extends MithrilComponent {
         try {
             this.streams = await getStreamsFollowed({ user_id: userId });
             this.lastReloadAt = Date.now();
+
+            const cacheVersion = `?d=${this.lastReloadAt}`;
+            this.streams.forEach((stream) => {
+                stream.thumbnail_url += cacheVersion;
+            });
         } finally {
             this.loading = false;
             m.redraw();
