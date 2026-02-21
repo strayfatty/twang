@@ -30,7 +30,7 @@ export class StreamList extends MithrilComponent<Props> {
                     </Link>
                     <Button
                         aria-label="Reload streams"
-                        class={cn("opacity-60 self-center", {
+                        class={cn("self-center opacity-60", {
                             hidden: props.loading,
                         })}
                         onclick={props.onReload}
