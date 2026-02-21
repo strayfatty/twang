@@ -1,8 +1,11 @@
 import m from "mithril";
+import { Button } from "~/components/button";
+import { RefreshCcwIcon } from "~/components/icons/refresh-ccw-icon";
 import { Link } from "~/components/link";
 import { MithrilComponent } from "~/components/mithril-component";
 import { Spinner } from "~/components/spinner";
 import { StreamCard } from "~/components/stream-card";
+import { timeSince } from "~/lib/time-since";
 import { Stream } from "~/lib/twitch";
 import { cn } from "~/lib/utils";
 
@@ -10,10 +13,22 @@ type Props = {
     url: string;
     title: string;
     streams: Stream[] | null;
+    loading: boolean;
+    lastReloadAt: number | null;
+    onReload: () => void;
 };
 
 export class StreamList extends MithrilComponent<Props> {
     render(props: Props) {
+        const reloadTitle = getReloadTitle(props.lastReloadAt);
+        const updateReloadTitleOnHover = (
+            event: MouseEvent & {
+                currentTarget: EventTarget & HTMLButtonElement;
+            },
+        ) => {
+            event.currentTarget.title = getReloadTitle(props.lastReloadAt);
+        };
+
         return (
             <div class="flex flex-col">
                 <div class="flex items-end gap-2">
@@ -24,10 +39,25 @@ export class StreamList extends MithrilComponent<Props> {
                     >
                         {props.title}
                     </Link>
-                    <Spinner visible={!props.streams} />
+                    <Button
+                        aria-label="Reload streams"
+                        class={cn("self-center opacity-60", {
+                            hidden: props.loading,
+                        })}
+                        onclick={props.onReload}
+                        onmouseenter={updateReloadTitleOnHover}
+                        title={reloadTitle}
+                    >
+                        <RefreshCcwIcon
+                            class="size-[16px]"
+                            title={reloadTitle}
+                        />
+                    </Button>
+                    <Spinner visible={props.loading} />
                     <div
                         class={cn("font-bold opacity-60", {
-                            hidden: props.streams?.length !== 0,
+                            hidden:
+                                props.loading || props.streams?.length !== 0,
                         })}
                     >
                         no streams found
@@ -41,4 +71,12 @@ export class StreamList extends MithrilComponent<Props> {
             </div>
         );
     }
+}
+
+function getReloadTitle(lastReloadAt: number | null) {
+    if (!lastReloadAt) {
+        return "Reload streams";
+    }
+
+    return `Reload streams (last reloaded ${timeSince(lastReloadAt)})`;
 }
