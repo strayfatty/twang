@@ -21,6 +21,7 @@ export class Dashboard extends MithrilComponent {
 
     oncreate(_: m.VnodeDOM<any, this>) {
         document.addEventListener("visibilitychange", this.onVisibilityChange);
+        window.addEventListener("focus", this.onVisibilityChange);
     }
 
     onremove(_: m.VnodeDOM<any, this>) {
@@ -28,6 +29,7 @@ export class Dashboard extends MithrilComponent {
             "visibilitychange",
             this.onVisibilityChange,
         );
+        window.removeEventListener("focus", this.onVisibilityChange);
     }
 
     private shouldAutoReload(now = Date.now()) {
